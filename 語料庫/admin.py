@@ -18,6 +18,22 @@ class 語料表管理(admin.ModelAdmin):
     ordering = ['-id']
     list_filter = ['音檔__類別', '漢字', ]
 
+    search_fields = ['漢字', '書寫', ]
+    fieldsets = (
+        (None, {
+            'fields': ('音檔', '聲音開始時間', '聲音結束時間', ),
+            'classes': ['wide']
+        }),
+        (None, {
+            'fields': ('漢字', '書寫', ),
+            'classes': ['wide']
+        }),
+        (None, {
+            'fields': ('斷詞', ),
+            'classes': ['wide']
+        })
+    )
+
     actions = [
         '設定類別_教材',
     ]
