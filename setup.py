@@ -2,14 +2,14 @@ from distutils.core import setup
 
 
 setup(
-    name='語料庫整理',
+    name='gi2_liau7_khoo3',
     packages=[],
     version='0.1.0',
     author='薛丞宏',
     author_email='ihcaoe@gmail.com',
     url='https://xn--v0qr21b.xn--kpry57d/',
     keywords=[
-        'Corpus', '語料庫',
+        'Corpus', 'gí-liāu-khòo', '語料庫', 'gi2-liau7-khoo3',
         'Taiwan', 'Taiwanese',
     ],
     classifiers=[
