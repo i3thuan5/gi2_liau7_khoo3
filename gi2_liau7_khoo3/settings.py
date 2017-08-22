@@ -122,3 +122,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '音檔')
+MEDIA_URL='/media/'

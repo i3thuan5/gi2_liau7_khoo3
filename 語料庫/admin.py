@@ -22,8 +22,12 @@ class 語料表管理(admin.ModelAdmin):
 
     search_fields = ['漢字', '書寫', ]
     fieldsets = (
+        ('音檔', {
+            'fields': ('音檔', ),
+            'classes': ['wide']
+        }),
         (None, {
-            'fields': ('音檔', '聲音開始時間', '聲音結束時間', ),
+            'fields': ('聲音開始時間', '聲音結束時間', ),
             'classes': ['wide']
         }),
         (None, {

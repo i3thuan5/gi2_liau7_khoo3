@@ -1,9 +1,16 @@
 {% extends "admin/change_form.html" %}
-{% block after_field_sets %}{{ block.super }}
-    <h2>test</h2>
-    <h2>test</h2>
-    <h2>test</h2>
-    <h2>test</h2>
-    <h3>original.漢字： {{ original.漢字 }}</h3>
-    <h3>original.書寫： {{ original.書寫 }}</h3>
+
+{% block field_sets %}
+{% for fieldset in adminform %}
+	{% include "admin/includes/fieldset.html" %}
+	{% if fieldset.name == '音檔' and original.音檔.原始檔 != None %}
+		<p>原始檔網址: {{original.音檔.原始檔.url}}</p>
+		<div class='row'>
+    		<audio controls>
+        	<source src="{{original.音檔.原始檔.url}}">
+        	Your browser does not support the audio element.
+    		</audio>
+		</div>
+  	{% endif %}
+{% endfor %}
 {% endblock %}
