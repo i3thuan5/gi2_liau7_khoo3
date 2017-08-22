@@ -6,11 +6,21 @@
 	{% if fieldset.name == '音檔' and original.音檔.原始檔 != None %}
 		<p>原始檔網址: {{original.音檔.原始檔.url}}</p>
 		<div class='row'>
-    		<audio controls>
+    		<audio controls id='mediaElementID'>
         	<source src="{{original.音檔.原始檔.url}}">
         	Your browser does not support the audio element.
     		</audio>
 		</div>
   	{% endif %}
 {% endfor %}
+{% endblock %}
+
+{% block admin_change_form_document_ready %}
+	<script type="text/javascript">
+	var vid = document.getElementById('mediaElementID');
+	vid.currentTime = {{original.聲音開始時間}};
+	vid.oncanplay = function() {
+    	alert("Can start playing video");
+	};
+	</script>
 {% endblock %}
