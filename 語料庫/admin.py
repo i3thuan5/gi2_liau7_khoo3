@@ -48,20 +48,28 @@ class 語料表管理(admin.ModelAdmin):
         queryset.update(類別='S1')
 
     change_form_template = 'admin/gi2_liau7_khoo3/語料表/custom_change_form.html'
+
     def get_urls(self):
         urls = super(語料表管理, self).get_urls()
         my_urls = [
             url(r'^語料表/$', self.admin_site.admin_view(self.my_view))
         ]
         return my_urls + urls
+
     def my_view(self, request):
         # ...
         context = dict(
-           # Include common variables for rendering the admin template.
-           self.admin_site.each_context(request),
-           # Anything else you want in the context...
-        #            key=value,
+            # Include common variables for rendering the admin template.
+            self.admin_site.each_context(request),
+            # Anything else you want in the context...
+            #            key=value,
         )
-        return TemplateResponse(request, 'admin/gi2_liau7_khoo3/語料表/custom_change_form.html', context)
+        return TemplateResponse(
+            request,
+            'admin/gi2_liau7_khoo3/語料表/custom_change_form.html',
+            context
+        )
+
+
 admin.site.register(音檔表)
 admin.site.register(語料表, 語料表管理)

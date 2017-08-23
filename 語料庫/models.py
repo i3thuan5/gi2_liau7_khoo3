@@ -36,7 +36,6 @@ class 語料表(models.Model):
     def 類別(self):
         return self.音檔.類別
 
-    
     def 對齊狀態(self):
         '改去cache表'
         return True
