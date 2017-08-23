@@ -70,6 +70,19 @@ class 語料表管理(admin.ModelAdmin):
             context
         )
 
+    def has_add_permission(self, request):
+        # 薛：只能由程式上傳音檔和語料
+        # 薛：任何人都不能從後台新增
+        return False
 
-admin.site.register(音檔表)
+
+class 音檔表管理(admin.ModelAdmin):
+
+    def has_add_permission(self, request):
+        # 薛：只能由程式上傳音檔和語料
+        # 薛：任何人都不能從後台新增
+        return False
+
+
+admin.site.register(音檔表, 音檔表管理)
 admin.site.register(語料表, 語料表管理)
