@@ -69,19 +69,20 @@ class 語料表管理(admin.ModelAdmin):
             'admin/gi2_liau7_khoo3/語料表/custom_change_form.html',
             context
         )
-    
+
     def has_add_permission(self, request):
-        # 薛：只能由程式上傳音檔和語料，
-        # 所以鎖住"add"的權限
-        # 任何人都不能從後台新增
+        # 薛：只能由程式上傳音檔和語料
+        # 薛：任何人都不能從後台新增
         return False
 
+
 class 音檔表管理(admin.ModelAdmin):
+
     def has_add_permission(self, request):
-        # 薛：只能由程式上傳音檔和語料，
-        # 所以鎖住"add"的權限
-        # 任何人都不能從後台新增
+        # 薛：只能由程式上傳音檔和語料
+        # 薛：任何人都不能從後台新增
         return False
+
 
 admin.site.register(音檔表, 音檔表管理)
 admin.site.register(語料表, 語料表管理)

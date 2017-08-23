@@ -14,6 +14,9 @@ class 音檔表(models.Model):
     原始檔 = models.FileField(blank=True)
     加入時間 = models.DateTimeField(auto_now_add=True, db_index=True)
 
+    def __str__(self):
+        return self.原始檔.name
+
 
 class 語料表(models.Model):
     音檔 = models.ForeignKey(
