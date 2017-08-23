@@ -6,10 +6,11 @@
 	{% if fieldset.name == '音檔' and original.音檔.原始檔 != None %}
 		<p>原始檔網址: {{original.音檔.原始檔.url}}</p>
 		<div class='row'>
-    		<audio controls id='mediaElementID'>
+    		<audio controls id='audio' ontimeupdate="restrictAudio(this)">
         	<source src="{{original.音檔.原始檔.url}}">
         	Your browser does not support the audio element.
     		</audio>
+    		<span id='position'></span>
 		</div>
   	{% endif %}
 {% endfor %}
@@ -17,10 +18,14 @@
 
 {% block admin_change_form_document_ready %}
 	<script type="text/javascript">
-	var vid = document.getElementById('mediaElementID');
+	var vid = document.getElementById('audio');
 	vid.currentTime = {{original.聲音開始時間}};
-	vid.oncanplay = function() {
-    	alert("Can start playing video");
-	};
+	function restrictAudio(event) {
+		if(event.currentTime >= {{original.聲音結束時間}}){
+			console.log(event.currentTime)
+			event.pause();
+			event.currentTime = {{original.聲音開始時間}};
+		}
+	}
 	</script>
 {% endblock %}
