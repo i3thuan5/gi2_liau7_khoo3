@@ -6,6 +6,7 @@ from 語料庫.models import 語料表
 from 語料庫.models import 音檔表
 from django.template.response import TemplateResponse
 from django.conf.urls import url
+from 語料庫.models import 語料狀況表
 
 admin.site.unregister(User)
 admin.site.unregister(Group)
@@ -84,5 +85,6 @@ class 音檔表管理(admin.ModelAdmin):
         return False
 
 
+admin.site.register(語料狀況表)
 admin.site.register(音檔表, 音檔表管理)
 admin.site.register(語料表, 語料表管理)

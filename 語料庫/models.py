@@ -1,6 +1,8 @@
 from django.db import models
 
-
+class 語料狀況表(models.Model):
+    狀況 = models.BooleanField()
+    
 class 音檔表(models.Model):
     類別 = models.CharField(
         max_length=20,
@@ -35,7 +37,9 @@ class 語料表(models.Model):
     頭一版資料 = models.TextField(blank=True)
     sing5hong5認為會使 = models.BooleanField(default=False)
     ricer認為會使 = models.BooleanField(default=False)
-
+    
+    語料狀況 = models.ManyToManyField(語料狀況表)
+    
     def 類別(self):
         return self.音檔.類別
 
