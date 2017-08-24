@@ -4,10 +4,11 @@ from django.contrib.auth.models import User, Group
 # from django.contrib.sites.models import Site
 from 語料庫.models import 語料表
 from 語料庫.models import 音檔表
+from 語料庫.models import 語料狀況表
 from django.template.response import TemplateResponse
 from django.conf.urls import url
 from django.db import models
-from django.forms.widgets import TextInput
+from django.forms.widgets import TextInput, CheckboxSelectMultiple
 
 admin.site.unregister(User)
 admin.site.unregister(Group)
@@ -18,7 +19,7 @@ admin.site.disable_action('delete_selected')
 
 
 class 語料表管理(admin.ModelAdmin):
-    list_display = ['id', '類別', '漢字', '書寫', '對齊狀態', ]
+    list_display = ['id', '類別', '漢字', '書寫', '對齊狀態']
     ordering = ['-id']
     list_filter = ['音檔__類別', '漢字', ]
 
@@ -36,15 +37,21 @@ class 語料表管理(admin.ModelAdmin):
             'fields': ('漢字', '書寫', '斷詞',),
             'classes': ['wide']
         }),
+        (None, {
+            'fields': ('語料狀況', ),
+            'classes': ['wide']
+        }),
     )
 
     actions = [
         '設定類別_教材',
     ]
 
-    # 文字欄位從<textarea>改成<input type='text'/>
+    # 文字欄位顯示從textarea改成input
+    # 多對多欄位改用複選
     formfield_overrides = {
         models.TextField: {'widget': TextInput(attrs={'size': 80})},
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
 
     def 設定類別_教材(self, request, queryset):
@@ -87,5 +94,6 @@ class 音檔表管理(admin.ModelAdmin):
         return False
 
 
+admin.site.register(語料狀況表)
 admin.site.register(音檔表, 音檔表管理)
 admin.site.register(語料表, 語料表管理)
