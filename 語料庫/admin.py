@@ -15,9 +15,6 @@ admin.site.unregister(Group)
 
 admin.site.disable_action('delete_selected')
 
-class 語料狀況Inline(admin.StackedInline):
-    model = 語料表.語料狀況.through
-
 class 語料表管理(admin.ModelAdmin):
     list_display = ['id', '類別', '漢字', '書寫', '對齊狀態']
     ordering = ['-id']
@@ -41,11 +38,12 @@ class 語料表管理(admin.ModelAdmin):
             'fields': ('斷詞', ),
             'classes': ['wide']
         }),
+        (None, {
+            'fields': ('語料狀況', ),
+            'classes': ['wide']
+        }),
     )
-    
-    inlines = [語料狀況Inline]
-    exclude = ('語料狀況',)
-    
+
     actions = [
         '設定類別_教材',
     ]
