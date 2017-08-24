@@ -20,5 +20,6 @@ setup(
     ],
     install_requires=[
         'django',
+        'Taiwanese-Speech-And-Text-Corpus',
     ],
 )
