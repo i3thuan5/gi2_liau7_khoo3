@@ -21,7 +21,7 @@ class 語料表管理(admin.ModelAdmin):
     list_display = ['id', '類別', '漢字', '書寫', '對齊狀態', ]
     ordering = ['-id']
     list_filter = ['音檔__類別', '漢字', ]
-    
+
     search_fields = ['漢字', '書寫', ]
     fieldsets = (
         ('音檔', {
@@ -41,12 +41,12 @@ class 語料表管理(admin.ModelAdmin):
     actions = [
         '設定類別_教材',
     ]
-    
+
     # 文字欄位從<textarea>改成<input type='text'/>
     formfield_overrides = {
         models.TextField: {'widget': TextInput(attrs={'size': 80})},
     }
-    
+
     def 設定類別_教材(self, request, queryset):
         queryset.update(類別='S1')
 
