@@ -15,6 +15,7 @@ admin.site.unregister(Group)
 
 admin.site.disable_action('delete_selected')
 
+
 class 語料表管理(admin.ModelAdmin):
     list_display = ['id', '類別', '漢字', '書寫', '對齊狀態']
     ordering = ['-id']

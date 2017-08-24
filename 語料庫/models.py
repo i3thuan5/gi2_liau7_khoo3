@@ -3,9 +3,10 @@ from django.db import models
 
 class 語料狀況表(models.Model):
     狀況 = models.CharField(default='', max_length=30)
-    
+
     def __str__(self):
         return self.狀況
+
 
 class 音檔表(models.Model):
     類別 = models.CharField(
