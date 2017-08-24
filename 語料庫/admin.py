@@ -8,7 +8,7 @@ from 語料庫.models import 語料狀況表
 from django.template.response import TemplateResponse
 from django.conf.urls import url
 from django.db import models
-from django.forms.widgets import TextInput
+from django.forms.widgets import TextInput, CheckboxSelectMultiple
 
 admin.site.unregister(User)
 admin.site.unregister(Group)
@@ -47,9 +47,11 @@ class 語料表管理(admin.ModelAdmin):
         '設定類別_教材',
     ]
 
-    # 文字欄位從<textarea>改成<input type='text'/>
+    # 文字欄位顯示從textarea改成input
+    # 多對多欄位改用複選
     formfield_overrides = {
         models.TextField: {'widget': TextInput(attrs={'size': 80})},
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
 
     def 設定類別_教材(self, request, queryset):
