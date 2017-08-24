@@ -4,9 +4,11 @@ from django.contrib.auth.models import User, Group
 # from django.contrib.sites.models import Site
 from 語料庫.models import 語料表
 from 語料庫.models import 音檔表
+from 語料庫.models import 語料狀況表
 from django.template.response import TemplateResponse
 from django.conf.urls import url
-from 語料庫.models import 語料狀況表
+from django.db import models
+from django.forms.widgets import TextInput
 
 admin.site.unregister(User)
 admin.site.unregister(Group)
@@ -32,11 +34,7 @@ class 語料表管理(admin.ModelAdmin):
             'classes': ['wide']
         }),
         (None, {
-            'fields': ('漢字', '書寫', ),
-            'classes': ['wide']
-        }),
-        (None, {
-            'fields': ('斷詞', ),
+            'fields': ('漢字', '書寫', '斷詞',),
             'classes': ['wide']
         }),
         (None, {
@@ -48,6 +46,11 @@ class 語料表管理(admin.ModelAdmin):
     actions = [
         '設定類別_教材',
     ]
+
+    # 文字欄位從<textarea>改成<input type='text'/>
+    formfield_overrides = {
+        models.TextField: {'widget': TextInput(attrs={'size': 80})},
+    }
 
     def 設定類別_教材(self, request, queryset):
         queryset.update(類別='S1')
