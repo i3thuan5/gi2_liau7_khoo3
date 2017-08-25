@@ -1,4 +1,8 @@
+from os.path import join
+
+from django.conf import settings
 from django.db import models
+from 臺灣言語工具.語音辨識.聲音檔 import 聲音檔
 
 
 class 音檔表(models.Model):
@@ -24,6 +28,9 @@ class 音檔表(models.Model):
 
     def __str__(self):
         return self.原始檔.name
+
+    def 聲音檔(self):
+        return 聲音檔.對檔案讀(join(settings.MEDIA_ROOT, self.原始檔.name))
 
 
 class 語料表(models.Model):
@@ -70,6 +77,6 @@ class 語料狀況表(models.Model):
     class Meta:
         verbose_name = "狀況表"
         verbose_name_plural = verbose_name
-        
+
     def __str__(self):
         return self.狀況
