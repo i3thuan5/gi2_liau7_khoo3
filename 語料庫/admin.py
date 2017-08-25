@@ -21,7 +21,7 @@ admin.site.disable_action('delete_selected')
 class 語料表管理(admin.ModelAdmin):
     list_display = ['id', '音檔', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態']
     ordering = ['id']
-    list_filter = ['音檔__類別', 'sing5hong5有揀出來用無', '語料狀況', ]
+    list_filter = ['音檔__類別', '語料狀況', ]
 
     search_fields = [
         '漢字', '本調臺羅', '口語調臺羅',
@@ -46,19 +46,12 @@ class 語料表管理(admin.ModelAdmin):
         }),
     )
 
-    actions = [
-        '設定類別_教材',
-    ]
-
     # 文字欄位顯示從textarea改成input
     # 多對多欄位改用複選
     formfield_overrides = {
         models.TextField: {'widget': TextInput(attrs={'size': 80})},
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
-
-    def 設定類別_教材(self, request, queryset):
-        queryset.update(類別='S1')
 
     change_form_template = 'admin/gi2_liau7_khoo3/語料表/custom_change_form.html'
 
@@ -87,6 +80,17 @@ class 語料表管理(admin.ModelAdmin):
         # 薛：只能由程式上傳音檔和語料
         # 薛：任何人都不能從後台新增
         return False
+
+    def get_queryset(self, request):
+        qs = super(語料表管理, self).get_queryset(request)
+        return qs.filter(sing5hong5有揀出來用無=True)
+
+    actions = [
+        '設定類別_教材',
+    ]
+
+    def 設定類別_教材(self, request, queryset):
+        queryset.update(類別='S1')
 
 
 class 音檔表管理(admin.ModelAdmin):
