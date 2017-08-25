@@ -19,26 +19,29 @@ admin.site.disable_action('delete_selected')
 
 
 class 語料表管理(admin.ModelAdmin):
-    list_display = ['id', '類別', '漢字', '書寫', '對齊狀態']
-    ordering = ['-id']
-    list_filter = ['音檔__類別', '漢字', ]
+    list_display = ['id', '類別', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態']
+    ordering = ['id']
+    list_filter = ['音檔__類別', 'sing5hong5有揀出來用無', ]
 
-    search_fields = ['漢字', '書寫', ]
+    search_fields = [
+        '漢字', '本調臺羅', '口語調臺羅',
+        'sing5hong5舊編號', 'sing5hong5新編號',
+    ]
     fieldsets = (
         ('音檔', {
             'fields': ('音檔', ),
             'classes': ['wide']
         }),
         (None, {
-            'fields': ('聲音開始時間', '聲音結束時間', ),
-            'classes': ['wide']
-        }),
-        (None, {
-            'fields': ('漢字', '書寫', '斷詞',),
-            'classes': ['wide']
-        }),
-        (None, {
             'fields': ('語料狀況', ),
+            'classes': ['wide']
+        }),
+        #         (None, {
+        #             'fields': ('聲音開始時間', '聲音結束時間', ),
+        #             'classes': ['wide']
+        #         }),
+        (None, {
+            'fields': ('漢字', '本調臺羅', '口語調臺羅', ),
             'classes': ['wide']
         }),
     )

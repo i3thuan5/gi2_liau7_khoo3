@@ -1,13 +1,6 @@
 from django.db import models
 
 
-class 語料狀況表(models.Model):
-    狀況 = models.CharField(default='', max_length=30)
-
-    def __str__(self):
-        return self.狀況
-
-
 class 音檔表(models.Model):
     類別 = models.CharField(
         max_length=20,
@@ -17,9 +10,17 @@ class 音檔表(models.Model):
             ('新聞', '新聞'),
             ('對話', '對話'),
         ),
+        db_index=True,
     )
     原始檔 = models.FileField(blank=True)
+    資料夾名 = models.CharField(max_length=50)
+    聲音檔名 = models.CharField(max_length=200)
+    聽拍檔名 = models.CharField(max_length=200)
     加入時間 = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        unique_together = (("資料夾名", "聽拍檔名"),)
+        ordering = ['資料夾名', '聲音檔名', '聽拍檔名']
 
     def __str__(self):
         return self.原始檔.name
@@ -33,17 +34,20 @@ class 語料表(models.Model):
     聲音開始時間 = models.FloatField()
     聲音結束時間 = models.FloatField()
 
+    語者 = models.CharField(max_length=50)
     漢字 = models.TextField(blank=True)
-    書寫 = models.TextField(blank=True)
-    斷詞 = models.TextField(blank=True)
-    音值 = models.TextField(blank=True)
+    本調臺羅 = models.TextField(blank=True)
+    口語調臺羅 = models.TextField(blank=True)
     華語 = models.TextField(blank=True)
 
     頭一版資料 = models.TextField(blank=True)
-    sing5hong5認為會使 = models.BooleanField(default=False)
-    ricer認為會使 = models.BooleanField(default=False)
+    頭一版通用 = models.TextField(blank=True)
 
-    語料狀況 = models.ManyToManyField(語料狀況表)
+    sing5hong5舊編號 = models.CharField(null=True, max_length=200)
+    sing5hong5新編號 = models.CharField(null=True, max_length=200)
+    sing5hong5有揀出來用無 = models.BooleanField(default=False)
+
+    語料狀況 = models.ManyToManyField('語料狀況表')
 
     def 類別(self):
         return self.音檔.類別
@@ -51,3 +55,13 @@ class 語料表(models.Model):
     def 對齊狀態(self):
         '改去cache表'
         return True
+
+    def __str__(self):
+        return '{} {}'.format(self.id, self.漢字)
+
+
+class 語料狀況表(models.Model):
+    狀況 = models.CharField(unique=True, max_length=30)
+
+    def __str__(self):
+        return self.狀況
