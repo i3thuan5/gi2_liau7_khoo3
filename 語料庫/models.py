@@ -10,12 +10,17 @@ class 音檔表(models.Model):
             ('新聞', '新聞'),
             ('對話', '對話'),
         ),
+        db_index=True,
     )
     原始檔 = models.FileField(blank=True)
     資料夾名 = models.CharField(max_length=50)
     聲音檔名 = models.CharField(max_length=200)
     聽拍檔名 = models.CharField(max_length=200)
     加入時間 = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        unique_together = (("資料夾名", "聽拍檔名"),)
+        ordering = ['資料夾名', '聲音檔名', '聽拍檔名']
 
     def __str__(self):
         return self.原始檔.name
@@ -50,6 +55,9 @@ class 語料表(models.Model):
     def 對齊狀態(self):
         '改去cache表'
         return True
+
+    def __str__(self):
+        return '{} {}'.format(self.id, self.漢字)
 
 
 class 語料狀況表(models.Model):
