@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.contrib.auth.models import User, Group
 # from django.contrib.sites.models import Site
 from 語料庫.models import 語料表
-from 語料庫.models import 音檔表
 from 語料庫.models import 語料狀況表
 from django.template.response import TemplateResponse
 from django.conf.urls import url
@@ -19,9 +18,9 @@ admin.site.disable_action('delete_selected')
 
 
 class 語料表管理(admin.ModelAdmin):
-    list_display = ['id', '類別', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態']
+    list_display = ['id', '音檔', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態']
     ordering = ['id']
-    list_filter = ['音檔__類別', 'sing5hong5有揀出來用無', ]
+    list_filter = ['音檔__類別', '語料狀況', ]
 
     search_fields = [
         '漢字', '本調臺羅', '口語調臺羅',
@@ -46,19 +45,12 @@ class 語料表管理(admin.ModelAdmin):
         }),
     )
 
-    actions = [
-        '設定類別_教材',
-    ]
-
     # 文字欄位顯示從textarea改成input
     # 多對多欄位改用複選
     formfield_overrides = {
         models.TextField: {'widget': TextInput(attrs={'size': 80})},
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
-
-    def 設定類別_教材(self, request, queryset):
-        queryset.update(類別='S1')
 
     change_form_template = 'admin/gi2_liau7_khoo3/語料表/custom_change_form.html'
 
@@ -88,15 +80,20 @@ class 語料表管理(admin.ModelAdmin):
         # 薛：任何人都不能從後台新增
         return False
 
-
-class 音檔表管理(admin.ModelAdmin):
-
-    def has_add_permission(self, request):
-        # 薛：只能由程式上傳音檔和語料
-        # 薛：任何人都不能從後台新增
+    def has_delete_permission(self, request, obj=None):
         return False
 
+    def get_queryset(self, request):
+        qs = super(語料表管理, self).get_queryset(request)
+        return qs.filter(sing5hong5有揀出來用無=True)
 
-admin.site.register(語料狀況表)
-admin.site.register(音檔表, 音檔表管理)
+#     actions = [
+#         '設定類別_教材',
+#     ]
+#
+#     def 設定類別_教材(self, request, queryset):
+#         queryset.update(類別='S1')
+
+
 admin.site.register(語料表, 語料表管理)
+admin.site.register(語料狀況表)

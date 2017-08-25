@@ -4,13 +4,15 @@
 {% for fieldset in adminform %}
 	{% include "admin/includes/fieldset.html" %}
 	{% if fieldset.name == '音檔' and original.音檔.原始檔 != None %}
-		<p>原始檔網址: {{original.音檔.原始檔.url}}</p>
-		<div class='row'>
-    		<audio controls id='mediaElementID'>
-        	<source src="{{original.音檔.原始檔.url}}">
-        	Your browser does not support the audio element.
-    		</audio>
-		</div>
+		<fieldset class="module aligned wide">
+    		<div class='form-row'>
+	            <label for="id_mediaElementID">音檔片段：</label>
+	    		<audio controls id='mediaElementID'>
+		        	<source src="/音檔/{{original.音檔.id}}/{{original.聲音開始時間}}/{{original.聲音結束時間}}/audio.wav">
+		        	Your browser does not support the audio element.
+	    		</audio>
+			</div>
+		</fieldset>
   	{% endif %}
 {% endfor %}
 {% endblock %}

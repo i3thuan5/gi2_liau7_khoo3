@@ -1,4 +1,8 @@
+from os.path import join
+
+from django.conf import settings
 from django.db import models
+from 臺灣言語工具.語音辨識.聲音檔 import 聲音檔
 
 
 class 音檔表(models.Model):
@@ -25,6 +29,9 @@ class 音檔表(models.Model):
     def __str__(self):
         return self.原始檔.name
 
+    def 聲音檔(self):
+        return 聲音檔.對檔案讀(join(settings.MEDIA_ROOT, self.原始檔.name))
+
 
 class 語料表(models.Model):
     音檔 = models.ForeignKey(
@@ -34,7 +41,7 @@ class 語料表(models.Model):
     聲音開始時間 = models.FloatField()
     聲音結束時間 = models.FloatField()
 
-    語者 = models.CharField(max_length=50)
+    語者 = models.CharField(max_length=50, db_index=True)
     漢字 = models.TextField(blank=True)
     本調臺羅 = models.TextField(blank=True)
     口語調臺羅 = models.TextField(blank=True)
@@ -47,7 +54,11 @@ class 語料表(models.Model):
     sing5hong5新編號 = models.CharField(null=True, max_length=200)
     sing5hong5有揀出來用無 = models.BooleanField(default=False)
 
-    語料狀況 = models.ManyToManyField('語料狀況表')
+    語料狀況 = models.ManyToManyField('語料狀況表', blank=True)
+
+    class Meta:
+        verbose_name = "語料表"
+        verbose_name_plural = verbose_name
 
     def 類別(self):
         return self.音檔.類別
@@ -62,6 +73,10 @@ class 語料表(models.Model):
 
 class 語料狀況表(models.Model):
     狀況 = models.CharField(unique=True, max_length=30)
+
+    class Meta:
+        verbose_name = "狀況表"
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.狀況
