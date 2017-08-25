@@ -10,6 +10,10 @@ from 語料庫.models import 音檔表
 
 
 class Command(BaseCommand):
+    語料類別 = {
+        'MH': '戲劇'
+    }
+
     def add_arguments(self, parser):
         parser.add_argument(
             'json資料夾所在', type=str
@@ -30,7 +34,7 @@ class Command(BaseCommand):
                 basename(dirname(json檔名)) == 參數['資料夾名'] and
                 basename(json檔名) == 參數['聽拍檔名']
             ):
-                類別 = 語料類別[參數['資料夾名']]
+                類別 = self.語料類別[參數['資料夾名']]
                 資料夾名 = basename(dirname(wav檔名))
                 聲音檔名 = basename(wav檔名)
                 聽拍檔名 = basename(json檔名)
@@ -45,11 +49,11 @@ class Command(BaseCommand):
                 with open(json檔名) as json檔案:
                     for 一句 in json.load(json檔案):
                         音檔資料.資料.create(
-                            頭一版資料=一句["trs聽拍"],
                             聲音結束時間=一句["結束時間"],
                             聲音開始時間=一句["開始時間"],
 
                             語者=一句["語者"],
+                            頭一版資料=一句["trs聽拍"],
                             頭一版通用=一句["原始通用"],
                             漢字=一句["漢字"],
                             本調臺羅=一句["本調臺羅"],
