@@ -34,7 +34,7 @@ class 語料表(models.Model):
     聲音開始時間 = models.FloatField()
     聲音結束時間 = models.FloatField()
 
-    語者 = models.CharField(max_length=50)
+    語者 = models.CharField(max_length=50, db_index=True)
     漢字 = models.TextField(blank=True)
     本調臺羅 = models.TextField(blank=True)
     口語調臺羅 = models.TextField(blank=True)
@@ -47,7 +47,7 @@ class 語料表(models.Model):
     sing5hong5新編號 = models.CharField(null=True, max_length=200)
     sing5hong5有揀出來用無 = models.BooleanField(default=False)
 
-    語料狀況 = models.ManyToManyField('語料狀況表')
+    語料狀況 = models.ManyToManyField('語料狀況表', blank=True)
 
     def 類別(self):
         return self.音檔.類別

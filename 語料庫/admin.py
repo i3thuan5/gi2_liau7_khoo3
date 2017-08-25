@@ -19,9 +19,9 @@ admin.site.disable_action('delete_selected')
 
 
 class 語料表管理(admin.ModelAdmin):
-    list_display = ['id', '類別', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態']
+    list_display = ['id', '音檔', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態']
     ordering = ['id']
-    list_filter = ['音檔__類別', 'sing5hong5有揀出來用無', ]
+    list_filter = ['音檔__類別', 'sing5hong5有揀出來用無', '語料狀況', ]
 
     search_fields = [
         '漢字', '本調臺羅', '口語調臺羅',
@@ -90,10 +90,15 @@ class 語料表管理(admin.ModelAdmin):
 
 
 class 音檔表管理(admin.ModelAdmin):
+    list_display = ['id', '資料夾名', '聲音檔名', '聽拍檔名']
+    ordering = ['資料夾名', '聲音檔名', '聽拍檔名']
 
     def has_add_permission(self, request):
         # 薛：只能由程式上傳音檔和語料
         # 薛：任何人都不能從後台新增
+        return False
+
+    def has_change_permission(self, request, obj=None):
         return False
 
 
