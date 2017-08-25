@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.contrib.auth.models import User, Group
 # from django.contrib.sites.models import Site
 from 語料庫.models import 語料表
-from 語料庫.models import 音檔表
 from 語料庫.models import 語料狀況表
 from django.template.response import TemplateResponse
 from django.conf.urls import url
@@ -93,19 +92,5 @@ class 語料表管理(admin.ModelAdmin):
         queryset.update(類別='S1')
 
 
-class 音檔表管理(admin.ModelAdmin):
-    list_display = ['id', '資料夾名', '聲音檔名', '聽拍檔名']
-    ordering = ['資料夾名', '聲音檔名', '聽拍檔名']
-
-    def has_add_permission(self, request):
-        # 薛：只能由程式上傳音檔和語料
-        # 薛：任何人都不能從後台新增
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False
-
-
-admin.site.register(語料狀況表)
-admin.site.register(音檔表, 音檔表管理)
 admin.site.register(語料表, 語料表管理)
+admin.site.register(語料狀況表)
