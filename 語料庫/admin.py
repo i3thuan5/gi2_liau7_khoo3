@@ -80,16 +80,19 @@ class 語料表管理(admin.ModelAdmin):
         # 薛：任何人都不能從後台新增
         return False
 
+    def has_delete_permission(self, request, obj=None):
+        return False
+
     def get_queryset(self, request):
         qs = super(語料表管理, self).get_queryset(request)
         return qs.filter(sing5hong5有揀出來用無=True)
 
-    actions = [
-        '設定類別_教材',
-    ]
-
-    def 設定類別_教材(self, request, queryset):
-        queryset.update(類別='S1')
+#     actions = [
+#         '設定類別_教材',
+#     ]
+#
+#     def 設定類別_教材(self, request, queryset):
+#         queryset.update(類別='S1')
 
 
 admin.site.register(語料表, 語料表管理)

@@ -49,6 +49,10 @@ class 語料表(models.Model):
 
     語料狀況 = models.ManyToManyField('語料狀況表', blank=True)
 
+    class Meta:
+        verbose_name = "語料表"
+        verbose_name_plural = verbose_name
+
     def 類別(self):
         return self.音檔.類別
 
@@ -63,5 +67,9 @@ class 語料表(models.Model):
 class 語料狀況表(models.Model):
     狀況 = models.CharField(unique=True, max_length=30)
 
+    class Meta:
+        verbose_name = "狀況表"
+        verbose_name_plural = verbose_name
+        
     def __str__(self):
         return self.狀況
