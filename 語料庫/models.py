@@ -19,6 +19,9 @@ class 音檔表(models.Model):
         ),
     )
     原始檔 = models.FileField(blank=True)
+    資料夾名=models.CharField(max_length=50)
+    聲音檔名=models.CharField(max_length=200)
+    聽拍檔名=models.CharField(max_length=200)
     加入時間 = models.DateTimeField(auto_now_add=True, db_index=True)
 
     def __str__(self):
