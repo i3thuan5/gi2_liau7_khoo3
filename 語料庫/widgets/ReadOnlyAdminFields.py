@@ -1,7 +1,9 @@
 from django import forms
 from pip._vendor.appdirs import unicode
 
+
 class ReadOnlyWidget(forms.Widget):
+
     def __init__(self, original_value, display_value):
         self.original_value = original_value
         self.display_value = display_value
@@ -18,6 +20,7 @@ class ReadOnlyWidget(forms.Widget):
 
 
 class ReadOnlyAdminFields(object):
+
     def get_form(self, request, obj=None):
         form = super(ReadOnlyAdminFields, self).get_form(request, obj)
 
@@ -26,11 +29,13 @@ class ReadOnlyAdminFields(object):
                 if field_name in form.base_fields:
 
                     if hasattr(obj, 'get_%s_display' % field_name):
-                        display_value = getattr(obj, 'get_%s_display' % field_name)()
+                        display_value = getattr(
+                            obj, 'get_%s_display' % field_name)()
                     else:
                         display_value = None
 
-                    form.base_fields[field_name].widget = ReadOnlyWidget(getattr(obj, field_name, ''), display_value)
+                    form.base_fields[field_name].widget = ReadOnlyWidget(
+                        getattr(obj, field_name, ''), display_value)
                     form.base_fields[field_name].required = False
 
         return form
