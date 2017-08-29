@@ -61,23 +61,6 @@ class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         obj.校對者 = request.user
         super(語料表管理, self).save_model(request, obj, form, change)
 
-    def get_urls(self):
-        urls = super(語料表管理, self).get_urls()
-        my_urls = [
-            url(r'^語料表/$', self.admin_site.admin_view(self.my_view))
-        ]
-        return my_urls + urls
-
-    def my_view(self, request):
-        context = dict(
-            self.admin_site.each_context(request),
-        )
-        return TemplateResponse(
-            request,
-            'admin/gi2_liau7_khoo3/語料表/custom_change_form.html',
-            context
-        )
-
     def has_add_permission(self, request):
         # 薛：只能由程式上傳音檔和語料
         # 薛：任何人都不能從後台新增
