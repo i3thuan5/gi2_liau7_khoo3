@@ -8,6 +8,7 @@ from django.template.response import TemplateResponse
 from django.conf.urls import url
 from django.db import models
 from django.forms.widgets import TextInput, CheckboxSelectMultiple
+from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 
 admin.site.unregister(User)
 admin.site.unregister(Group)
@@ -17,11 +18,12 @@ admin.site.unregister(Group)
 admin.site.disable_action('delete_selected')
 
 
-class 語料表管理(admin.ModelAdmin):
+class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     list_display = ['id', '音檔', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態']
     ordering = ['id']
     list_filter = ['音檔__類別', '語料狀況', ]
 
+    readonly_fields = ('音檔',)
     search_fields = [
         '漢字', '本調臺羅', '口語調臺羅',
         'sing5hong5舊編號', 'sing5hong5新編號',
