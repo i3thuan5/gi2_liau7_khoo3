@@ -20,7 +20,7 @@ admin.site.disable_action('delete_selected')
 
 class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     list_display = ['id', '音檔', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態', '校對者', '校對時間']
-    ordering = ['id']
+    ordering = ['校對者', 'id']
     list_filter = ['音檔__類別', '語料狀況', ]
 
     readonly_fields = ('音檔',)
