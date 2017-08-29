@@ -1,5 +1,4 @@
 from django import forms
-from pip._vendor.appdirs import unicode
 
 
 class ReadOnlyWidget(forms.Widget):
@@ -12,8 +11,8 @@ class ReadOnlyWidget(forms.Widget):
 
     def render(self, name, value, attrs=None):
         if self.display_value is not None:
-            return unicode(self.display_value)
-        return unicode(self.original_value)
+            return str(self.display_value)
+        return str(self.original_value)
 
     def value_from_datadict(self, data, files, name):
         return self.original_value
