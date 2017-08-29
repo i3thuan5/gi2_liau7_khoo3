@@ -19,7 +19,7 @@ admin.site.disable_action('delete_selected')
 
 
 class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
-    list_display = ['id', '音檔', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態']
+    list_display = ['id', '音檔', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態', '校對者', '校對時間']
     ordering = ['id']
     list_filter = ['音檔__類別', '語料狀況', ]
 
@@ -56,6 +56,11 @@ class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
 
     change_form_template = 'admin/gi2_liau7_khoo3/語料表/custom_change_form.html'
 
+    def save_model(self, request, obj, form, change):
+        # 儲存校對者
+        obj.校對者 = request.user
+        super(語料表管理, self).save_model(request, obj, form, change)
+
     def get_urls(self):
         urls = super(語料表管理, self).get_urls()
         my_urls = [
@@ -64,12 +69,8 @@ class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         return my_urls + urls
 
     def my_view(self, request):
-        # ...
         context = dict(
-            # Include common variables for rendering the admin template.
             self.admin_site.each_context(request),
-            # Anything else you want in the context...
-            #            key=value,
         )
         return TemplateResponse(
             request,

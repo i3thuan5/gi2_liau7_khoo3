@@ -3,6 +3,7 @@ from os.path import join
 from django.conf import settings
 from django.db import models
 from 臺灣言語工具.語音辨識.聲音檔 import 聲音檔
+from django.contrib.auth.models import User
 
 
 class 音檔表(models.Model):
@@ -40,21 +41,25 @@ class 語料表(models.Model):
     )
     聲音開始時間 = models.FloatField()
     聲音結束時間 = models.FloatField()
-
     語者 = models.CharField(max_length=50, db_index=True)
+
+    # Edit
     漢字 = models.TextField(blank=True)
     本調臺羅 = models.TextField(blank=True)
     口語調臺羅 = models.TextField(blank=True)
     華語 = models.TextField(blank=True)
+    語料狀況 = models.ManyToManyField('語料狀況表', blank=True)
+    校對者 = models.ForeignKey(User, null=True) 
+    校對時間 = models.DateTimeField(auto_now=True)
 
+    # Original data backup
     頭一版資料 = models.TextField(blank=True)
     頭一版通用 = models.TextField(blank=True)
 
+    # Tags for Kaldi
     sing5hong5舊編號 = models.CharField(null=True, max_length=200)
     sing5hong5新編號 = models.CharField(null=True, max_length=200)
     sing5hong5有揀出來用無 = models.BooleanField(default=False)
-
-    語料狀況 = models.ManyToManyField('語料狀況表', blank=True)
 
     class Meta:
         verbose_name = "語料表"
