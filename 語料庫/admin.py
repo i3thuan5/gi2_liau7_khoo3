@@ -4,8 +4,6 @@ from django.contrib.auth.models import User, Group
 # from django.contrib.sites.models import Site
 from 語料庫.models import 語料表
 from 語料庫.models import 語料狀況表
-from django.template.response import TemplateResponse
-from django.conf.urls import url
 from django.db import models
 from django.forms.widgets import TextInput, CheckboxSelectMultiple
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
