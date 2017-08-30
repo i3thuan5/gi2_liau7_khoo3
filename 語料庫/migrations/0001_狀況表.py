@@ -32,7 +32,8 @@ class Migration(migrations.Migration):
             name='語料狀況表',
             fields=[
                 ('id', models.AutoField(
-                    auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                    auto_created=True, primary_key=True, serialize=False,
+                    verbose_name='ID')),
                 ('狀況', models.CharField(max_length=30, unique=True)),
             ],
             options={
@@ -44,7 +45,8 @@ class Migration(migrations.Migration):
             name='語料表',
             fields=[
                 ('id', models.AutoField(
-                    auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                    auto_created=True, primary_key=True, serialize=False,
+                    verbose_name='ID')),
                 ('聲音開始時間', models.FloatField()),
                 ('聲音結束時間', models.FloatField()),
                 ('語者', models.CharField(db_index=True, max_length=50)),
@@ -59,7 +61,8 @@ class Migration(migrations.Migration):
                 ('sing5hong5新編號', models.CharField(max_length=200, null=True)),
                 ('sing5hong5有揀出來用無', models.BooleanField(default=False)),
                 ('校對者', models.ForeignKey(
-                    null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                    null=True, on_delete=django.db.models.deletion.CASCADE,
+                    to=settings.AUTH_USER_MODEL)),
                 ('語料狀況', models.ManyToManyField(blank=True, to='語料庫.語料狀況表')),
             ],
             options={
@@ -71,9 +74,11 @@ class Migration(migrations.Migration):
             name='音檔表',
             fields=[
                 ('id', models.AutoField(
-                    auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                    auto_created=True, primary_key=True, serialize=False,
+                    verbose_name='ID')),
                 ('類別', models.CharField(choices=[
-                 ('戲劇', '戲劇'), ('朗讀', '朗讀'), ('新聞', '新聞'), ('對話', '對話')], db_index=True, max_length=20)),
+                 ('戲劇', '戲劇'), ('朗讀', '朗讀'), ('新聞', '新聞'), ('對話', '對話')],
+                    db_index=True, max_length=20)),
                 ('原始檔', models.FileField(blank=True, upload_to='')),
                 ('資料夾名', models.CharField(max_length=50)),
                 ('聲音檔名', models.CharField(max_length=200)),
@@ -93,7 +98,8 @@ class Migration(migrations.Migration):
             model_name='語料表',
             name='音檔',
             field=models.ForeignKey(
-                null=True, on_delete=django.db.models.deletion.CASCADE, related_name='資料', to='語料庫.音檔表'),
+                null=True, on_delete=django.db.models.deletion.CASCADE,
+                related_name='資料', to='語料庫.音檔表'),
         ),
         migrations.RunPython(初始狀況表, lambda *x:x),
     ]
