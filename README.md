@@ -8,3 +8,8 @@ sudo apt-get install normalize-audio
 virtualenv --python=python3 venv; . venv/bin/activate; pip install --upgrade pip # 設置環境檔
 pip install django Taiwanese-Speech-And-Text-Corpus
 ```
+
+## 匯入資料
+```
+time python manage.py 匯入1_0版語料 ../Ko_corpus/TL-Json ~/Dropbox/母語/語料/高老師聽拍語料/Finished/ MH MaternalHome-003\|25\|110308\|MaternalHome-003-101223.json
+```
