@@ -84,4 +84,4 @@ class 語料狀況表(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.狀況
+        return '{} {}'.format(self.pk, self.狀況.split('：')[-1])
