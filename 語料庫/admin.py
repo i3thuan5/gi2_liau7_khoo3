@@ -4,8 +4,6 @@ from django.contrib.auth.models import User, Group
 # from django.contrib.sites.models import Site
 from 語料庫.models import 語料表
 from 語料庫.models import 語料狀況表
-from django.template.response import TemplateResponse
-from django.conf.urls import url
 from django.db import models
 from django.forms.widgets import TextInput, CheckboxSelectMultiple
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
@@ -19,8 +17,8 @@ admin.site.disable_action('delete_selected')
 
 
 class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
-    list_display = ['id', '音檔', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態']
-    ordering = ['id']
+    list_display = ['id', '音檔', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態', '校對者', '校對時間']
+    ordering = ['校對者', 'id']
     list_filter = ['音檔__類別', '語料狀況', ]
 
     readonly_fields = ('音檔',)
@@ -56,26 +54,10 @@ class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
 
     change_form_template = 'admin/gi2_liau7_khoo3/語料表/custom_change_form.html'
 
-    def get_urls(self):
-        urls = super(語料表管理, self).get_urls()
-        my_urls = [
-            url(r'^語料表/$', self.admin_site.admin_view(self.my_view))
-        ]
-        return my_urls + urls
-
-    def my_view(self, request):
-        # ...
-        context = dict(
-            # Include common variables for rendering the admin template.
-            self.admin_site.each_context(request),
-            # Anything else you want in the context...
-            #            key=value,
-        )
-        return TemplateResponse(
-            request,
-            'admin/gi2_liau7_khoo3/語料表/custom_change_form.html',
-            context
-        )
+    def save_model(self, request, obj, form, change):
+        # 儲存校對者
+        obj.校對者 = request.user
+        super(語料表管理, self).save_model(request, obj, form, change)
 
     def has_add_permission(self, request):
         # 薛：只能由程式上傳音檔和語料
