@@ -1,17 +1,11 @@
 
 from django.contrib import admin
-from django.contrib.auth.models import User, Group
-# from django.contrib.sites.models import Site
 from 語料庫.models import 語料表
 from 語料庫.models import 語料狀況表
 from django.db import models
 from django.forms.widgets import TextInput, CheckboxSelectMultiple
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 
-admin.site.unregister(User)
-admin.site.unregister(Group)
-
-# admin.site.unregister(Site)
 
 admin.site.disable_action('delete_selected')
 
@@ -19,7 +13,7 @@ admin.site.disable_action('delete_selected')
 class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     list_display = ['id', '音檔', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態', '校對者', '校對時間']
     ordering = ['校對者', 'id']
-    list_filter = ['音檔__類別', '語料狀況', ]
+    list_filter = ['音檔__類別', '語料狀況', '校對者']
 
     readonly_fields = ('音檔',)
     search_fields = [
