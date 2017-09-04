@@ -21,10 +21,6 @@ class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         'sing5hong5舊編號', 'sing5hong5新編號',
     ]
     fieldsets = (
-        ('音檔', {
-            'fields': ('音檔', ),
-            'classes': ['wide']
-        }),
         (None, {
             'fields': ('語料狀況', ),
             'classes': ['wide']
