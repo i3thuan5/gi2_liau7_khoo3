@@ -1,0 +1,9 @@
+/*
+* Overriding style for CheckboxSelectMultiple widget
+*/
+form .related-widget-wrapper ul {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	max-width: 60vw;
+}

@@ -1,9 +1,8 @@
 {% extends "admin/change_form.html" %}
 
 {% block field_sets %}
-{% for fieldset in adminform %}
-	{% include "admin/includes/fieldset.html" %}
-	{% if fieldset.name == '音檔' and original.音檔.原始檔 != None %}
+
+{% if original.音檔.原始檔 != None %}
 		<fieldset class="module aligned wide">
     		<div class='form-row'>
 	            <label for="id_mediaElementID">音檔片段：</label>
@@ -13,17 +12,11 @@
 	    		</audio>
 			</div>
 		</fieldset>
-  	{% endif %}
+{% endif %}
+  	
+{% for fieldset in adminform %}
+	{% include "admin/includes/fieldset.html" %}
 {% endfor %}
-<fieldset class="module aligned wide">
-	<div class='form-row'>
-        <label for="id_mediaElementID2">音檔片段：</label>
-		<audio controls id='mediaElementID2'>
-        	<source src="/音檔/{{original.音檔.id}}/{{original.聲音開始時間}}/{{original.聲音結束時間}}/audio.wav">
-        	Your browser does not support the audio element.
-		</audio>
-	</div>
-</fieldset>
 {% endblock %}
 
 {% block admin_change_form_document_ready %}

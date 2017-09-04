@@ -21,10 +21,6 @@ class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         'sing5hong5舊編號', 'sing5hong5新編號',
     ]
     fieldsets = (
-        ('音檔', {
-            'fields': ('音檔', ),
-            'classes': ['wide']
-        }),
         (None, {
             'fields': ('語料狀況', ),
             'classes': ['wide']
@@ -61,6 +57,10 @@ class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         qs = super(語料表管理, self).get_queryset(request)
         return qs.filter(sing5hong5有揀出來用無=True)
 
+    class Media:
+        css = {
+            "all": ("css/admin_gi2_liau7_pio2.css",)
+        }
 #     actions = [
 #         '設定類別_教材',
 #     ]
