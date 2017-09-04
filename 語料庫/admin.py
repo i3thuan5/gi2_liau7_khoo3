@@ -71,3 +71,5 @@ class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
 
 admin.site.register(語料表, 語料表管理)
 admin.site.register(語料狀況表)
+
+admin.site.register(檢查表, 檢查表管理)
