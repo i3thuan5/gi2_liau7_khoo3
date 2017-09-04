@@ -29,12 +29,8 @@ class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
             'fields': ('語料狀況', ),
             'classes': ['wide']
         }),
-        #         (None, {
-        #             'fields': ('聲音開始時間', '聲音結束時間', ),
-        #             'classes': ['wide']
-        #         }),
         (None, {
-            'fields': ('漢字', '本調臺羅', '口語調臺羅', ),
+            'fields': ('漢字', '本調臺羅', '口語調臺羅', '備註', ),
             'classes': ['wide']
         }),
     )
