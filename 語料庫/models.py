@@ -52,7 +52,7 @@ class 語料表(models.Model):
     校對者 = models.ForeignKey(User, null=True)
     校對時間 = models.DateTimeField(auto_now=True)
     備註 = models.TextField(blank=True)
-    
+
     # Original data backup
     頭一版資料 = models.TextField(blank=True)
     頭一版通用 = models.TextField(blank=True)
