@@ -1,16 +1,16 @@
 from 語料庫.models import 語料狀況表
 from 語料庫.models import 語料表
-from 語料庫.管理.校對 import 語料表管理
+from 語料庫.管理.校對 import 校對表管理
 
 
 class 檢查表(語料表):
     class Meta:
         proxy = True
-        verbose_name = "檢查表"
+        verbose_name = "2.檢查表"
         verbose_name_plural = verbose_name
 
 
-class 檢查表管理(語料表管理):
+class 檢查表管理(校對表管理):
     readonly_fields = ('音檔', '漢字', '本調臺羅', '口語調臺羅', )
 
     fieldsets = (

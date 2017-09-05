@@ -2,9 +2,16 @@ from django.contrib import admin
 from django.db import models
 from django.forms.widgets import TextInput, CheckboxSelectMultiple
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
+from 語料庫.models import 語料表
 
 
-class 語料表管理(ReadOnlyAdminFields, admin.ModelAdmin):
+class 校對表(語料表):
+    class Meta:
+        proxy = True
+        verbose_name = "1.語料校對表"
+        verbose_name_plural = verbose_name
+
+class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     list_display = ['id', '音檔', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態', '校對者', '校對時間']
     ordering = ['校對者', 'id']
     list_filter = ['音檔__類別', '語料狀況', '校對者']
