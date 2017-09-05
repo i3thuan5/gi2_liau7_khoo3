@@ -14,6 +14,7 @@ class 檢查表(語料表):
 class 檢查表管理(校對表管理):
     # change list
     list_display = ['id', '目標音檔', '漢字', '本調臺羅', '口語調臺羅', '校對者', '校對時間']
+    list_per_page = 10
     actions = [
         '設定無問題',
     ]
