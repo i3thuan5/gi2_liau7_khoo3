@@ -31,7 +31,7 @@ class 檢查表管理(校對表管理):
         queryset.update(檢查者=request.user)
 
     # change view
-    readonly_fields = ('音檔', '漢字', '本調臺羅', '口語調臺羅', )
+    readonly_fields = ('音檔', '漢字', '本調臺羅', '口語調臺羅', '語料狀況',)
     fieldsets = (
         ('音檔', {
             'fields': ('音檔', ),
