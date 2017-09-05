@@ -22,10 +22,6 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         'sing5hong5舊編號', 'sing5hong5新編號',
     ]
     fieldsets = (
-        ('音檔', {
-            'fields': ('音檔', ),
-            'classes': ['wide']
-        }),
         (None, {
             'fields': ('語料狀況', ),
             'classes': ['wide']
@@ -48,7 +44,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         # 儲存校對者
         obj.校對者 = request.user
-        super(語料表管理, self).save_model(request, obj, form, change)
+        super(校對表管理, self).save_model(request, obj, form, change)
 
     def has_add_permission(self, request):
         # 薛：只能由程式上傳音檔和語料
@@ -59,5 +55,10 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         return False
 
     def get_queryset(self, request):
-        qs = super(語料表管理, self).get_queryset(request)
+        qs = super(校對表管理, self).get_queryset(request)
         return qs.filter(sing5hong5有揀出來用無=True)
+
+    class Media:
+        css = {
+            "all": ("css/admin_gi2_liau7_pio2.css",)
+        }
