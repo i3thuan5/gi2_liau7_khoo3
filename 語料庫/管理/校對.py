@@ -11,6 +11,7 @@ class 校對表(語料表):
         verbose_name = "1.語料校對表"
         verbose_name_plural = verbose_name
 
+
 class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     list_display = ['id', '音檔', '漢字', '本調臺羅', '口語調臺羅', '對齊狀態', '校對者', '校對時間']
     ordering = ['校對者', 'id']
