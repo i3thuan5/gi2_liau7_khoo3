@@ -8,7 +8,7 @@ from 語料庫.models import 語料表
 class 校對表(語料表):
     class Meta:
         proxy = True
-        verbose_name = "1.語料校對表"
+        verbose_name = "1.校對表"
         verbose_name_plural = verbose_name
 
 
