@@ -1,4 +1,9 @@
 /*
+* Over
+*/
+.module {
+}
+/*
 * Overriding style for CheckboxSelectMultiple widget
 */
 form .related-widget-wrapper ul {
@@ -6,4 +11,12 @@ form .related-widget-wrapper ul {
 	flex-direction: row;
 	flex-wrap: wrap;
 	max-width: 60vw;
+}
+/*
+* Style for TextField Hint
+*/
+.field-hint {
+	color: #666;
+	display:inline-block;
+	padding-left: 6px;
 }
