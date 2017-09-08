@@ -8,4 +8,4 @@ register = template.Library()
 @register.simple_tag
 def 今仔日校對數量():
     數量 = 語料表.objects.filter(校對時間__date=date.today()).count()
-    return 數量 
+    return 數量
