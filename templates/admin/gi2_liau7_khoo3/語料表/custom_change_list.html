@@ -68,8 +68,8 @@
         {% if cl.has_filters %}
           <div id="changelist-filter">
             <h2>{% trans 'Filter' %}</h2>
-           	<span>{% now "Y\.n\.j H:i" %}</span><br/>
-            <span>今仔日校對數量：{% 今仔日校對數量 %}</span>
+           	<h3>{% now "Y\.n\.j H:i" %}</h3>
+            <h3>今仔日校對數量：{% 今仔日校對數量 %}</h3>
             {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
           </div>
         {% endif %}
