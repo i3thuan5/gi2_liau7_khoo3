@@ -3,9 +3,13 @@ from django.db import models
 from django.forms.widgets import TextInput, CheckboxSelectMultiple
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 from 語料庫.models import 語料表
+from django.utils.timezone import now
 
 
 class 校對表(語料表):
+    def save(self, *args, **kwargs):
+        self.校對時間 = now()
+        super().save(*args, **kwargs)
 
     class Meta:
         proxy = True
