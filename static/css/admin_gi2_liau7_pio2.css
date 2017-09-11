@@ -1,9 +1,24 @@
 /*
-* Overriding style for CheckboxSelectMultiple widget
+* Overriding fieldset style 
+*/
+.module {
+	margin-bottom: 20px;
+}
+/*
+* Overriding style of CheckboxSelectMultiple widget
 */
 form .related-widget-wrapper ul {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	max-width: 60vw;
+}
+/*
+* Style for TextField Hint
+*/
+.field-hint {
+	color: #666;
+	display: inline-block;
+	padding-left: 6px;
+	line-height: 1.6em; 
 }
