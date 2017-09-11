@@ -64,7 +64,7 @@ class 檢查表管理(校對表管理):
     def save_model(self, request, obj, form, change):
         # 儲存校對者
         obj.檢查者 = request.user
-        if '這條愛討論' in request.POST.keys():
+        if '_這條愛討論' in request.POST.keys():
             obj.語料狀況.add(語料狀況表.objects.get(狀況='愛討論'))
         super(檢查表管理, self).save_model(request, obj, form, change)
 
