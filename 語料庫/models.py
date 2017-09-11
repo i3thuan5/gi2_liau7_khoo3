@@ -37,7 +37,7 @@ class 音檔表(models.Model):
 class 語料表(models.Model):
     音檔 = models.ForeignKey(
         音檔表, related_name='資料',
-        on_delete=models.CASCADE, null=True
+        on_delete=models.CASCADE
     )
     聲音開始時間 = models.FloatField()
     聲音結束時間 = models.FloatField()
