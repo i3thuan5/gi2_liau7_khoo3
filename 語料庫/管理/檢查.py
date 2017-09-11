@@ -20,14 +20,17 @@ class 檢查表管理(校對表管理):
     # change list
     list_display = [
         'id',
-        '目標音檔', '漢字', '本調臺羅', '口語調臺羅',
-        '檢查者', '檢查時間', '校對者', '校對時間',
+        '目標音檔', '狀況',
+        '漢字', '本調臺羅', '口語調臺羅',
+        '備註開頭',
+        '檢查時間',
     ]
     ordering = ['檢查者', 'id']
     list_per_page = 10
     actions = [
         '設定無問題',
     ]
+    list_filter = ['音檔__類別', '語料狀況', '校對者', '檢查者', ]
 
     def 目標音檔(self, obj):
         return ('''<audio controls>

@@ -71,6 +71,16 @@ class 語料表(models.Model):
     def 類別(self):
         return self.音檔.類別
 
+    def 狀況(self):
+        陣列 = []
+        for 狀況 in self.語料狀況.order_by('id'):
+            陣列.append(str(狀況.id))
+        return ', '.join(陣列)
+
+    def 備註開頭(self):
+        if len(self.備註)>10:
+            return self.備註[:10]+'……'
+        return self.備註
     def 對齊狀態(self):
         '改去cache表'
         return True
