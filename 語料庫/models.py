@@ -50,7 +50,7 @@ class 語料表(models.Model):
     華語 = models.TextField(blank=True)
     語料狀況 = models.ManyToManyField('語料狀況表', blank=True)
     校對者 = models.ForeignKey(User, null=True)
-    校對時間 = models.DateTimeField(auto_now=True)
+    校對時間 = models.DateTimeField(null=True)
     備註 = models.TextField(blank=True)
 
     # Original data backup
