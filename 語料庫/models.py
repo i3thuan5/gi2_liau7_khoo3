@@ -78,9 +78,10 @@ class 語料表(models.Model):
         return ', '.join(陣列)
 
     def 備註開頭(self):
-        if len(self.備註)>10:
-            return self.備註[:10]+'……'
+        if len(self.備註) > 10:
+            return self.備註[:10] + '……'
         return self.備註
+
     def 對齊狀態(self):
         '改去cache表'
         return True
