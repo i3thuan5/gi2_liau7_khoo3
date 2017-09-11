@@ -1,6 +1,7 @@
 from 語料庫.models import 語料狀況表
 from 語料庫.models import 語料表
 from 語料庫.管理.校對 import 校對表管理
+from django.utils.timezone import now
 
 
 class 檢查表(語料表):
@@ -9,6 +10,10 @@ class 檢查表(語料表):
         proxy = True
         verbose_name = "2.檢查表"
         verbose_name_plural = verbose_name
+
+    def save(self, *args, **kwargs):
+        self.檢查時間 = now()
+        super().save(*args, **kwargs)
 
 
 class 檢查表管理(校對表管理):
