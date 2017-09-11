@@ -26,6 +26,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
 
     # change view
     # venv/lib/python3.5/site-packages/django/contrib/admin/templates/admin/
+    change_list_template = 'admin/gi2_liau7_khoo3/語料表/custom_change_list.html'
     change_form_template = 'admin/gi2_liau7_khoo3/語料表/custom_change_form.html'
     readonly_fields = ('音檔',)
     fieldsets = (
