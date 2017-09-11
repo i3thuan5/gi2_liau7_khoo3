@@ -1,0 +1,12 @@
+{% extends "admin/gi2_liau7_khoo3/語料表/custom_change_form.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+{% block submit_buttons_bottom %}
+   <input type="submit" 
+         value="{% trans '這條愛討論' %}" 
+         class="default" 
+         name="這條愛討論" />
+  {% submit_row %}
+{% endblock %}
+
+  

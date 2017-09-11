@@ -44,6 +44,7 @@ class 檢查表管理(校對表管理):
         queryset.update(檢查者=request.user, 檢查時間=now())
 
     # change view
+    change_form_template = 'admin/gi2_liau7_khoo3/語料表/檢查_change_form.html'
     readonly_fields = ('音檔', '漢字', '本調臺羅', '口語調臺羅', '語料狀況',)
     fieldsets = (
         ('音檔', {
@@ -62,8 +63,9 @@ class 檢查表管理(校對表管理):
 
     def save_model(self, request, obj, form, change):
         # 儲存校對者
-        obj.語料狀況.add(語料狀況表.objects.get(狀況='愛討論'))
         obj.檢查者 = request.user
+        if '這條愛討論' in request.POST.keys():
+            obj.語料狀況.add(語料狀況表.objects.get(狀況='愛討論'))
         super(檢查表管理, self).save_model(request, obj, form, change)
 
     def get_queryset(self, request):
