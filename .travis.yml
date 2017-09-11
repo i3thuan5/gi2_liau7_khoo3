@@ -5,8 +5,8 @@ python:
 - '3.4'
 - '3.5'
 env:
-- TOX_ENV=安裝
 - TOX_ENV=flake8
+- TOX_ENV=test
 install:
 - sudo apt-get install normalize-audio
 - pip install tox
