@@ -5,8 +5,10 @@ from 語料庫.管理.校對 import 校對表
 
 
 class 校對表試驗(TestCase):
+
     def setup(self):
         pass
+
     def test更新校對時間(self):
         音檔資料 = 音檔表.objects.create(
             類別='戲劇',
