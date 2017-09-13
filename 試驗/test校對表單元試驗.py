@@ -7,16 +7,13 @@ from 語料庫.管理.校對 import 校對表
 class 校對表試驗(TestCase):
 
     def setUp(self):
-        pass
-
-    def test更新校對時間(self):
         音檔資料 = 音檔表.objects.create(
             類別='戲劇',
             資料夾名='dirsui2',
             聲音檔名='sui2.wav',
             聽拍檔名='sui2.txt',
         )
-        語料 = 音檔資料.資料.create(
+        self.語料 = 音檔資料.資料.create(
             聲音結束時間='0',
             聲音開始時間='1',
 
@@ -31,10 +28,14 @@ class 校對表試驗(TestCase):
             sing5hong5新編號='333',
             sing5hong5有揀出來用無=True,
         )
-        校對資料 = 校對表.objects.get(pk=語料.pk)
+
+    def test更新校對時間(self):
+        校對資料 = 校對表.objects.get(pk=self.語料.pk)
         校對資料.漢字 = '駝'
+        self.assertIsNone(
+            校對資料.校對時間
+        )
         校對資料.save()
-        self.assertEqual(
-            校對資料.校對時間.strftime('%Y-%m-%d'),
-            now().strftime('%Y-%m-%d')
+        self.assertIsNotNone(
+            校對資料.校對時間
         )
