@@ -1,6 +1,5 @@
 from django.test.testcases import TestCase
 from 語料庫.models import 音檔表
-from django.utils.timezone import now
 from 語料庫.管理.校對 import 校對表
 
 
