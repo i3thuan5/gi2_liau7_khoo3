@@ -1,6 +1,6 @@
 {% extends "admin/change_list.html" %}
 {% load i18n admin_list %}
-{% load 今仔日校對數量 from gi2_liau7_tags %}
+{% load 今仔日校對數量 攏總校對數量 from gi2_liau7_tags %}
 
 {% block filters %}
  	{% if cl.has_filters %}
@@ -8,6 +8,7 @@
     		<h2>{% trans 'Filter' %}</h2>
         	<h3>{% now "Y\.n\.j H:i" %}</h3>
         	<h3>今仔日校對數量：{% 今仔日校對數量 %}</h3>
+        	<h3>攏總校對數量：{% 攏總校對數量 %}</h3>
     		{% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
         </div>
     {% endif %}
