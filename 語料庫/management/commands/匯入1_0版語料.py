@@ -12,7 +12,11 @@ from 語料庫.models import 音檔表
 
 class Command(BaseCommand):
     語料類別 = {
-        'MH': '戲劇'
+        'MH': '戲劇',
+        'DaAi_blktc': '戲劇',
+        'DaAi_csgr': '戲劇',
+        'DaAi_urs': '戲劇',
+        'DaAi_vvrs': '戲劇',
     }
 
     def add_arguments(self, parser):
