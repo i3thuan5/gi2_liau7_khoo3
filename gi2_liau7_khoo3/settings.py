@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     '語料庫',
+    '用字',
 ]
 
 MIDDLEWARE = [
