@@ -29,3 +29,8 @@ class 標本調試驗(TestCase):
         self.漢字 = '丞宏'
         self.原本本調 = 'sing5-hong5'
         self.答案本調 = '丞 hong5'
+
+    def test合音(self):
+        self.漢字 = '（查某）人'
+        self.原本本調 = 'tsa9-lang5'
+        self.答案本調 = 'tsa9 lang5'
