@@ -45,7 +45,17 @@
 		trackCurrentTime.call(vid);
 	}
 	
-	django.jQuery("#senn1pun2tiau7").on('click', function(){
+django.jQuery(document).ready(function($){
+	$('#校對表_form').on('keyup keypress', function(e) {
+		var keyCode = e.keyCode || e.which;
+		if (keyCode === 13) { 
+		    e.preventDefault();
+		    $('input[name="_continue"]').click();
+		    return false;
+		}
+	});
+	 
+	$("#senn1pun2tiau7").on('click', function(){
 		var a='/標本調/'+django.jQuery("#id_漢字").val()+'/'+django.jQuery("#id_本調臺羅").val();
 		/*alert(a);/* /*  */ 
 		var jqxhr = django.jQuery.ajax( a )
@@ -55,11 +65,7 @@
 		  .fail(function() {
 		    alert( "error" );
 		  });
-		/*
-		  .always(function() {
-		    alert( "complete" );
-		  });*/
-
 	})
-	</script>
+});
+</script>
 {% endblock %}
