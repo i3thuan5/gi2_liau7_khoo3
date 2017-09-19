@@ -4,7 +4,10 @@ from 語料庫.介面 import 傳音檔
 from 校對工具.views import 工具
 from django.http.response import JsonResponse
 
-_工具 = 工具()
+try:
+    _工具 = 工具()
+except Exception as 錯誤:
+    print(錯誤)
 
 
 def 標本調(request, 漢字, 臺羅):
