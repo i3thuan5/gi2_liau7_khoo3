@@ -20,8 +20,10 @@
                         	{{ field.field }}
                         	<input type='button' id='senn1pun2tiau7' value='生本調'/>
                         {% elif field.field.name == '本調臺羅' or field.field.name == '口語調臺羅' %}
-                        	<span class="field-hint">{{field.field.value }}</span><br/>
-                        	{{ field.field }}
+                        	<div class="field-full-width">
+	                        	<div class="field-hint">{{field.field.value }}</div>
+	                        	{{ field.field }}
+                        </div>
                         {% else %}
                             {{ field.field }}
                         {% endif %}

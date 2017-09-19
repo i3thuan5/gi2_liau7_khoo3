@@ -16,9 +16,17 @@ form .related-widget-wrapper ul {
 /*
 * Style for TextField Hint
 */
+#content-main {
+	overflow: hidden;
+}
 .field-hint {
 	color: #666;
 	display: inline-block;
 	padding-left: 6px;
 	line-height: 1.6em; 
+}
+.field-full-width {
+	display: flex;
+	width: 100%;
+	flex-flow: column nowrap;
 }
