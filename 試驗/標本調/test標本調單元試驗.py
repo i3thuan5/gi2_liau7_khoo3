@@ -22,8 +22,8 @@ class 標本調試驗(TestCase):
 
     def test照詞處理(self):
         self.漢字 = '大人'
-        self.原本本調 = 'tai7-lan5'
-        self.答案本調 = 'tai7-lin5'
+        self.原本本調 = 'tua7-lan5'
+        self.答案本調 = 'tua7-lang5'
 
     def test無佇辭典內(self):
         self.漢字 = '丞宏'
