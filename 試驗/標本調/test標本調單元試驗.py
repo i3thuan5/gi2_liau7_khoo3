@@ -34,3 +34,8 @@ class 標本調試驗(TestCase):
         self.漢字 = '（查某）人'
         self.原本本調 = 'tsa9-lang5'
         self.答案本調 = 'tsa9 lang5'
+
+    def test字數無仝照漢字(self):
+        self.漢字 = '已經到'
+        self.原本本調 = 'i2-king1'
+        self.答案本調 = 'i2-king1 kau3'
