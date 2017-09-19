@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     '語料庫',
     '用字',
+    '校對工具',
 ]
 
 MIDDLEWARE = [

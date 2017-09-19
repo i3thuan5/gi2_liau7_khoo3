@@ -7,16 +7,16 @@ from 臺灣言語工具.斷詞.拄好長度辭典揣詞 import 拄好長度辭�
 # from 臺灣言語工具.斷詞.語言模型揀集內組 import 語言模型揀集內組
 from 臺灣言語工具.解析整理.座標揀集內組 import 座標揀集內組
 from 臺灣言語工具.辭典.型音辭典 import 型音辭典
-from 臺灣言語工具.基本物件.詞 import 詞
+from 校對工具.models import 辭典表
 
 
 class 工具:
 
     def __init__(self):
         self.辭典 = 型音辭典(4)
-        for 分詞 in 用字表.全部分詞():
+        for 分詞 in 辭典表.全部分詞():
             self.辭典.加詞(
-                詞([拆文分析器.分詞字物件(分詞)])
+                拆文分析器.分詞詞物件(分詞)
             )
 
     def 標本調(self, 漢字, 原本臺羅):
