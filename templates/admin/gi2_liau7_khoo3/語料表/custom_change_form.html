@@ -46,7 +46,7 @@
 	}
 	
 django.jQuery(document).ready(function($){
-	$('#校對表_form').on('keyup keypress', function(e) {
+	$('#校對表_form').on('keypress', function(e) {
 		var keyCode = e.keyCode || e.which;
 		if (keyCode === 13) { 
 		    e.preventDefault();
