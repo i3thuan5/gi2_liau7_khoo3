@@ -15,7 +15,11 @@
                     	{{ field.label_tag }}
                         {% if field.is_readonly %}
                             <div class="readonly">{{ field.contents }}</div>
-                        {% elif field.field.name == '漢字' or  field.field.name == '本調臺羅' or field.field.name == '口語調臺羅' %}
+                        {% elif field.field.name == '漢字' %}
+                        	<span class="field-hint">{{field.field.value }}</span><br/>
+                        	{{ field.field }}
+                        	<input type='button' id='senn1pun2tiau7' value='生本調'/>
+                        {% elif field.field.name == '本調臺羅' or field.field.name == '口語調臺羅' %}
                         	<span class="field-hint">{{field.field.value }}</span><br/>
                         	{{ field.field }}
                         {% else %}
