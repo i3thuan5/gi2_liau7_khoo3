@@ -30,3 +30,6 @@ form .related-widget-wrapper ul {
 	width: 100%;
 	flex-flow: column nowrap;
 }
+.field-full-width > .field-hint {
+	line-height: 2em;
+}
