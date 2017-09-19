@@ -45,5 +45,21 @@
 		trackCurrentTime.call(vid);
 	}
 	
+	django.jQuery("#senn1pun2tiau7").on('click', function(){
+		var a='/標本調/'+django.jQuery("#id_漢字").val()+'/'+django.jQuery("#id_本調臺羅").val();
+		/*alert(a);/* /*  */ 
+		var jqxhr = django.jQuery.ajax( a )
+		  .done(function(data) {
+			django.jQuery("#id_本調臺羅").val(data.本調);
+		  })
+		  .fail(function() {
+		    alert( "error" );
+		  });
+		/*
+		  .always(function() {
+		    alert( "complete" );
+		  });*/
+
+	})
 	</script>
 {% endblock %}
