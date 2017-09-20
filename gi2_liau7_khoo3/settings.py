@@ -128,3 +128,5 @@ STATICFILES_DIRS = (os.path.join('static'), )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '音檔')
 MEDIA_URL = '/media/'
+
+GI2_GIAN5_MOO5_HING5 = os.path.join(BASE_DIR, '語言模型.arpa')
