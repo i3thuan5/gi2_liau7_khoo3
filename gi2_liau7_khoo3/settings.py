@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     '語料庫',
     '用字',
     '校對工具',
+    '語言模型',
 ]
 
 MIDDLEWARE = [
