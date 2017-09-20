@@ -20,7 +20,7 @@ def 匯入教典例句():
 
 
 class 教典資料:
-    例句 = 'https://raw.githubusercontent.com/g0v/moedict-data-twblg/master/uni/%E4%BE%8B%E5%8F%A5.csv'
+    例句網址 = 'https://raw.githubusercontent.com/g0v/moedict-data-twblg/master/uni/%E4%BE%8B%E5%8F%A5.csv'
 
     @classmethod
     def 全部資料(cls):
@@ -28,7 +28,7 @@ class 教典資料:
 
     @classmethod
     def _例句(cls):
-        with urlopen(cls.詞目總檔網址) as 檔:
+        with urlopen(cls.例句網址) as 檔:
             with io.StringIO(檔.read().decode()) as 資料:
                 for row in DictReader(資料):
                     音讀 = row['例句標音'].strip()
