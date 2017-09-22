@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     '校對工具',
     '語言模型',
     '討論用',
+    '口語辭典',
 ]
 
 MIDDLEWARE = [
