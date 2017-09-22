@@ -1,11 +1,13 @@
 from os.path import join
 from tempfile import TemporaryDirectory
-from unittest.case import TestCase
 
 from django.core.management import call_command
+from django.test.testcases import TestCase
+
+
 from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 from 語言模型.models import 語言模型表
-from 口語辭典.揣全漢全羅 import 口語揣全漢全羅
+from 校對工具.views import 工具
 
 
 class 全漢全羅試驗(TestCase):
@@ -21,7 +23,7 @@ class 全漢全羅試驗(TestCase):
         with TemporaryDirectory() as 資料夾:
             with self.settings(GI2_GIAN5_MOO5_HING5=join(資料夾, '語言模型.arpa')):
                 call_command('訓練語言模型')
-                全漢全羅 = 口語揣全漢全羅()
+                全漢全羅 = 工具()
                 原本 = 'hue1-tshia1'
                 句物件 = 全漢全羅.變調臺羅轉本調臺羅(拆文分析器.建立句物件(原本))
                 self.assertEqual(句物件.看分詞(), '火｜hue2 車｜tshia1')
@@ -36,7 +38,7 @@ class 全漢全羅試驗(TestCase):
             with self.settings(GI2_GIAN5_MOO5_HING5=join(資料夾, '語言模型.arpa')):
                 call_command('訓練語言模型')
 
-                全漢全羅 = 口語揣全漢全羅()
+                全漢全羅 = 工具()
                 原本 = 'hue1-tshia1'
                 句物件 = 全漢全羅.變調臺羅轉本調臺羅(拆文分析器.建立句物件(原本))
                 self.assertEqual(句物件.看分詞(), '花｜hue1 車｜tshia1')
@@ -52,19 +54,19 @@ class 全漢全羅試驗(TestCase):
             with self.settings(GI2_GIAN5_MOO5_HING5=join(資料夾, '語言模型.arpa')):
                 call_command('訓練語言模型')
 
-                全漢全羅 = 口語揣全漢全羅()
+                全漢全羅 = 工具()
                 原本 = 'li1 koh8 lai5'
                 句物件 = 全漢全羅.變調臺羅轉本調臺羅(拆文分析器.建立句物件(原本))
                 self.assertEqual(句物件.看分詞(), '你｜li2 閣｜koh4 來｜lai5')
 
     def test_無佇語料出現的音(self):
-        全漢全羅 = 口語揣全漢全羅()
+        全漢全羅 = 工具()
         原本 = 'sui2'
         句物件 = 全漢全羅.變調臺羅轉本調臺羅(拆文分析器.建立句物件(原本))
         self.assertEqual(句物件.看分詞(), 'sui2｜sui2')
 
     def test_無合法音標(self):
-        全漢全羅 = 口語揣全漢全羅()
+        全漢全羅 = 工具()
         原本 = 'Pigu'
         句物件 = 全漢全羅.變調臺羅轉本調臺羅(拆文分析器.建立句物件(原本))
         self.assertEqual(句物件.看分詞(), 'Pigu｜Pigu')
