@@ -1,10 +1,11 @@
 from os.path import join
 from tempfile import TemporaryDirectory
 from unittest.case import TestCase
+
+from django.core.management import call_command
 from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 from 語言模型.models import 語言模型表
-from 口語轉漢字佮本調.揣全漢全羅 import 口語揣全漢全羅
-from django.core.management import call_command
+from 口語辭典.揣全漢全羅 import 口語揣全漢全羅
 
 
 class 全漢全羅試驗(TestCase):
@@ -67,12 +68,3 @@ class 全漢全羅試驗(TestCase):
         原本 = 'Pigu'
         句物件 = 全漢全羅.變調臺羅轉本調臺羅(拆文分析器.建立句物件(原本))
         self.assertEqual(句物件.看分詞(), 'Pigu｜Pigu')
-
-    def test_通用轉口語調臺羅(self):
-        全漢全羅 = 口語揣全漢全羅()
-        原本 = 'ho3-lang2-zin2-gam1-sim1-'
-        口語調臺羅 = (
-            全漢全羅.通用處理做口語調臺羅(原本)
-            .看型(物件分字符號='-')
-        )
-        self.assertEqual(口語調臺羅, 'hoo3-lang7-tsin7-kam1-sim1')
