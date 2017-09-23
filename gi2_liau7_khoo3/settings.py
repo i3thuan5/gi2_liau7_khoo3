@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     '用字',
     '校對工具',
     '語言模型',
-    '討論用',
 ]
 
 MIDDLEWARE = [
