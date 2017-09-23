@@ -19,14 +19,20 @@ form .related-widget-wrapper ul {
 /*
 * Style for TextField
 */
+.field-hint {
+	color: #666;
+	display: block;
+	line-height: 1.6em; 
+}
+.field-hint-zh {
+	padding-left: 6px;
+}
 .field-long {
 	display: flex;
 	width: 80%;
  	flex-flow: column nowrap;
 }
-.field-hint {
-	color: #666;
-	display: inline-block;
-	padding-left: 6px;
-	line-height: 1.6em; 
+.field-hint-en {
+	margin-left: 0px;
+	padding-left: 7px;
 }
