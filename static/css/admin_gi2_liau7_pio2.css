@@ -4,6 +4,9 @@
 .module {
 	margin-bottom: 20px;
 }
+.wide label {
+	width: 100px;
+}
 /*
 * Overriding style of CheckboxSelectMultiple widget
 */
@@ -14,22 +17,18 @@ form .related-widget-wrapper ul {
 	max-width: 60vw;
 }
 /*
-* Style for TextField Hint
+* Style for TextField
 */
-#content-main {
-	overflow: hidden;
+.field-two-line {
+	display: flex;
+	flex-flow: column nowrap;
+}
+.field-80w {
+	width: 80%;
 }
 .field-hint {
 	color: #666;
-	display: inline-block;
-	padding-left: 6px;
-	line-height: 1.6em; 
-}
-.field-full-width {
-	display: flex;
-	width: 100%;
-	flex-flow: column nowrap;
-}
-.field-full-width > .field-hint {
-	line-height: 2em;
+	display: block;
+	line-height: 1.6em;
+	padding-left: 6px; 
 }
