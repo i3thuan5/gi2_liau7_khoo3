@@ -17,8 +17,13 @@ form .related-widget-wrapper ul {
 	max-width: 60vw;
 }
 /*
-* Style for TextField Hint
+* Style for TextField
 */
+.field-long {
+	display: flex;
+	width: 80%;
+ 	flex-flow: column nowrap;
+}
 .field-hint {
 	color: #666;
 	display: inline-block;
