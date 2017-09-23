@@ -14,6 +14,11 @@ class 全漢全羅試驗(TestCase):
     火車 = '我｜gua2 坐-佇｜tse7-ti7 火｜hue2 車｜tshia1 頂｜ting2'
     花車 = '我｜gua2 坐-佇｜tse7-ti7 花｜hue1 車｜tshia1 頂｜ting2'
 
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        call_command('本調辭典轉口語辭典')
+
     def test_火車(self):
         語言模型表.objects.get_or_create(分詞=self.火車)
         語言模型表.objects.get_or_create(分詞=self.花車)

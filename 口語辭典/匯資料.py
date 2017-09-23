@@ -7,7 +7,7 @@ from 校對工具.models import 辭典表
 from 程式.全漢全羅.做辭典 import 可能的變調
 
 
-def 匯入教典例句():
+def 轉到口語辭典():
     for 詞物件 in _全部資料():
         口語辭典表.objects.get_or_create(分詞=詞物件.轉音(臺灣閩南語羅馬字拼音).看分詞())
 
