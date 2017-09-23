@@ -6,11 +6,11 @@ from 臺灣言語工具.基本物件.公用變數 import 無音
 from 臺灣言語工具.斷詞.拄好長度辭典揣詞 import 拄好長度辭典揣詞
 from 臺灣言語工具.斷詞.語言模型揀集內組 import 語言模型揀集內組
 from 校對工具.models import 辭典表
-from 臺灣言語工具 import 解析整理
 import re
 from 語言模型.models import 語言模型表
 from 程式.全漢全羅.揣全漢全羅 import 揣全漢全羅
 from 口語辭典.models import 口語辭典表
+from 臺灣言語工具.解析整理.羅馬字仕上げ import 羅馬字仕上げ
 
 
 class 工具(揣全漢全羅):
@@ -44,6 +44,15 @@ class 工具(揣全漢全羅):
             if 字物件.音 == 無音:
                 字物件.音 = 字物件.型
         try:
-            return 解析整理.羅馬字仕上げ.羅馬字仕上げ.輕聲佮外來語(結果句物件.看音())
+            return 羅馬字仕上げ.輕聲佮外來語(結果句物件.看音())
         except:
             return 結果句物件.看音().replace('0', '--').replace(' --', '--')
+
+    def 口語標漢字本調(self, 口語):
+        句物件 = self.變調臺羅轉本調臺羅(拆文分析器.建立句物件(口語))
+        漢字 = 文章粗胚.數字英文中央全加分字符號(句物件.看型())
+        try:
+            本調 = 羅馬字仕上げ.輕聲佮外來語(句物件.看音())
+        except:
+            本調 = 句物件.看音().replace('0', '--').replace(' --', '--')
+        return 漢字, 本調
