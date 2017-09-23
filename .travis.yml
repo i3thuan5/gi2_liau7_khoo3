@@ -15,4 +15,7 @@ branches:
   - master
 script:
 - tox -e $TOX_ENV
+after_success:
+- coverage report
+- coveralls
 
