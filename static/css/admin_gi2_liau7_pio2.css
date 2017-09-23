@@ -4,6 +4,9 @@
 .module {
 	margin-bottom: 20px;
 }
+.wide label {
+	width: 100px;
+}
 /*
 * Overriding style of CheckboxSelectMultiple widget
 */
