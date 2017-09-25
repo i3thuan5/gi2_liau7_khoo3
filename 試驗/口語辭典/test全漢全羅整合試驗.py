@@ -1,6 +1,7 @@
 from os.path import join
 from tempfile import TemporaryDirectory
 
+from django.contrib.auth.models import User
 from django.core.management import call_command
 from django.test.testcases import TestCase
 
@@ -8,6 +9,7 @@ from django.test.testcases import TestCase
 from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 from 語言模型.models import 語言模型表
 from 校對工具.views import 工具
+from 語料庫.models import 音檔表
 
 
 class 全漢全羅試驗(TestCase):
@@ -76,3 +78,37 @@ class 全漢全羅試驗(TestCase):
         原本 = 'Pigu'
         句物件 = 全漢全羅.變調臺羅轉本調臺羅(拆文分析器.建立句物件(原本))
         self.assertEqual(句物件.看分詞(), 'Pigu｜Pigu')
+
+    def test_語助詞照校對來調整(self):
+        self.加資料()
+        call_command('校對語句匯口語辭典')
+        
+        全漢全羅 = 工具()
+        原本 = 'ooh10'
+        句物件 = 全漢全羅.變調臺羅轉本調臺羅(拆文分析器.建立句物件(原本))
+        self.assertEqual(句物件.看分詞(), '喔｜ooh4')
+
+    def 加資料(self):
+        音檔資料 = 音檔表.objects.create(
+            類別='戲劇',
+            資料夾名='dirsui2',
+            聲音檔名='sui2.wav',
+            聽拍檔名='sui2.txt',
+        )
+        self.語料 = 音檔資料.資料.create(
+            聲音結束時間='0',
+            聲音開始時間='1',
+
+            語者='sui2',
+            頭一版資料='sui2',
+            頭一版通用='sui',
+            漢字='是喔',
+            本調臺羅='si7--ooh4',
+            口語調臺羅='si7 ooh10',
+
+            sing5hong5舊編號='333',
+            sing5hong5新編號='333',
+            sing5hong5有揀出來用無=True,
+
+            校對者=User.objects.create_user('admin', 'admin@test.com', 'pass')
+        )
