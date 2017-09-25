@@ -103,3 +103,8 @@ ENV/
 /.pydevproject
 /MANIFEST
 /.settings
+
+# 資料
+/db.sqlite3*
+/音檔
+/*.json
