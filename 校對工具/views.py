@@ -5,18 +5,18 @@ from 用字.models import 用字表
 from 臺灣言語工具.基本物件.公用變數 import 無音
 from 臺灣言語工具.斷詞.拄好長度辭典揣詞 import 拄好長度辭典揣詞
 from 臺灣言語工具.斷詞.語言模型揀集內組 import 語言模型揀集內組
-from 校對工具.models import 辭典表
 import re
 from 語言模型.models import 語言模型表
 from 程式.全漢全羅.揣全漢全羅 import 揣全漢全羅
 from 口語辭典.models import 口語辭典表
 from 臺灣言語工具.解析整理.羅馬字仕上げ import 羅馬字仕上げ
+from 本調辭典.models import 本調辭典表
 
 
 class 工具(揣全漢全羅):
 
     def __init__(self):
-        self.本調辭典 = 辭典表.辭典物件()
+        self.本調辭典 = 本調辭典表.辭典物件()
         self.口語辭典 = 口語辭典表.辭典物件()
         self.語言模型 = 語言模型表.載入模型()
 

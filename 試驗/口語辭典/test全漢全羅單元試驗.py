@@ -17,6 +17,7 @@ class 全漢全羅試驗(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        call_command('教典匯入本調辭典')
         call_command('本調辭典轉口語辭典')
 
     def test_火車(self):
