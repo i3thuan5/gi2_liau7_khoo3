@@ -80,15 +80,15 @@ class 全漢全羅試驗(TestCase):
         self.assertEqual(句物件.看分詞(), 'Pigu｜Pigu')
 
     def test_語助詞照校對來調整(self):
-        self.加資料()
+        self.加資料('是喔', 'si7--ooh4', 'si7 ooh10')
         call_command('校對語句匯口語辭典')
 
         全漢全羅 = 工具()
         原本 = 'ooh10'
         句物件 = 全漢全羅.變調臺羅轉本調臺羅(拆文分析器.建立句物件(原本))
-        self.assertEqual(句物件.看分詞(), '喔｜ooh4')
+        self.assertEqual(句物件.看分詞(), '喔｜0ooh4')
 
-    def 加資料(self):
+    def 加資料(self, 漢字, 本調臺羅, 口語調臺羅):
         音檔資料 = 音檔表.objects.create(
             類別='戲劇',
             資料夾名='dirsui2',
@@ -102,9 +102,9 @@ class 全漢全羅試驗(TestCase):
             語者='sui2',
             頭一版資料='sui2',
             頭一版通用='sui',
-            漢字='是喔',
-            本調臺羅='si7--ooh4',
-            口語調臺羅='si7 ooh10',
+            漢字=漢字,
+            本調臺羅=本調臺羅,
+            口語調臺羅=口語調臺羅,
 
             sing5hong5舊編號='333',
             sing5hong5新編號='333',
