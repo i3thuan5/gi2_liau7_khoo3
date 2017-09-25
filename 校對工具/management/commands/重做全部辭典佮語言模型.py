@@ -17,4 +17,5 @@ class Command(BaseCommand):
             call_command('校對語句匯口語辭典')
             語言模型表.objects.all().delete()
             call_command('匯入教典例句')
+            call_command('匯入校對語句')            
             call_command('訓練語言模型')
