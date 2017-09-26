@@ -6,18 +6,17 @@ from csv import DictReader
 import io
 from urllib.request import urlopen
 
-from django.db import migrations
-
 
 from 臺灣言語工具.解析整理.文章粗胚 import 文章粗胚
 from 臺灣言語工具.音標系統.閩南語.臺灣閩南語羅馬字拼音 import 臺灣閩南語羅馬字拼音
 from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
+from 本調辭典.models import 本調辭典表
 
 
-def 匯入用字(app, editor):
-    辭典表 = app.get_model("校對工具", "辭典表")
+
+def 匯入教典內的詞():
     for 詞物件 in 教典資料.全部資料():
-        辭典表.objects.get_or_create(分詞=詞物件.轉音(臺灣閩南語羅馬字拼音).看分詞())
+        本調辭典表.objects.get_or_create(分詞=詞物件.轉音(臺灣閩南語羅馬字拼音).看分詞())
 
 
 class 教典資料:
@@ -84,13 +83,3 @@ class 教典資料:
                         except Exception as 錯誤:
                             print(錯誤)
 
-
-class Migration(migrations.Migration):
-
-    dependencies = [
-        ('校對工具', '0001_initial'),
-    ]
-
-    operations = [
-        # migrations.RunPython(匯入用字, lambda *x:x),
-    ]
