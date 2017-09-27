@@ -1,0 +1,27 @@
+/*
+@font-face {
+  font-family: "basicLatin";
+  unicode-range: U+0020-007F;
+  src: local('Lato'),local('Helvetica Neue'),
+    local('Arial'),local('Helvetica'),local(sans-serif);
+}*/
+@font-face {
+  font-family: "MOEDICT";
+  unicode-range: U+4E00-9FFF,
+          U+3400-4DB5,
+          U+20000-28467,
+          U+28469-2A6D6,
+          U+2A700-2B734,
+          U+2B740-2B81D;
+  src: url(https://www.moedict.tw/MOEDICT.woff) format('woff'),
+  url("https://www.moedict.tw/MOEDICT.otf") format('opentype'),
+  url("https://www.moedict.tw/MOEDICT.ttf") format('truetype'),
+  url("https://www.moedict.tw/MOEDICT.eot");
+}
+/*@font-face {
+  font-family: "FiraSansOT";
+  unicode-range: U+0250-02AF,U+1D00-1D7F,
+    U+1D80-1DBF,U+02B0-02FF,U+0300-036F,
+    U+2090x;
+  src: url(https://www.moedict.tw/fonts/FiraSansOT-Regular.woff);
+}*/
