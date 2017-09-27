@@ -23,5 +23,5 @@ class 討論表管理(校對表管理, 目標音檔欄):
     ]
 
     def get_queryset(self, request):
-        qs = super(校對表管理, self).get_queryset(request)
-        return qs.filter(語料狀況__狀況="愛討論")
+        qs = super().get_queryset(request)
+        return qs.filter(校對者__isnull=False)
