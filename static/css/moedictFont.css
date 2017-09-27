@@ -1,10 +1,9 @@
-/*
-@font-face {
-  font-family: "basicLatin";
-  unicode-range: U+0020-007F;
-  src: local('Lato'),local('Helvetica Neue'),
-    local('Arial'),local('Helvetica'),local(sans-serif);
-}*/
+/*! moedict font
+* Website: https://www.moedict.tw/
+* Github: https://github.com/g0v/moedict-webkit/blob/master/sass/han/mre/ff/_range.scss
+*/
+
+/* CJK Ext-A, B, C, D */
 @font-face {
   font-family: "MOEDICT";
   unicode-range: U+4E00-9FFF,
@@ -18,10 +17,3 @@
   url("https://www.moedict.tw/MOEDICT.ttf") format('truetype'),
   url("https://www.moedict.tw/MOEDICT.eot");
 }
-/*@font-face {
-  font-family: "FiraSansOT";
-  unicode-range: U+0250-02AF,U+1D00-1D7F,
-    U+1D80-1DBF,U+02B0-02FF,U+0300-036F,
-    U+2090x;
-  src: url(https://www.moedict.tw/fonts/FiraSansOT-Regular.woff);
-}*/
