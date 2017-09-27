@@ -2,6 +2,7 @@ from 語料庫.models import 語料狀況表
 from 語料庫.models import 語料表
 from 語料庫.管理.校對 import 校對表管理
 from django.utils.timezone import now
+from 語料庫.widgets.目標音檔欄 import 目標音檔欄
 
 
 class 檢查表(語料表):
@@ -16,7 +17,7 @@ class 檢查表(語料表):
         super().save(*args, **kwargs)
 
 
-class 檢查表管理(校對表管理):
+class 檢查表管理(校對表管理, 目標音檔欄):
     # change list
     list_display = [
         'id',
@@ -31,14 +32,6 @@ class 檢查表管理(校對表管理):
         '設定無問題',
     ]
     list_filter = ['音檔__類別', '語料狀況', '校對者', '檢查者', ]
-
-    def 目標音檔(self, obj):
-        return ('''<audio controls>
-        <source src='/音檔/{}/{}/{}/audio.wav'>
-        Your browser does not support the audio element.</audio>'''.format(
-            obj.音檔.id, obj.聲音開始時間, obj.聲音結束時間
-        ))
-    目標音檔.allow_tags = True
 
     def 設定無問題(self, request, queryset):
         queryset.update(檢查者=request.user, 檢查時間=now())
