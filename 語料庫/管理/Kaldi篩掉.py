@@ -21,7 +21,7 @@ class Kaldi篩掉表管理(校對表管理):
     # change list
     list_display = [
         'id',
-        '目標音檔', 
+        '目標音檔',
         '漢字', '本調臺羅', '口語調臺羅',
     ]
     ordering = ['id']
