@@ -55,6 +55,18 @@ django.jQuery(document).ready(function($){
 		}
 	});
 	 
+	$("#ing7khau2gi2ting5pio1").on('click', function(){
+		var a='/口語標漢字本調/'+django.jQuery("#id_口語調臺羅").val();
+		var jqxhr = django.jQuery.ajax( a )
+		  .done(function(data) {
+			django.jQuery("#id_漢字").val(data.漢字);
+			django.jQuery("#id_本調臺羅").val(data.本調);
+		  })
+		  .fail(function() {
+		    alert( "error" );
+		  });
+	})
+ 
 	$("#senn1pun2tiau7").on('click', function(){
 		var a='/標本調/'+django.jQuery("#id_漢字").val()+'/'+django.jQuery("#id_本調臺羅").val();
 		/*alert(a);/* /*  */ 
@@ -66,6 +78,7 @@ django.jQuery(document).ready(function($){
 		    alert( "error" );
 		  });
 	})
+	
 });
 </script>
 {% endblock %}

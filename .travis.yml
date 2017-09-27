@@ -7,6 +7,22 @@ python:
 env:
 - TOX_ENV=flake8
 - TOX_ENV=test
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - linux-libc-dev
+      - gcc-multilib
+      - automake
+      - libtool
+      - zlib1g-dev
+      - libbz2-dev
+      - liblzma-dev
+      - libboost-all-dev
+      - libgoogle-perftools-dev
+      - cmake
+      - csh
 install:
 - sudo apt-get install normalize-audio
 - pip install tox
