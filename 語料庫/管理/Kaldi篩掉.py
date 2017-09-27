@@ -28,6 +28,7 @@ class Kaldi篩掉表管理(校對表管理):
     list_per_page = 10
     actions = []
     list_filter = ()
+    list_display_links = None
 
     def 目標音檔(self, obj):
         return ('''<audio controls>
