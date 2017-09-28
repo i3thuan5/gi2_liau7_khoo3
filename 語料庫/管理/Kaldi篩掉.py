@@ -13,9 +13,6 @@ class Kaldi篩掉表(語料表):
         verbose_name = "Kaldi篩掉表"
         verbose_name_plural = verbose_name
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
 
 class Kaldi篩掉表管理(校對表管理, 目標音檔欄):
     # change list
