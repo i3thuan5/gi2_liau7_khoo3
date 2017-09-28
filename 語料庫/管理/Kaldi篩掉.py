@@ -1,7 +1,6 @@
 # from 語料庫.models import 語料狀況表
 from 語料庫.models import 語料表
 from 語料庫.管理.校對 import 校對表管理
-from django.utils.timezone import now
 from 語料庫.widgets.目標音檔欄 import 目標音檔欄
 # from 語料庫.管理.檢查 import 檢查表管理
 
