@@ -7,6 +7,7 @@ from django.utils.timezone import now
 
 
 class 校對表(語料表):
+
     def save(self, *args, **kwargs):
         self.校對時間 = now()
         super().save(*args, **kwargs)
@@ -74,5 +75,5 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
 
     class Media:
         css = {
-            "all": ("css/admin_gi2_liau7_pio2.css",)
+            "all": ("css/admin_gi2_liau7_pio2.css", "css/moedictFont.css")
         }

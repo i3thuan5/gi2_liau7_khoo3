@@ -17,6 +17,7 @@ class Command(BaseCommand):
         'DaAi_csgr': '戲劇',
         'DaAi_urs': '戲劇',
         'DaAi_vvrs': '戲劇',
+        'LTS': '戲劇',
     }
 
     def add_arguments(self, parser):

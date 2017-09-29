@@ -1,5 +1,6 @@
 from django.test.testcases import TestCase
 from 校對工具.views import 工具
+from django.core.management import call_command
 
 
 class 標本調試驗(TestCase):
@@ -7,6 +8,7 @@ class 標本調試驗(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        call_command('教典匯入本調辭典')
         cls.工具 = 工具()
 
     def tearDown(self):
