@@ -20,7 +20,10 @@ def 匯入教典例句():
 
 
 class 教典資料:
-    例句網址 = 'https://raw.githubusercontent.com/g0v/moedict-data-twblg/master/uni/%E4%BE%8B%E5%8F%A5.csv'
+    例句網址 = (
+        'https://raw.githubusercontent.com/g0v/moedict-data-twblg/'
+        'master/uni/%E4%BE%8B%E5%8F%A5.csv'
+    )
 
     @classmethod
     def 全部資料(cls):

@@ -36,6 +36,7 @@ class 語言模型表(models.Model):
                 ),
                 cls.語言模型檔案()
             )
+
     @classmethod
     def 載入模型(cls):
         return KenLM語言模型(
