@@ -1,4 +1,13 @@
 /*
+* Overriding base.css
+*/
+body {
+	font-family: "MOEDICT", "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+}
+td, th, input, textarea {
+	font-family: "MOEDICT", "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+}
+/*
 * Overriding fieldset style 
 */
 .module {

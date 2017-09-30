@@ -25,10 +25,13 @@ addons:
       - csh
 install:
 - sudo apt-get install normalize-audio
-- pip install tox
+- pip install tox python-coveralls
 branches:
   only:
   - master
 script:
 - tox -e $TOX_ENV
+after_success:
+- coverage report
+- coveralls
 
