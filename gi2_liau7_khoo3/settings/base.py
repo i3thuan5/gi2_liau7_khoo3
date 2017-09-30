@@ -21,16 +21,14 @@ def get_env_variable(var_name):
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5hf5)s^_b=m4=cg=_jhpe30mjks1l-v%n3y9b$w(ll5d$hh-ts'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = '5hf5)s^_b=m4=cg=_jhpe30mjks1l-v%n3y9b$w(ll5d$hh-ts' 
+#get_env_variable('SECRET_KEY_gi2_liau7_khoo3')
 
 ALLOWED_HOSTS = ['*']
 
@@ -88,12 +86,12 @@ WSGI_APPLICATION = 'gi2_liau7_khoo3.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 
 # Password validation
