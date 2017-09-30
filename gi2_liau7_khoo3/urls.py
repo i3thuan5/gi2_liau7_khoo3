@@ -17,12 +17,25 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from django import views
+import re
 
 
 urlpatterns = [
+    url(r'^%s(?P<path>.*)$' % re.escape(settings.STATIC_URL.lstrip('/')), 
+        views.static.serve, {
+            'document_root': settings.STATIC_ROOT
+            }
+        ),
+    url(r'^%s(?P<path>.*)$' % re.escape(settings.MEDIA_URL.lstrip('/')), 
+        views.static.serve, {
+            'document_root': settings.MEDIA_ROOT
+            }
+        ),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('語料庫.網址')),
     url(r'^', include('校對工具.網址')),
 ]
 
+# Available url for debug mode
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
