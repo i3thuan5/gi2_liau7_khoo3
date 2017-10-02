@@ -25,14 +25,7 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+SHARED_APPS = [
     '語料庫',
     '用字',
     '校對工具',
@@ -40,6 +33,8 @@ INSTALLED_APPS = [
     '口語辭典',
     '本調辭典',
 ]
+
+# INSTALLED_APPS was moved to each setting
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
