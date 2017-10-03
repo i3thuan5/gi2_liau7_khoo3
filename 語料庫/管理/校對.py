@@ -21,13 +21,13 @@ class 校對表(語料表):
 class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     # change list
     list_display = [
-        'id', '狀況',
+        'id', '語者', '音檔', '狀況',
         '漢字', '本調臺羅', '口語調臺羅',
         '備註開頭',
         '校對者', '校對時間'
     ]
     ordering = ['校對者', 'id']
-    list_filter = ['音檔__類別', '語料狀況', '校對者']
+    list_filter = ['語料狀況', '校對者']
     search_fields = [
         '漢字', '本調臺羅', '口語調臺羅',
         'sing5hong5舊編號', 'sing5hong5新編號',
