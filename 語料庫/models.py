@@ -49,9 +49,9 @@ class 語料表(models.Model):
     口語調臺羅 = models.TextField(blank=True)
     華語 = models.TextField(blank=True)
     語料狀況 = models.ManyToManyField('語料狀況表', blank=True)
-    校對者 = models.ForeignKey(User, null=True, related_name='+')
+    校對者 = models.ForeignKey(User, null=True, related_name='+',  on_delete=models.CASCADE)
     校對時間 = models.DateTimeField(null=True)
-    檢查者 = models.ForeignKey(User, null=True, related_name='+')
+    檢查者 = models.ForeignKey(User, null=True, related_name='+',  on_delete=models.CASCADE)
     檢查時間 = models.DateTimeField(null=True)
     備註 = models.TextField(blank=True)
 
