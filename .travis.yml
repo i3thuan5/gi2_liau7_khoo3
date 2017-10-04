@@ -1,4 +1,4 @@
-sudo: true
+sudo: false
 dist: trusty
 language: python
 python:
@@ -24,8 +24,8 @@ addons:
       - libgoogle-perftools-dev
       - cmake
       - csh
+      - normalize-audio
 install:
-- sudo apt-get install normalize-audio
 - pip install tox python-coveralls
 branches:
   only:
