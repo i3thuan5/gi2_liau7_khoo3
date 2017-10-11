@@ -24,7 +24,7 @@ class Kaldi篩掉表管理(校對表管理, 目標音檔欄):
     ordering = ['id']
     list_per_page = 10
     actions = []
-    list_filter = ()
+    list_filter = ['音檔']
     list_display_links = None
 
     def get_queryset(self, request):
