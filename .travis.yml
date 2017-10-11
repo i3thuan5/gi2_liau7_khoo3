@@ -25,6 +25,7 @@ addons:
       - cmake
       - csh
       - normalize-audio
+      - sox
 install:
 - pip install tox python-coveralls
 - pip install https://github.com/a8568730/django/archive/url_prefix_unicode.zip

@@ -15,7 +15,7 @@ def 傳音檔(request, 音檔編號, 開始時間, 結束時間):
         with TemporaryDirectory() as 資料夾:
             檔名 = join(資料夾, 'audio.wav')
             with open(檔名, 'wb') as 檔案:
-                檔案.write(語句音檔.wav格式資料())
+                程式腳本._走指令(['sox', '-', 檔名, 'remix', '1'], stdin=檔案)
             程式腳本._走指令(['normalize-audio', 檔名])
             with open(檔名, 'rb') as 檔案:
                 資料 = 檔案.read()
