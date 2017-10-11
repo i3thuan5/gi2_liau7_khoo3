@@ -19,7 +19,8 @@ class 語料庫Config(AppConfig):
                 程式腳本._走指令(['normalize-audio', 檔名])
             except:
                 raise OSError(
-                    '請裝normalize-audio!! `sudo apt-get install normalize-audio`'
+                    '請裝normalize-audio!! '
+                    '`sudo apt-get install normalize-audio`'
                 )
             try:
                 程式腳本._走指令(['sox', 檔名, '-t', 'wav', '/dev/null', 'remix', '1'],)
