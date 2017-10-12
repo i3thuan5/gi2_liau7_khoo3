@@ -1,5 +1,6 @@
 from 語料庫.models import 音檔表
 from os.path import join
+from subprocess import PIPE, Popen
 from tempfile import TemporaryDirectory
 
 from django.http.response import HttpResponse
@@ -15,7 +16,8 @@ def 傳音檔(request, 音檔編號, 開始時間, 結束時間):
         with TemporaryDirectory() as 資料夾:
             檔名 = join(資料夾, 'audio.wav')
             with open(檔名, 'wb') as 檔案:
-                檔案.write(語句音檔.wav格式資料())
+                指令 = Popen(['sox', '-', 檔名, 'remix', '1'], stdin=PIPE)
+                指令.communicate(input=語句音檔.wav格式資料())
             程式腳本._走指令(['normalize-audio', 檔名])
             with open(檔名, 'rb') as 檔案:
                 資料 = 檔案.read()
