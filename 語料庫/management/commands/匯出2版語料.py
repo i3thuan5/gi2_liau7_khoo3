@@ -16,9 +16,12 @@ class Command(BaseCommand):
         '講袂清楚',
         '有人聲雜音',
         '有非人聲雜音',
+        '有外語詞',
         '北部腔o',
         '切音問題',
         '猶袂處理好',
+        '雜音傷大',
+        '重複語料',
     ]
 
     def add_arguments(self, parser):
