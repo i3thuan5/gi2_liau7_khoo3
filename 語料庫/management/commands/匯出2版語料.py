@@ -13,10 +13,10 @@ from 語料庫.models import 語料狀況表
 class Command(BaseCommand):
     無愛的狀況 = [
         '愛討論',
-        '講袂清楚',
-        '有人聲雜音',
-        '有非人聲雜音',
-        '有外語詞',
+        '品質：講袂清楚',
+        '品質：有人聲雜音',
+        '品質：有非人聲雜音',
+        '詞：有外語詞',
         '北部腔o',
         '切音問題',
         '猶袂處理好',
@@ -37,6 +37,12 @@ class Command(BaseCommand):
             .filter(狀況__in=self.無愛的狀況)
             .values_list('id', flat=True)
         )
+        if 無愛狀況.count() != len(self.無愛的狀況):
+            拍毋著 = []
+            for 狀況 in self.無愛的狀況:
+                if not 語料狀況表.objects.filter(狀況=狀況).exists():
+                    拍毋著.append(狀況)
+            raise RuntimeError('狀況名有拍毋著！！\n{}'.format('\n'.join(拍毋著)))
         匯出資料 = []
         for 音檔資料 in 音檔表.objects.order_by('id'):
             語句 = []
