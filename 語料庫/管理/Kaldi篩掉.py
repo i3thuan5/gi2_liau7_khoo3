@@ -30,5 +30,5 @@ class Kaldi篩掉表管理(校對表管理, 目標音檔欄):
     def get_queryset(self, request):
         qs = super(校對表管理, self).get_queryset(request)
         return qs.filter(
-            sing5hong5新編號__isnull=False, sing5hong5有揀出來用無=False
+            愛先做無=False, sing5hong5有揀出來用無=False
         )

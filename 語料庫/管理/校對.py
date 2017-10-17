@@ -25,9 +25,9 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         'id', '語者', '音檔', '狀況',
         '漢字', '本調臺羅', '口語調臺羅',
         '備註開頭',
-        '校對者', '校對時間'
+        '校對者', '校對時間',
     ]
-    ordering = ['校對者', 'id']
+    ordering = ['校對者', 'id', ]
     list_filter = ['語料狀況', '校對者', '音檔']
     search_fields = [
         '漢字', '本調臺羅', '口語調臺羅',
@@ -72,7 +72,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(校對表管理, self).get_queryset(request)
         return qs.filter(
-            Q(sing5hong5新編號__isnull=True) |
+            Q(愛先做無=True) |
             Q(sing5hong5有揀出來用無=True)
         )
 

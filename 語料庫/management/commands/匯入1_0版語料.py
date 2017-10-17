@@ -1,5 +1,6 @@
 import json
 from os.path import basename, dirname
+import re
 
 from django.core.files.base import File
 from django.core.management.base import BaseCommand
@@ -19,6 +20,16 @@ class Command(BaseCommand):
         'DaAi_vvrs': '戲劇',
         'LTS': '戲劇',
     }
+    先莫閬過符號 = [
+        'SIL', 'SPN', 'NSN',
+        'LTSH',  # 濫做伙
+        'TSLS',  # 濟人聲
+        'THB',  # 聽無
+        'TS',  # 大聲
+        'KS',  # 歌聲
+        'MTS',  # 毋知
+    ]
+    先莫閬過比較 = re.compile('(({}))'.format(')|('.join(先莫閬過符號)))
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -69,4 +80,11 @@ class Command(BaseCommand):
                             sing5hong5舊編號=一句["舊編號"],
                             sing5hong5新編號=一句["新編號"],
                             sing5hong5有揀出來用無=一句["有揀出來無"],
+                            愛先做無=self.判斷先愛先做無(一句["漢字"]),
                         )
+
+    @classmethod
+    def 判斷先愛先做無(cls, 語句):
+        if cls.先莫閬過比較.search(語句):
+            return False
+        return True
