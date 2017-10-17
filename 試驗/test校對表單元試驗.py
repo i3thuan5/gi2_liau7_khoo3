@@ -38,17 +38,3 @@ class 校對表試驗(TestCase):
         self.assertIsNotNone(
             校對資料.校對時間
         )
-    
-    def test更新對齊狀態(self):
-        校對資料 = 校對表.objects.get(pk=self.語料.pk)
-        校對資料.漢字 = '媠的'
-        校對資料.本調臺羅 = 'sui2-e5'
-        校對資料.save()
-        self.assertTrue(校對資料.對齊狀態)
-
-    def test更新對齊狀態_錯誤(self):
-        校對資料 = 校對表.objects.get(pk=self.語料.pk)
-        校對資料.漢字 = '媠的'
-        校對資料.本調臺羅 = 'sui-e5'
-        校對資料.save()
-        self.assertFalse(校對資料.對齊狀態)
