@@ -51,8 +51,6 @@ class Command(BaseCommand):
                     聲音檔名=聲音檔名,
                     聽拍檔名=聽拍檔名,
                 )
-                with open(wav檔名, 'rb') as 檔案:
-                    音檔資料.原始檔.save(資料夾名 + '/' + 聲音檔名, File(檔案))
                 with open(json檔名) as json檔案:
                     for 一句 in json.load(json檔案):
                         音檔資料.資料.create(
@@ -70,3 +68,5 @@ class Command(BaseCommand):
                             sing5hong5新編號=一句["新編號"],
                             sing5hong5有揀出來用無=一句["有揀出來無"],
                         )
+                with open(wav檔名, 'rb') as 檔案:
+                    音檔資料.原始檔.save(資料夾名 + '/' + 聲音檔名, File(檔案))
