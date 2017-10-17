@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.db import models
+from django.db.models.query_utils import Q
 from django.forms.widgets import TextInput, CheckboxSelectMultiple
+from django.utils.timezone import now
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 from 語料庫.models import 語料表
-from django.utils.timezone import now
 
 
 class 校對表(語料表):
@@ -70,7 +71,10 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super(校對表管理, self).get_queryset(request)
-        return qs.filter(sing5hong5有揀出來用無=True)
+        return qs.filter(
+            Q(sing5hong5新編號__isnull=True) |
+            Q(sing5hong5有揀出來用無=True)
+        )
 
     class Media:
         css = {
