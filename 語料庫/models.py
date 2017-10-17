@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db import models
 from 臺灣言語工具.語音辨識.聲音檔 import 聲音檔
 from django.contrib.auth.models import User
+from 校對工具.檢查本調拼音 import 檢查本調拼音
 
 
 class 音檔表(models.Model):
@@ -86,7 +87,7 @@ class 語料表(models.Model):
 
     def 對齊狀態(self):
         '改去cache表'
-        return True
+        return 檢查本調拼音(self.漢字, self.本調臺羅)
 
     def __str__(self):
         return '{} {}'.format(self.id, self.漢字)
