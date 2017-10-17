@@ -24,7 +24,8 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         'id', '語者', '音檔', '狀況',
         '漢字', '本調臺羅', '口語調臺羅',
         '備註開頭',
-        '校對者', '校對時間'
+        '校對者', '校對時間',
+        '對齊狀態'
     ]
     ordering = ['校對者', 'id']
     list_filter = ['語料狀況', '校對者', '音檔']
