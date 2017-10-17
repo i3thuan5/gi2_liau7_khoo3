@@ -33,6 +33,7 @@ class 校對表標籤試驗(TestCase):
             sing5hong5舊編號='333',
             sing5hong5新編號='333',
             sing5hong5有揀出來用無=True,
+            愛先做無=True,
         )
 
     def test今仔日校對數量(self):
