@@ -65,7 +65,7 @@ class 語料表(models.Model):
     sing5hong5舊編號 = models.CharField(null=True, max_length=200)
     sing5hong5新編號 = models.CharField(null=True, max_length=200)
     sing5hong5有揀出來用無 = models.BooleanField(default=False)
-    
+
     愛先做無 = models.BooleanField()
 
     class Meta:
