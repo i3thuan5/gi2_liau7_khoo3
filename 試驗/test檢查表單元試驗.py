@@ -26,7 +26,7 @@ class 檢查表試驗(TestCase):
             sing5hong5舊編號='333',
             sing5hong5新編號='333',
             sing5hong5有揀出來用無=True,
-                            愛先做無=True,
+            愛先做無=True,
         )
 
     def test更新檢查時間(self):
