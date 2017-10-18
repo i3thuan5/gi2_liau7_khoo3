@@ -62,8 +62,6 @@ class Command(BaseCommand):
                     聲音檔名=聲音檔名,
                     聽拍檔名=聽拍檔名,
                 )
-                with open(wav檔名, 'rb') as 檔案:
-                    音檔資料.原始檔.save(資料夾名 + '/' + 聲音檔名, File(檔案))
                 with open(json檔名) as json檔案:
                     for 一句 in json.load(json檔案):
                         音檔資料.資料.create(
@@ -82,6 +80,8 @@ class Command(BaseCommand):
                             sing5hong5有揀出來用無=一句["有揀出來無"],
                             愛先做無=self.判斷先愛先做無(一句["漢字"]),
                         )
+                with open(wav檔名, 'rb') as 檔案:
+                    音檔資料.原始檔.save(資料夾名 + '/' + 聲音檔名, File(檔案))
 
     @classmethod
     def 判斷先愛先做無(cls, 語句):
