@@ -24,6 +24,7 @@ class Command(BaseCommand):
         'SIL', 'SPN', 'NSN',
         'LTSH',  # 濫做伙
         'TSLS',  # 濟人聲
+        'TTH',  # 重疊
         'THB',  # 聽無
         'TS',  # 大聲
         'KS',  # 歌聲
