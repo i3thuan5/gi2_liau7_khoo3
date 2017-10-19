@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^', include('校對工具.網址')),
 ]
 
+# Available url for debug mode
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
