@@ -11,6 +11,7 @@ from 程式.全漢全羅.揣全漢全羅 import 揣全漢全羅
 from 口語辭典.models import 口語辭典表
 from 臺灣言語工具.解析整理.羅馬字仕上げ import 羅馬字仕上げ
 from 本調辭典.models import 本調辭典表
+from 臺灣言語工具.解析整理.解析錯誤 import 解析錯誤
 
 
 class 工具(揣全漢全羅):
@@ -27,7 +28,7 @@ class 工具(揣全漢全羅):
                 愛處理的漢字,
                 文章粗胚.建立物件語句前處理減號(臺灣閩南語羅馬字拼音, 原本臺羅)
             )
-        except:
+        except 解析錯誤:
             原本句物件 = 拆文分析器.建立句物件(愛處理的漢字)
         for 字物件 in 原本句物件.篩出字物件():
             if 字物件.型 == 'X':
@@ -45,7 +46,7 @@ class 工具(揣全漢全羅):
                 字物件.音 = 字物件.型
         try:
             return 羅馬字仕上げ.輕聲佮外來語(結果句物件.看音())
-        except:
+        except ImportError:
             return 結果句物件.看音().replace('0', '--').replace(' --', '--')
 
     def 口語標漢字本調(self, 口語):
@@ -53,6 +54,6 @@ class 工具(揣全漢全羅):
         漢字 = 文章粗胚.數字英文中央全加分字符號(句物件.看型())
         try:
             本調 = 羅馬字仕上げ.輕聲佮外來語(句物件.看音())
-        except:
+        except ImportError:
             本調 = 句物件.看音().replace('0', '--').replace(' --', '--')
         return 漢字, 本調
