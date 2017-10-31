@@ -28,3 +28,11 @@ class 檢查本調拼音試驗(TestCase):
         漢字 = '後擺'
         本調臺羅 = 'au7-pai2 honnh4'
         self.assertEqual(檢查本調拼音(漢字, 本調臺羅), ['乎｜honnh4'])
+        
+    def test漢字比本調少(self):
+        漢字 = '來dddd'
+        本調臺羅 = 'lai5 test  ttt'
+        with self.assertRaises(Exception) as e:
+            檢查本調拼音(漢字, 本調臺羅)
+            self.assertEqual(e.exception.message, '訊息')
+#         self.assertExEqual(檢查本調拼音(漢字, 本調臺羅), ['乎｜honnh4'])

@@ -57,6 +57,8 @@ class 語料表(models.Model):
         User, null=True, related_name='+',  on_delete=models.CASCADE)
     檢查時間 = models.DateTimeField(null=True)
     備註 = models.TextField(blank=True)
+    對齊狀態 = models.OneToOneField(
+        '對齊狀態表', null=True,  on_delete=models.CASCADE)
 
     # Original data backup
     頭一版資料 = models.TextField(blank=True)
@@ -85,9 +87,9 @@ class 語料表(models.Model):
             return self.備註[:10] + '……'
         return self.備註
 
-    def 對齊狀態(self):
-        '改去cache表'
-        return 檢查本調拼音(self.漢字, self.本調臺羅)
+#     def 對齊狀態(self):
+#         '改去cache表'
+#         return 檢查本調拼音(self.漢字, self.本調臺羅)
 
     def __str__(self):
         return '{} {}'.format(self.id, self.漢字)
@@ -102,3 +104,7 @@ class 語料狀況表(models.Model):
 
     def __str__(self):
         return '{} {}'.format(self.pk, self.狀況.split('：')[-1])
+
+
+class 對齊狀態表(models.Model):
+    狀態 = models.CharField(max_length=30)
