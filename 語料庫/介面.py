@@ -21,7 +21,7 @@ def 傳音檔(request, 音檔編號, 開始時間, 結束時間):
             程式腳本._走指令(['normalize-audio', 檔名])
             with open(檔名, 'rb') as 檔案:
                 資料 = 檔案.read()
-    except:
+    except RuntimeError:
         資料 = 語句音檔.wav格式資料()
     return HttpResponse(
         資料,
