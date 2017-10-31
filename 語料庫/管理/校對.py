@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.db import models
+from django.db.models.query_utils import Q
 from django.forms.widgets import TextInput, CheckboxSelectMultiple
+from django.utils.timezone import now
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 from 語料庫.models import 語料表
-from django.utils.timezone import now
 
 
 class 校對表(語料表):
@@ -27,7 +28,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         '校對者', '校對時間',
         '對齊狀態'
     ]
-    ordering = ['校對者', 'id']
+    ordering = ['校對者', 'id', ]
     list_filter = ['語料狀況', '校對者', '音檔']
     search_fields = [
         '漢字', '本調臺羅', '口語調臺羅',
@@ -71,7 +72,10 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super(校對表管理, self).get_queryset(request)
-        return qs.filter(sing5hong5有揀出來用無=True)
+        return qs.filter(
+            Q(愛先做無=True) |
+            Q(sing5hong5有揀出來用無=True)
+        )
 
     class Media:
         css = {

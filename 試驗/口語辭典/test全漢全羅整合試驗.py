@@ -109,6 +109,7 @@ class 全漢全羅試驗(TestCase):
             sing5hong5舊編號='333',
             sing5hong5新編號='333',
             sing5hong5有揀出來用無=True,
+            愛先做無=True,
 
             校對者=User.objects.create_user('admin', 'admin@test.com', 'pass')
         )

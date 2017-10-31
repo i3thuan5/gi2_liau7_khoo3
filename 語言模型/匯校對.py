@@ -7,6 +7,7 @@ from 臺灣言語工具.音標系統.閩南語.臺灣閩南語羅馬字拼音 im
 from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 from 語言模型.models import 語言模型表
 from 語料庫.models import 語料表
+from 臺灣言語工具.解析整理.解析錯誤 import 解析錯誤
 
 
 def 匯入校對語料():
@@ -21,5 +22,5 @@ def _校對語句():
                 語料.漢字,
                 文章粗胚.建立物件語句前處理減號(臺灣閩南語羅馬字拼音, 語料.本調臺羅)
             )
-        except:
+        except 解析錯誤:
             pass
