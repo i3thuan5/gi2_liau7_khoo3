@@ -17,12 +17,12 @@ class 語料庫Config(AppConfig):
                 檔案.write(音檔.wav格式資料())
             try:
                 程式腳本._走指令(['normalize-audio', 檔名])
-            except:
+            except RuntimeError:
                 raise OSError(
                     '請裝normalize-audio!! '
                     '`sudo apt-get install normalize-audio`'
                 )
             try:
                 程式腳本._走指令(['sox', 檔名, '-t', 'wav', '/dev/null', 'remix', '1'],)
-            except:
+            except RuntimeError:
                 raise OSError('請裝sox!! `sudo apt-get install sox`')

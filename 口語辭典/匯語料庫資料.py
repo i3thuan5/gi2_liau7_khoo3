@@ -9,6 +9,7 @@ from 臺灣言語工具.解析整理.文章粗胚 import 文章粗胚
 from 用字.models import 用字表
 from 程式.全漢全羅.做辭典 import 漢字本調分開符號
 from 程式.全漢全羅.原始通用處理 import 原始通用工具
+from 臺灣言語工具.解析整理.解析錯誤 import 解析錯誤
 
 
 def 語料庫校對語句匯口語辭典():
@@ -33,7 +34,7 @@ def _全部資料():
             for 字物件 in 舊通用的臺羅.篩出字物件():
                 字物件.音 = 字物件.型
             yield from _本調口語調對應(本調, 舊通用的臺羅)
-        except:
+        except 解析錯誤:
             pass
 
 
