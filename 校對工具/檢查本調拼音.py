@@ -9,14 +9,11 @@ from 用字.models import 用字表
 def 判斷本調拼音(漢字, 本調臺羅):
     結果 = 檢查本調拼音(漢字, 本調臺羅)
     回傳字串 = ''
-    是否合格 = False
     if type(結果) is list:
-        if len(結果) == 0:
-            是否合格 = True
         回傳字串 = ' '.join(結果)
     else:
         回傳字串 = 結果
-    return (是否合格, 回傳字串)
+    return 回傳字串
 
 
 def 檢查本調拼音(漢字, 本調臺羅):

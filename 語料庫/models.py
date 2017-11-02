@@ -110,7 +110,6 @@ class 語料狀況表(models.Model):
 
 class 對齊狀態表(models.Model):
     狀態 = models.CharField(max_length=30)
-    是否合格 = models.BooleanField(default=False)
     
     def __str__(self):
         return self.狀態

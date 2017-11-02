@@ -9,8 +9,8 @@ def 初始對齊狀態(apps, editor):
     語料表 = apps.get_model('語料庫', '語料表')
     對齊狀態表 = apps.get_model('語料庫', '對齊狀態表')
     for 一語料 in 語料表.objects.all():
-        是否合格, 狀況字串 = 判斷本調拼音(一語料.漢字, 一語料.本調臺羅)
-        一狀態 = 對齊狀態表(是否合格=是否合格, 狀態=狀況字串)
+        狀態字串 = 判斷本調拼音(一語料.漢字, 一語料.本調臺羅)
+        一狀態 = 對齊狀態表(狀態=狀態字串)
         一狀態.save()
         一語料.對齊狀態 = 一狀態
         一語料.save()
@@ -30,11 +30,6 @@ class Migration(migrations.Migration):
                     auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('狀態', models.CharField(max_length=30)),
             ],
-        ),
-        migrations.AddField(
-            model_name='對齊狀態表',
-            name='是否合格',
-            field=models.BooleanField(default=False),
         ),
         migrations.AddField(
             model_name='語料表',

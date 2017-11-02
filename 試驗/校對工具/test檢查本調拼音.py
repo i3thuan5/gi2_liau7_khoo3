@@ -57,9 +57,9 @@ class 檢查本調拼音試驗(TestCase):
     def test判斷本調拼音正確(self):
         漢字 = '媠的'
         本調臺羅 = 'sui2-e5'
-        self.assertEqual(判斷本調拼音(漢字, 本調臺羅), (True, ''))
+        self.assertEqual(判斷本調拼音(漢字, 本調臺羅), '')
     
     def test判斷本調拼音錯誤(self):
         漢字 = '媠的'
         本調臺羅 = 'sui-e5'
-        self.assertEqual(判斷本調拼音(漢字, 本調臺羅), (False, '媠｜sui1'))
+        self.assertEqual(判斷本調拼音(漢字, 本調臺羅), '媠｜sui1')
