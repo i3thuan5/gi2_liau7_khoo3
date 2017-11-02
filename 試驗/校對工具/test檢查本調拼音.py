@@ -1,5 +1,6 @@
 from django.test.testcases import TestCase
 from 校對工具.檢查本調拼音 import 檢查本調拼音
+from 校對工具.檢查本調拼音 import 判斷本調拼音
 
 
 class 檢查本調拼音試驗(TestCase):
@@ -9,7 +10,7 @@ class 檢查本調拼音試驗(TestCase):
         本調臺羅 = 'sui2-e5'
         self.assertEqual(檢查本調拼音(漢字, 本調臺羅), [])
 
-    def test更新對齊狀態錯誤(self):
+    def test本調拼音錯誤(self):
         漢字 = '媠的'
         本調臺羅 = 'sui-e5'
         self.assertEqual(檢查本調拼音(漢字, 本調臺羅), ['媠｜sui1'])
@@ -52,3 +53,13 @@ class 檢查本調拼音試驗(TestCase):
             檢查本調拼音(漢字, 本調臺羅),
             "詞組內底的型「來dddd」比音「lai5 test ttt」少"
         )
+
+    def test判斷本調拼音正確(self):
+        漢字 = '媠的'
+        本調臺羅 = 'sui2-e5'
+        self.assertEqual(判斷本調拼音(漢字, 本調臺羅), (True, ''))
+    
+    def test判斷本調拼音錯誤(self):
+        漢字 = '媠的'
+        本調臺羅 = 'sui-e5'
+        self.assertEqual(判斷本調拼音(漢字, 本調臺羅), (False, '媠｜sui1'))
