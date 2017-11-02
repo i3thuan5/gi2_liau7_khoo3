@@ -5,6 +5,8 @@ from django.db import models
 from 臺灣言語工具.語音辨識.聲音檔 import 聲音檔
 from django.contrib.auth.models import User
 from 校對工具.檢查本調拼音 import 檢查本調拼音
+from 校對工具.檢查本調拼音 import 判斷本調拼音
+from django.db.models.base import Model
 
 
 class 音檔表(models.Model):
@@ -92,7 +94,13 @@ class 語料表(models.Model):
 #     def 對齊狀態(self):
 #         '改去cache表'
 #         return 檢查本調拼音(self.漢字, self.本調臺羅)
-
+    def save(self, *args, **kwargs):
+        if getattr(self, '漢字', True) and getattr(self, '本調臺羅', True):
+            狀態字串 = 判斷本調拼音(self.漢字, self.本調臺羅)
+            self.對齊狀態.狀態 = 狀態字串
+            self.對齊狀態.save()
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return '{} {}'.format(self.id, self.漢字)
 
