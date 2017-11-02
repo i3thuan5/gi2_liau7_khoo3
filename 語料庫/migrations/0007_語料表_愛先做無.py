@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('語料庫', '0005_kaldi篩掉表_討論表'),
+        ('語料庫', '0006_對齊狀態表_狀態'),
     ]
 
     operations = [
