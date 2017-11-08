@@ -91,16 +91,28 @@ class 語料表(models.Model):
             return self.備註[:10] + '……'
         return self.備註
 
-#     def 對齊狀態(self):
-#         '改去cache表'
-#         return 檢查本調拼音(self.漢字, self.本調臺羅)
+    def 對齊狀態(self):
+        '改去cache表'
+        return 檢查本調拼音(self.漢字, self.本調臺羅)
     def save(self, *args, **kwargs):
+#         print('我是儲存')
+        print('START. self.__dict__=', self.__dict__)
+        super(語料表, self).save(*args, **kwargs)
         if getattr(self, '漢字', True) and getattr(self, '本調臺羅', True):
+            print('漢羅=', self.漢字, self.本調臺羅)
             狀態字串 = 判斷本調拼音(self.漢字, self.本調臺羅)
-            self.對齊狀態.狀態 = 狀態字串
+            print('狀態字串=', 狀態字串)
+            try:
+                self.對齊狀態.狀態 = 狀態字串
+            except AttributeError:
+                print('新增, 狀態字串=', 狀態字串)
+                新狀態 = 對齊狀態表(狀態=狀態字串)
+                self.對齊狀態 = 新狀態
             self.對齊狀態.save()
-        super().save(*args, **kwargs)
-        
+#             print('新狀態 pk=', 新狀態, 新狀態.pk)
+            print('self.對齊狀態.狀態=', self.對齊狀態.狀態)
+        print('END. self.__dict__=', self.__dict__)
+
     def __str__(self):
         return '{} {}'.format(self.id, self.漢字)
 
@@ -118,6 +130,6 @@ class 語料狀況表(models.Model):
 
 class 對齊狀態表(models.Model):
     狀態 = models.CharField(max_length=30)
-    
+
     def __str__(self):
         return self.狀態

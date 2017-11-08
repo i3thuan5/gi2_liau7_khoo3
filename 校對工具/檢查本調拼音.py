@@ -7,7 +7,9 @@ from 用字.models import 用字表
 
 
 def 判斷本調拼音(漢字, 本調臺羅):
+    print('引數=', 漢字, 本調臺羅)
     結果 = 檢查本調拼音(漢字, 本調臺羅)
+    print('結果=', 結果)
     回傳字串 = ''
     if type(結果) is list:
         回傳字串 = ' '.join(結果)
