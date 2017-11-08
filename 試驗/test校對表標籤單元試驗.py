@@ -64,7 +64,7 @@ class 校對表標籤試驗(TestCase):
             '{% 賰校對數量 %}'
         ).render(Context())
         self.assertEqual(rendered, "1")
-        
+
     def test賰校對數量_校對完畢(self):
         self.新增語料(self.一助理, self.一音檔, True)
         self.新增語料(self.一助理, self.一音檔, True)
