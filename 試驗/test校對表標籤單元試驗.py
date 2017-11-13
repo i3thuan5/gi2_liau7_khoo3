@@ -21,7 +21,7 @@ class 校對表標籤試驗(TestCase):
         一助理 = User.objects.create_user(名, 信箱, 密碼)
         return 一助理
 
-    def 新增語料(self, 校對者, 音檔, 有揀出來用無):
+    def 新增語料(self, 校對者, 音檔, 有揀出來用無=True, 愛先做無=True):
         校對表.objects.create(
             校對者=校對者,
             音檔=音檔,
@@ -33,7 +33,7 @@ class 校對表標籤試驗(TestCase):
             sing5hong5舊編號='333',
             sing5hong5新編號='333',
             sing5hong5有揀出來用無=有揀出來用無,
-            愛先做無=True,
+            愛先做無=愛先做無,
         )
 
     def setUp(self):
@@ -41,7 +41,7 @@ class 校對表標籤試驗(TestCase):
         self.一助理 = self.新增助理('小豬', 'a@gmail.com', '3333')
 
     def test今仔日校對數量(self):
-        self.新增語料(self.一助理, self.一音檔, True)
+        self.新增語料(self.一助理, self.一音檔)
         rendered = Template(
             '{% load 今仔日校對數量 from gi2_liau7_tags %}'
             '{% 今仔日校對數量 %}'
@@ -49,7 +49,7 @@ class 校對表標籤試驗(TestCase):
         self.assertEqual(rendered, "1")
 
     def test攏總校對數量(self):
-        self.新增語料(self.一助理, self.一音檔, True)
+        self.新增語料(self.一助理, self.一音檔)
         rendered = Template(
             '{% load 攏總校對數量 from gi2_liau7_tags %}'
             '{% 攏總校對數量 %}'
@@ -57,27 +57,38 @@ class 校對表標籤試驗(TestCase):
         self.assertEqual(rendered, "1")
 
     def test賰校對數量(self):
-        self.新增語料(None, self.一音檔, True)
-        self.新增語料(self.一助理, self.一音檔, True)
+        self.新增語料(None, self.一音檔)
+        self.新增語料(None, self.一音檔)
+        self.新增語料(self.一助理, self.一音檔)
         rendered = Template(
             '{% load 賰校對數量 from gi2_liau7_tags %}'
             '{% 賰校對數量 %}'
         ).render(Context())
-        self.assertEqual(rendered, "1")
+        self.assertEqual(rendered, "2")
 
     def test賰校對數量_校對完畢(self):
-        self.新增語料(self.一助理, self.一音檔, True)
-        self.新增語料(self.一助理, self.一音檔, True)
+        self.新增語料(self.一助理, self.一音檔)
+        self.新增語料(self.一助理, self.一音檔)
         rendered = Template(
             '{% load 賰校對數量 from gi2_liau7_tags %}'
             '{% 賰校對數量 %}'
         ).render(Context())
         self.assertEqual(rendered, "0")
 
-    def test賰校對數量_扣掉沒挑出來用的(self):
-        self.新增語料(None, self.一音檔, True)
-        self.新增語料(None, self.一音檔, True)
-        self.新增語料(None, self.一音檔, False)
+    def test賰校對數量_有揀出來用(self):
+        self.新增語料(None, self.一音檔, False, False)
+        self.新增語料(None, self.一音檔, True, False)
+        self.新增語料(None, self.一音檔, True, False)
+        rendered = Template(
+            '{% load 賰校對數量 from gi2_liau7_tags %}'
+            '{% 賰校對數量 %}'
+        ).render(Context())
+        self.assertEqual(rendered, "2")
+
+    def test賰校對數量_愛先做(self):
+        self.新增語料(None, self.一音檔, False, True)
+        self.新增語料(None, self.一音檔, False, True)
+        self.新增語料(None, self.一音檔, False, False)
         rendered = Template(
             '{% load 賰校對數量 from gi2_liau7_tags %}'
             '{% 賰校對數量 %}'
