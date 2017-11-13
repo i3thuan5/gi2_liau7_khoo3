@@ -6,7 +6,7 @@ from django.template.base import Template
 from django.contrib.auth.models import User
 
 
-class 校對表標籤試驗(TestCase):
+class 賰校對數量試驗(TestCase):
 
     def 新增音檔(self, 類別, 資料夾名, 聲音檔名, 聽拍檔名):
         一音檔 = 音檔表.objects.create(
@@ -40,41 +40,6 @@ class 校對表標籤試驗(TestCase):
         self.一音檔 = self.新增音檔('戲劇', 'dirsui2', 'sui2.wav', 'sui2.txt',)
         self.一助理 = self.新增助理('小豬', 'a@gmail.com', '3333')
 
-    def test今仔日校對數量(self):
-        self.新增語料(self.一助理, self.一音檔)
-        rendered = Template(
-            '{% load 今仔日校對數量 from gi2_liau7_tags %}'
-            '{% 今仔日校對數量 %}'
-        ).render(Context())
-        self.assertEqual(rendered, "1")
-
-    def test攏總校對數量(self):
-        self.新增語料(self.一助理, self.一音檔)
-        rendered = Template(
-            '{% load 攏總校對數量 from gi2_liau7_tags %}'
-            '{% 攏總校對數量 %}'
-        ).render(Context())
-        self.assertEqual(rendered, "1")
-
-    def test賰校對數量(self):
-        self.新增語料(None, self.一音檔)
-        self.新增語料(None, self.一音檔)
-        self.新增語料(self.一助理, self.一音檔)
-        rendered = Template(
-            '{% load 賰校對數量 from gi2_liau7_tags %}'
-            '{% 賰校對數量 %}'
-        ).render(Context())
-        self.assertEqual(rendered, "2")
-
-    def test賰校對數量_校對完畢(self):
-        self.新增語料(self.一助理, self.一音檔)
-        self.新增語料(self.一助理, self.一音檔)
-        rendered = Template(
-            '{% load 賰校對數量 from gi2_liau7_tags %}'
-            '{% 賰校對數量 %}'
-        ).render(Context())
-        self.assertEqual(rendered, "0")
-
     def test賰校對數量_有揀出來用(self):
         self.新增語料(None, self.一音檔, False, False)
         self.新增語料(None, self.一音檔, True, False)
@@ -94,3 +59,12 @@ class 校對表標籤試驗(TestCase):
             '{% 賰校對數量 %}'
         ).render(Context())
         self.assertEqual(rendered, "2")
+
+    def test賰校對數量_校對完畢(self):
+        self.新增語料(self.一助理, self.一音檔)
+        self.新增語料(self.一助理, self.一音檔)
+        rendered = Template(
+            '{% load 賰校對數量 from gi2_liau7_tags %}'
+            '{% 賰校對數量 %}'
+        ).render(Context())
+        self.assertEqual(rendered, "0")
