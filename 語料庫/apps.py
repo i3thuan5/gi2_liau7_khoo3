@@ -4,8 +4,6 @@ from tempfile import TemporaryDirectory
 from django.apps import AppConfig
 from 臺灣言語工具.語音辨識.聲音檔 import 聲音檔
 from 臺灣言語工具.系統整合.程式腳本 import 程式腳本
-from django.db.models import signals
-from 語料庫.signals.新增對齊狀態 import 新增對齊狀態
 
 
 class 語料庫Config(AppConfig):
@@ -28,11 +26,5 @@ class 語料庫Config(AppConfig):
                 程式腳本._走指令(['sox', 檔名, '-t', 'wav', '/dev/null', 'remix', '1'],)
             except RuntimeError:
                 raise OSError('請裝sox!! `sudo apt-get install sox`')
-        
-        # importing model classes
-        from .models import 語料表
-        語料表 = self.get_model('語料表')
-
         # registering signals
-        signals.post_save.connect(新增對齊狀態, sender='語料庫.語料表', weak=False,
-                                  dispatch_uid='models.新增對齊狀態')
+        import 語料庫.signals
