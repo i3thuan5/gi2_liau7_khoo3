@@ -62,5 +62,5 @@ class 校對表試驗(TestCase):
             一校對.對齊狀態.狀態
         )
     
-    def test更新對齊狀態(self):
-        self.fail()
+#     def test更新對齊狀態(self):
+#         self.fail()

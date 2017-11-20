@@ -5,8 +5,7 @@ from django.db import models
 from 臺灣言語工具.語音辨識.聲音檔 import 聲音檔
 from django.contrib.auth.models import User
 from 校對工具.檢查本調拼音 import 檢查本調拼音
-from 校對工具.檢查本調拼音 import 判斷本調拼音
-from django.db.models.base import Model
+from django.db.models.signals import post_save
 
 
 class 音檔表(models.Model):
@@ -94,24 +93,10 @@ class 語料表(models.Model):
     def 對齊狀態(self):
         '改去cache表'
         return 檢查本調拼音(self.漢字, self.本調臺羅)
+    
     def save(self, *args, **kwargs):
-#         print('我是儲存')
-        print('START. self.__dict__=', self.__dict__)
         super(語料表, self).save(*args, **kwargs)
-        if getattr(self, '漢字', True) and getattr(self, '本調臺羅', True):
-            print('漢羅=', self.漢字, self.本調臺羅)
-            狀態字串 = 判斷本調拼音(self.漢字, self.本調臺羅)
-            print('狀態字串=', 狀態字串)
-            try:
-                self.對齊狀態.狀態 = 狀態字串
-            except AttributeError:
-                print('新增, 狀態字串=', 狀態字串)
-                新狀態 = 對齊狀態表(狀態=狀態字串)
-                self.對齊狀態 = 新狀態
-            self.對齊狀態.save()
-#             print('新狀態 pk=', 新狀態, 新狀態.pk)
-            print('self.對齊狀態.狀態=', self.對齊狀態.狀態)
-        print('END. self.__dict__=', self.__dict__)
+        post_save.send(sender=self.__class__, instance=self)
 
     def __str__(self):
         return '{} {}'.format(self.id, self.漢字)
