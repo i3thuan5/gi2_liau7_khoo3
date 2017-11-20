@@ -89,10 +89,6 @@ class 語料表(models.Model):
         if len(self.備註) > 10:
             return self.備註[:10] + '……'
         return self.備註
-
-    def 對齊狀態(self):
-        '改去cache表'
-        return 檢查本調拼音(self.漢字, self.本調臺羅)
     
     def save(self, *args, **kwargs):
         super(語料表, self).save(*args, **kwargs)

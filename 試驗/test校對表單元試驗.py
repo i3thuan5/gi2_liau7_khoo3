@@ -29,7 +29,6 @@ class 校對表試驗(TestCase):
             sing5hong5有揀出來用無=True,
             愛先做無=True,
         )
-#         print('self.語料', self.語料.__dict__)
     
     def test更新校對時間(self):
 #         print('33 對齊狀態表數量=', len(對齊狀態表.objects.all()))
@@ -57,9 +56,11 @@ class 校對表試驗(TestCase):
     def test新校對有初始對齊狀態(self):
 #         print('47 對齊狀態表數量=', len(對齊狀態表.objects.all()))
         一校對 = 校對表.objects.get(pk=self.語料.pk)
-        print('一校對.__dict__=', 一校對.__dict__)
         self.assertIsNotNone(
-            一校對.對齊狀態.狀態
+            一校對.對齊狀態
+        )
+        self.assertEqual(
+            一校對.對齊狀態.pk, '1'
         )
     
 #     def test更新對齊狀態(self):
