@@ -31,8 +31,6 @@ class 校對表試驗(TestCase):
         )
     
     def test更新校對時間(self):
-#         print('33 對齊狀態表數量=', len(對齊狀態表.objects.all()))
-
         校對資料 = 校對表.objects.get(pk=self.語料.pk)
         print('校對資料.__dict__=', 校對資料.__dict__)
 #         一狀態 = 對齊狀態表(狀態='媠｜sui22')
@@ -54,13 +52,12 @@ class 校對表試驗(TestCase):
 #         print('44 對齊狀態表數量=', len(對齊狀態表.objects.all()))
 
     def test新校對有初始對齊狀態(self):
-#         print('47 對齊狀態表數量=', len(對齊狀態表.objects.all()))
         一校對 = 校對表.objects.get(pk=self.語料.pk)
         self.assertIsNotNone(
             一校對.對齊狀態
         )
         self.assertEqual(
-            一校對.對齊狀態.pk, '1'
+            一校對.對齊狀態.pk, 1
         )
     
 #     def test更新對齊狀態(self):
