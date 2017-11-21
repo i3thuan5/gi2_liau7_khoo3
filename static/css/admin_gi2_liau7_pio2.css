@@ -35,6 +35,9 @@ form .related-widget-wrapper ul {
 .field-80w {
 	width: 80%;
 }
+.field-90w {
+	width: 90%;
+}
 .field-hint {
 	color: #666;
 	display: block;

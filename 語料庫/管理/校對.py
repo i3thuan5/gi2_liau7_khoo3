@@ -54,8 +54,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     formfield_overrides = {
         models.TextField: {'widget': Textarea(
                            attrs={'rows': 2,
-                                  'cols': 80,
-                                  'style': 'resize: none;'})},
+                                  'style': 'resize: none; min-width: 80%;'})},
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
 
