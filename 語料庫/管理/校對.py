@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django.db.models.query_utils import Q
-from django.forms.widgets import TextInput, CheckboxSelectMultiple
+from django.forms.widgets import CheckboxSelectMultiple, Textarea
 from django.utils.timezone import now
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 from 語料庫.models import 語料表
@@ -52,7 +52,10 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     # 文字欄位顯示從textarea改成input
     # 多對多欄位改用複選
     formfield_overrides = {
-        models.TextField: {'widget': TextInput(attrs={'size': 80})},
+        models.TextField: {'widget': Textarea(
+                           attrs={'rows': 2,
+                                  'cols': 80,
+                                  'style': 'resize: none;'})},
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
 
