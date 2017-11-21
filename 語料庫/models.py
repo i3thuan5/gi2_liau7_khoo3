@@ -58,8 +58,6 @@ class 語料表(models.Model):
         User, null=True, related_name='+',  on_delete=models.CASCADE)
     檢查時間 = models.DateTimeField(null=True)
     備註 = models.TextField(blank=True)
-    對齊狀態 = models.OneToOneField(
-        '對齊狀態表', null=True,  on_delete=models.CASCADE)
 
     # Original data backup
     頭一版資料 = models.TextField(blank=True)
@@ -89,7 +87,7 @@ class 語料表(models.Model):
         if len(self.備註) > 10:
             return self.備註[:10] + '……'
         return self.備註
-    
+
     def save(self, *args, **kwargs):
         super(語料表, self).save(*args, **kwargs)
         post_save.send(sender=self.__class__, instance=self)
@@ -110,6 +108,8 @@ class 語料狀況表(models.Model):
 
 
 class 對齊狀態表(models.Model):
+    語料 = models.OneToOneField(
+        '語料表', default=None, related_name='對齊狀態', on_delete=models.CASCADE)
     狀態 = models.CharField(max_length=30)
 
     def __str__(self):
