@@ -29,19 +29,9 @@ class 校對表試驗(TestCase):
             sing5hong5有揀出來用無=True,
             愛先做無=True,
         )
-    
+
     def test更新校對時間(self):
         校對資料 = 校對表.objects.get(pk=self.語料.pk)
-        print('校對資料.__dict__=', 校對資料.__dict__)
-#         一狀態 = 對齊狀態表(狀態='媠｜sui22')
-#         一狀態.save()
-#         校對資料.對齊狀態 = 一狀態
-#         校對資料.save()
-#         
-#         print('校對資料.__dict__=', 校對資料.__dict__)
-#         return
-
-        校對資料.漢字 = '駝'
         self.assertIsNone(
             校對資料.校對時間
         )
@@ -49,7 +39,6 @@ class 校對表試驗(TestCase):
         self.assertIsNotNone(
             校對資料.校對時間
         )
-#         print('44 對齊狀態表數量=', len(對齊狀態表.objects.all()))
 
     def test新校對有初始對齊狀態(self):
         一校對 = 校對表.objects.get(pk=self.語料.pk)
@@ -59,6 +48,17 @@ class 校對表試驗(TestCase):
         self.assertEqual(
             一校對.對齊狀態.pk, 1
         )
-    
-#     def test更新對齊狀態(self):
-#         self.fail()
+
+    def test對齊狀態顯示錯誤(self):
+        一校對 = 校對表.objects.get(pk=self.語料.pk)
+        print('1st save=',一校對.__dict__)
+        一校對.漢字 = '駝駝駝'
+        print('2nd save')
+        一校對.save()
+        print('2nd save=',一校對.__dict__)
+        self.assertEqual(
+            一校對.對齊狀態.狀態, '駝駝駝'
+        )
+        self.assertEqual(
+            一校對.對齊狀態.pk, 1
+        )
