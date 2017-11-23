@@ -51,13 +51,13 @@ class 校對表試驗(TestCase):
 
     def test對齊狀態顯示錯誤(self):
         一校對 = 校對表.objects.get(pk=self.語料.pk)
-        print('1st save=',一校對.__dict__)
+#         print('1st save=',一校對.__dict__)
         一校對.漢字 = '駝駝駝'
-        print('2nd save')
+#         print('2nd save')
         一校對.save()
-        print('2nd save=',一校對.__dict__)
+#         print('2nd save=',一校對.__dict__)
         self.assertEqual(
-            一校對.對齊狀態.狀態, '駝駝駝'
+            一校對.對齊狀態.狀態, '型比音多'
         )
         self.assertEqual(
             一校對.對齊狀態.pk, 1
