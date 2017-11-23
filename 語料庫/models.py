@@ -89,13 +89,8 @@ class 語料表(models.Model):
         return self.備註
 
     def save(self, *args, **kwargs):
-        try:
-            super(語料表, self).save(*args, **kwargs)
-            print('before post_Save save, 漢字=', self.漢字, self.__class__)
-            post_save.send(sender=self.__class__, instance=self)
-            print('after post_Save save')
-        except Exception as 錯誤:
-            print('錯誤=', 錯誤)
+        super(語料表, self).save(*args, **kwargs)
+        post_save.send(sender=self.__class__, instance=self)
 
     def __str__(self):
         return '{} {}'.format(self.id, self.漢字)
