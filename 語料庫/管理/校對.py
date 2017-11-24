@@ -19,6 +19,30 @@ class 校對表(語料表):
         verbose_name_plural = verbose_name
 
 
+class 對齊狀態過濾器(admin.SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = '對齊狀態'
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'tui3tse5'
+
+    def lookups(self, request, model_admin):
+        """
+        (URL query, human-readable menu item)
+        """
+        return (
+            ('alignissue', '校對錯誤'),
+        )
+
+    def queryset(self, request, queryset):
+        # decide how to filter the queryset.
+        if self.value() == 'alignissue':
+            return queryset.filter(
+                校對者__isnull=False
+            ).exclude(對齊狀態__狀態__exact='')
+
+
 class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     # change list
     list_display = [
@@ -29,7 +53,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         '對齊狀態'
     ]
     ordering = ['校對者', 'id', ]
-    list_filter = ['語料狀況', '校對者', '音檔']
+    list_filter = ['語料狀況', '校對者', '音檔', 對齊狀態過濾器]
     search_fields = [
         '漢字', '本調臺羅', '口語調臺羅',
     ]
