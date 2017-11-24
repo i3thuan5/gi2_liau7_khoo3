@@ -4,7 +4,6 @@ from django.conf import settings
 from django.db import models
 from 臺灣言語工具.語音辨識.聲音檔 import 聲音檔
 from django.contrib.auth.models import User
-from 校對工具.檢查本調拼音 import 檢查本調拼音
 from django.db.models.signals import post_save
 
 
@@ -109,7 +108,8 @@ class 語料狀況表(models.Model):
 
 class 對齊狀態表(models.Model):
     語料 = models.OneToOneField(
-        '語料表', default=None, null=True, related_name='對齊狀態', on_delete=models.CASCADE)
+        '語料表', default=None, null=True, related_name='對齊狀態',
+        on_delete=models.CASCADE)
     狀態 = models.CharField(max_length=30)
 
     def __str__(self):

@@ -28,3 +28,4 @@ class 語料庫Config(AppConfig):
                 raise OSError('請裝sox!! `sudo apt-get install sox`')
         # registering signals
         import 語料庫.signals
+        語料庫.signals
