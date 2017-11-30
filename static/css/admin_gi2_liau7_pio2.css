@@ -16,6 +16,9 @@ td, th, input, textarea {
 .wide label {
 	width: 100px;
 }
+.module > h2 {
+	display: none;
+}
 /*
 * Overriding style of CheckboxSelectMultiple widget
 */
