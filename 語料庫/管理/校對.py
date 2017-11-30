@@ -15,7 +15,7 @@ class 校對表(語料表):
 
     class Meta:
         proxy = True
-        verbose_name = "1.校對表"
+        verbose_name = "校對表"
         verbose_name_plural = verbose_name
 
 

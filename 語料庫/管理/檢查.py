@@ -9,7 +9,7 @@ class 檢查表(語料表):
 
     class Meta:
         proxy = True
-        verbose_name = "2.檢查表"
+        verbose_name = "檢查表"
         verbose_name_plural = verbose_name
 
     def save(self, *args, **kwargs):
