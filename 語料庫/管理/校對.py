@@ -38,9 +38,11 @@ class 對齊狀態過濾器(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         # decide how to filter the queryset.
         if self.value() == 'alignissue':
-            return queryset.filter(
-                校對者__isnull=False
-            ).exclude(對齊狀態__狀態__exact='')
+            return (
+                queryset.filter(校對者__isnull=False)
+                .filter(語料狀況__isnull=True)
+                .exclude(對齊狀態__狀態__exact='')
+            )
 
 
 class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
