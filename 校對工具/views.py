@@ -5,13 +5,13 @@ from 用字.models import 用字表
 from 臺灣言語工具.基本物件.公用變數 import 無音
 from 臺灣言語工具.斷詞.拄好長度辭典揣詞 import 拄好長度辭典揣詞
 from 臺灣言語工具.斷詞.語言模型揀集內組 import 語言模型揀集內組
-import re
 from 語言模型.models import 語言模型表
 from 程式.全漢全羅.揣全漢全羅 import 揣全漢全羅
 from 口語辭典.models import 口語辭典表
 from 臺灣言語工具.解析整理.羅馬字仕上げ import 羅馬字仕上げ
 from 本調辭典.models import 本調辭典表
 from 臺灣言語工具.解析整理.解析錯誤 import 解析錯誤
+from 校對工具.檢查 import 文本分析
 
 
 class 工具(揣全漢全羅):
@@ -22,7 +22,7 @@ class 工具(揣全漢全羅):
         self.語言模型 = 語言模型表.載入模型()
 
     def 標本調(self, 漢字, 原本臺羅):
-        愛處理的漢字 = re.sub('（[^）]+）', ' X ', 漢字)
+        愛處理的漢字 = 文本分析.漢字合音轉做代號(漢字)
         try:
             原本句物件 = 拆文分析器.對齊句物件(
                 愛處理的漢字,
@@ -31,7 +31,7 @@ class 工具(揣全漢全羅):
         except 解析錯誤:
             原本句物件 = 拆文分析器.建立句物件(愛處理的漢字)
         for 字物件 in 原本句物件.篩出字物件():
-            if 字物件.型 == 'X':
+            if 文本分析.這字的漢字敢是合音(字物件):
                 pass
             elif not 用字表.有這个字無(字物件):
                 字物件.舊音 = 字物件.音

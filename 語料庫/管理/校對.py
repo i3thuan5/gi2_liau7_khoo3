@@ -38,9 +38,11 @@ class 對齊狀態過濾器(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         # decide how to filter the queryset.
         if self.value() == 'alignissue':
-            return queryset.filter(
-                校對者__isnull=False
-            ).exclude(對齊狀態__狀態__exact='')
+            return (
+                queryset.filter(校對者__isnull=False)
+                .filter(語料狀況__isnull=True)
+                .exclude(對齊狀態__狀態__exact='')
+            )
 
 
 class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
@@ -55,7 +57,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     ordering = ['校對者', 'id', ]
     list_filter = ['語料狀況', '校對者', '音檔', 對齊狀態過濾器]
     search_fields = [
-        '漢字', '本調臺羅', '口語調臺羅',
+        'id', '漢字', '本調臺羅', '口語調臺羅',
     ]
     list_per_page = 20
 
