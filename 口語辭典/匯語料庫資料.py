@@ -19,6 +19,7 @@ def 語料庫校對語句匯口語辭典():
 
 def _全部資料():
     for 語料 in 語料表.objects.filter(校對者__isnull=False):
+        # 對照本調和口語
         try:
             本調 = 拆文分析器.對齊句物件(
                 語料.漢字,

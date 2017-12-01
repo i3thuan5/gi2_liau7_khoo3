@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django.db.models.query_utils import Q
-from django.forms.widgets import TextInput, CheckboxSelectMultiple
+from django.forms.widgets import CheckboxSelectMultiple, Textarea
 from django.utils.timezone import now
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 from 語料庫.models import 語料表
@@ -15,8 +15,32 @@ class 校對表(語料表):
 
     class Meta:
         proxy = True
-        verbose_name = "1.校對表"
+        verbose_name = "校對表"
         verbose_name_plural = verbose_name
+
+
+class 對齊狀態過濾器(admin.SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = '對齊狀態'
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'tui3tse5'
+
+    def lookups(self, request, model_admin):
+        """
+        (URL query, human-readable menu item)
+        """
+        return (
+            ('alignissue', '校對錯誤'),
+        )
+
+    def queryset(self, request, queryset):
+        # decide how to filter the queryset.
+        if self.value() == 'alignissue':
+            return queryset.filter(
+                校對者__isnull=False
+            ).exclude(對齊狀態__狀態__exact='')
 
 
 class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
@@ -26,9 +50,10 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         '漢字', '本調臺羅', '口語調臺羅',
         '備註開頭',
         '校對者', '校對時間',
+        '對齊狀態'
     ]
     ordering = ['校對者', 'id', ]
-    list_filter = ['語料狀況', '校對者', '音檔']
+    list_filter = ['語料狀況', '校對者', '音檔', 對齊狀態過濾器]
     search_fields = [
         '漢字', '本調臺羅', '口語調臺羅',
     ]
@@ -40,11 +65,11 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     change_form_template = 'admin/gi2_liau7_khoo3/語料表/custom_change_form.html'
     readonly_fields = ('音檔',)
     fieldsets = (
-        (None, {
+        ('語料狀況', {
             'fields': ('語料狀況', ),
             'classes': ['wide']
         }),
-        (None, {
+        ('漢字', {
             'fields': ('漢字', '本調臺羅', '口語調臺羅', '備註', ),
             'classes': ['wide']
         }),
@@ -52,7 +77,10 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     # 文字欄位顯示從textarea改成input
     # 多對多欄位改用複選
     formfield_overrides = {
-        models.TextField: {'widget': TextInput(attrs={'size': 80})},
+        models.TextField: {'widget': Textarea(attrs={
+            'rows': 2,
+            'column': 40,
+            'style': 'resize: none; min-width: 80%; overflow:hidden;'})},
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
 
