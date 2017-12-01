@@ -1,8 +1,11 @@
 {% extends "admin/change_form.html" %}
 
 {% block field_sets %}
-
-{% if original.音檔.原始檔 != None %}
+  	
+{% for fieldset in adminform %}
+	{% if fieldset.name == '語料狀況' %}
+		{% include "admin/gi2_liau7_khoo3/語料表/custom_fieldset.html" %}
+		{% if original.音檔.原始檔 != None %}
 		<fieldset class="module aligned wide">
     		<div class='form-row'>
 	            <label for="id_mediaElementID">音檔片段：</label>
@@ -12,10 +15,11 @@
 	    		</audio>
 			</div>
 		</fieldset>
-{% endif %}
-  	
-{% for fieldset in adminform %}
-	{% include "admin/gi2_liau7_khoo3/語料表/custom_fieldset.html" %}
+		{% endif %}
+	
+	{% else %}
+		{% include "admin/gi2_liau7_khoo3/語料表/custom_fieldset.html" %}
+	{% endif %}
 {% endfor %}
 {% endblock %}
 
@@ -27,21 +31,16 @@
 	
 	function trackCurrentTime() {
 		// `this` : `audio`
-		console.log(this.currentTime);
-  		if (this.currentTime >= {{original.聲音結束時間}}-0.01) {
-  			console.log("pause !");
-    		this.pause();
+		if (this.currentTime >= {{original.聲音結束時間}}-0.01) {
+  			this.pause();
     		this.currentTime = {{original.聲音開始時間}};
   		} else {
     		requestAnimationFrame(trackCurrentTime.bind(this))
   		}
 	}
 	
-	vid.oncanplay = function() {
-    	console.log("Can start playing video");
-	};
+	vid.oncanplay = function() {};
 	vid.onplay = function(){
-		console.log("Onplay");
 		trackCurrentTime.call(vid);
 	}
 	
