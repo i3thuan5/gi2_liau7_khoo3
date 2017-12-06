@@ -50,17 +50,9 @@ class 對齊狀態過濾器(admin.SimpleListFilter):
 
 class 對齊狀態Inline(admin.StackedInline):
     model = 對齊狀態表
-    fieldsets = None
-    readonly_fields = ('顯示狀態', )
-
-    def 顯示狀態(self, instance):
-        # assuming get_full_address() returns a list of strings
-        # for each line of the address and you want to separate each
-        # line by a linebreak
-        return mark_safe(instance.狀態) or mark_safe("<span class='errors'>I can't determine this address.</span>")
-
-    # short_description functions like a model field's verbose_name
-    顯示狀態.short_description = "顯示狀態"
+    exclude = ('狀態', ) 
+    verbose_name = '對齊狀態'
+    verbose_name_plural = verbose_name
 
     def has_delete_permission(self, request, obj):
         return False
