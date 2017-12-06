@@ -1,5 +1,5 @@
 import json
-from os.path import basename, dirname
+from os.path import basename, dirname, join
 import re
 
 from django.core.files.base import File
@@ -9,28 +9,11 @@ from django.db import transaction
 
 from 程式.全漢全羅.匯入檔案揣資料夾 import 揣資料夾內的語料
 from 語料庫.models import 音檔表
+from praatio.tgio import openTextgrid
+from 語料庫.management.commands.匯入1版trs語料 import Command as trs指令
 
 
-class Command(BaseCommand):
-    語料類別 = {
-        'MH': '戲劇',
-        'DaAi_blktc': '戲劇',
-        'DaAi_csgr': '戲劇',
-        'DaAi_urs': '戲劇',
-        'DaAi_vvrs': '戲劇',
-        'LTS': '戲劇',
-    }
-    先莫閬過符號 = [
-        'SIL', 'SPN', 'NSN',
-        'LTSH',  # 濫做伙
-        'TSLS',  # 濟人聲
-        'TTH',  # 重疊
-        'THB',  # 聽無
-        'TS',  # 大聲
-        'KS',  # 歌聲
-        'MTS',  # 毋知
-    ]
-    先莫閬過比較 = re.compile('(({}))'.format(')|('.join(先莫閬過符號)))
+class Command(trs指令):
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -51,40 +34,42 @@ class Command(BaseCommand):
         textgird檔名 = join(參數['textgrid資料夾所在'], 參數['資料夾名'], 參數['聽拍檔名'])
         wav檔名 = join(參數['wav資料夾所在'], 參數['資料夾名'],
                      參數['聽拍檔名'].split('|')[0].replace('&amp;', '&'))
-        類別 = self.語料類別[參數['資料夾名']]
-        資料夾名 = basename(dirname(wav檔名))
-        聲音檔名 = basename(wav檔名)
-        聽拍檔名 = basename(textgird檔名)
         音檔資料 = 音檔表.objects.create(
-            類別=類別,
-            資料夾名=資料夾名,
-            聲音檔名=聲音檔名,
-            聽拍檔名=聽拍檔名,
+            類別=self.語料類別[參數['資料夾名']],
+            資料夾名=參數['資料夾名'],
+            聲音檔名=basename(wav檔名),
+            聽拍檔名=basename(textgird檔名),
         )
-        return
-        with open(json檔名) as json檔案:
-            for 一句 in json.load(json檔案):
-                音檔資料.資料.create(
-                    聲音結束時間=一句["結束時間"],
-                    聲音開始時間=一句["開始時間"],
+        tg = openTextgrid(textgird檔名)
 
-                    語者=一句["語者"],
-                    頭一版資料=一句["trs聽拍"],
-                    頭一版通用=一句["原始通用"],
-                    漢字=一句["漢字"],
-                    本調臺羅=一句["臺羅"],
-                    口語調臺羅=一句["口語調臺羅"],
+        print(tg.tierNameList)
+        # Get all intervals
+        entryList = tg.tierDict["Speech"].entryList[:10]
+        print(entryList)
+        a,b,c=entryList[0]
+        print(a,b,c)
 
-                    sing5hong5舊編號=一句["舊編號"],
-                    sing5hong5新編號=一句["新編號"],
-                    sing5hong5有揀出來用無=一句["有揀出來無"],
-                    愛先做無=self.判斷先愛先做無(一句["漢字"]),
-                )
+        entryList = tg.tierDict["Turns"].find("添福")[:10]  # Get all instances of 'a'
+        print(entryList)
+        print( tg.tierDict["Turns"].entryList[41])
+        
+        raise NotImplementedError()
+        for 一句 in json.load(json檔案):
+            音檔資料.資料.create(
+                聲音結束時間=一句["結束時間"],
+                聲音開始時間=一句["開始時間"],
+
+                語者=一句["語者"],
+                頭一版資料=一句["trs聽拍"],
+                頭一版通用=一句["原始通用"],
+                漢字=一句["漢字"],
+                本調臺羅=一句["臺羅"],
+                口語調臺羅=一句["口語調臺羅"],
+
+                sing5hong5舊編號=一句["舊編號"],
+                sing5hong5新編號=一句["新編號"],
+                sing5hong5有揀出來用無=一句["有揀出來無"],
+                愛先做無=self.判斷先愛先做無(一句["漢字"]),
+            )
         with open(wav檔名, 'rb') as 檔案:
             音檔資料.原始檔.save(資料夾名 + '/' + 聲音檔名, File(檔案))
-
-    @classmethod
-    def 判斷先愛先做無(cls, 語句):
-        if cls.先莫閬過比較.search(語句):
-            return False
-        return True
