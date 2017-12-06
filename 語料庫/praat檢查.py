@@ -1,3 +1,4 @@
+from praatio.tgio import openTextgrid
 
 
 class praat檢查:
@@ -21,11 +22,32 @@ class praat檢查:
                     趨線數量 += 1
             if 趨線數量 > 2:
                 self.發生錯誤('語句{}-{}，趨線愛調整'.format(開始, 結束))
-    def 檢查語者(self,聽拍資料,語者資料):
-        時間=set()
-        for 開始, 結束,_聽拍 in 聽拍資料:
+
+    def 檢查語者(self, 聽拍資料, 語者資料):
+        時間 = set()
+        for 開始, 結束, _聽拍 in 聽拍資料:
             時間.add(開始)
             時間.add(結束)
-        for 開始, _結束,_聽拍 in 語者資料:
+        for 開始, _結束, _聽拍 in 語者資料:
             if 開始 not in 時間:
                 self.發生錯誤('語者第{}秒的時間，佮聽拍無仝'.format(開始))
+
+    def 檢查檔案(self, 檔名):
+        try:
+            聽拍資料 = self.提出聽拍資料(檔名)
+        except KeyError:
+            self.發生錯誤('TextGrid無Speech的Tier')
+            return
+        self.檢查聽拍(聽拍資料)
+        try:
+            語者資料 = self.提出語者資料(檔名)
+        except KeyError:
+            self.發生錯誤('TextGrid無Turns的Tier')
+            return
+        self.檢查語者(聽拍資料, 語者資料)
+
+    def 提出聽拍資料(self, 檔名):
+        return openTextgrid(檔名).tierDict["Speech"].entryList
+
+    def 提出語者資料(self, 檔名):
+        return openTextgrid(檔名).tierDict["Turns"].entryList
