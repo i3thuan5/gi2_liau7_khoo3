@@ -78,7 +78,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     readonly_fields = ('音檔', )
     fieldsets = (
         ('語料狀況', {
-            'fields': ('語料狀況', ),
+            'fields': ('語料狀況', '語者'),
             'classes': ['wide']
         }),
         ('漢字', {
