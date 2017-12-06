@@ -11,6 +11,9 @@ class praat檢查:
     def 錯誤資訊(self):
         return '\n'.join(self.錯誤)
 
+    def 有錯誤無(self):
+        return len(self.錯誤) != 0
+
     def 檢查聽拍(self, 聽拍資料):
         for 開始, 結束, 聽拍 in 聽拍資料:
             for 舊標仔 in ['[empty]', '[noise]', '[silence]', ]:
@@ -21,7 +24,7 @@ class praat檢查:
                 if 字 == '/':
                     趨線數量 += 1
             if 趨線數量 > 2:
-                self.發生錯誤('語句{}-{}，趨線愛調整'.format(開始, 結束))
+                self.發生錯誤('語句{}-{}，趨線愛調整：{}'.format(開始, 結束, 聽拍))
 
     def 檢查語者(self, 聽拍資料, 語者資料):
         時間 = set()
