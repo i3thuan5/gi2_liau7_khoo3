@@ -1,15 +1,13 @@
 import json
-from os.path import basename, dirname, join
-import re
+from os.path import join, basename
 
 from django.core.files.base import File
-from django.core.management.base import BaseCommand
 from django.db import transaction
 
-
-from 程式.全漢全羅.匯入檔案揣資料夾 import 揣資料夾內的語料
-from 語料庫.models import 音檔表
 from praatio.tgio import openTextgrid
+
+
+from 語料庫.models import 音檔表
 from 語料庫.management.commands.匯入1版trs語料 import Command as trs指令
 
 
