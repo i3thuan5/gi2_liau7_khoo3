@@ -16,8 +16,7 @@ class textgrid試驗(TestCase):
     def test_愛有speech(self):
         entryList = tg.tierDict["Speech"].entryList[:10]
         self.fail()
+
     def test_愛有turns(self):
         self.fail()
-        
-
-        entryList = tg.tierDict["Turns"].find("添福")[:10] 
+        entryList = tg.tierDict["Turns"].find("添福")[:10]
