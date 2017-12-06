@@ -48,7 +48,7 @@ class 對齊狀態過濾器(admin.SimpleListFilter):
 class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     # change list
     list_display = [
-        'id', '語者', '音檔', '狀況',
+        'id', '語者', '狀況',
         '漢字', '本調臺羅', '口語調臺羅',
         '備註開頭',
         '校對者', '校對時間',
