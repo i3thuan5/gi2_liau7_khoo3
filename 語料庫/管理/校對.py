@@ -6,8 +6,6 @@ from django.utils.timezone import now
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 from 語料庫.models import 語料表
 from 語料庫.models import 對齊狀態表
-from django.utils.html import format_html_join
-from django.utils.safestring import mark_safe
 
 
 class 校對表(語料表):
@@ -50,7 +48,7 @@ class 對齊狀態過濾器(admin.SimpleListFilter):
 
 class 對齊狀態Inline(admin.StackedInline):
     model = 對齊狀態表
-    exclude = ('狀態', ) 
+    exclude = ('狀態', )
     verbose_name = '對齊狀態'
     verbose_name_plural = verbose_name
 
