@@ -5,6 +5,7 @@ from django.forms.widgets import CheckboxSelectMultiple, Textarea
 from django.utils.timezone import now
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 from 語料庫.models import 語料表
+from 語料庫.models import 對齊狀態表
 
 
 class 校對表(語料表):
@@ -45,6 +46,16 @@ class 對齊狀態過濾器(admin.SimpleListFilter):
             )
 
 
+class 對齊狀態Inline(admin.StackedInline):
+    model = 對齊狀態表
+    exclude = ('狀態', )
+    verbose_name = '對齊狀態'
+    verbose_name_plural = verbose_name
+
+    def has_delete_permission(self, request, obj):
+        return False
+
+
 class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     # change list
     list_display = [
@@ -64,7 +75,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     # venv/lib/python3.5/site-packages/django/contrib/admin/templates/admin/
     change_list_template = 'admin/gi2_liau7_khoo3/語料表/custom_change_list.html'
     change_form_template = 'admin/gi2_liau7_khoo3/語料表/custom_change_form.html'
-    readonly_fields = ('音檔',)
+    readonly_fields = ('音檔', )
     fieldsets = (
         ('語料狀況', {
             'fields': ('語料狀況', ),
@@ -75,6 +86,10 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
             'classes': ['wide']
         }),
     )
+    inlines = [
+        對齊狀態Inline,
+    ]
+
     # 文字欄位顯示從textarea改成input
     # 多對多欄位改用複選
     formfield_overrides = {
