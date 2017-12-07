@@ -10,7 +10,6 @@ from 語料庫.management.commands.匯入1版trs語料 import Command as trs指�
 from 語料庫.praat檢查 import praat檢查
 from 程式.提出通用音標 import 提出通用音標
 from 程式.全漢全羅.原始通用處理 import 原始通用工具
-from 校對工具.views import 工具
 
 
 class Command(trs指令):
