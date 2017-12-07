@@ -1,5 +1,5 @@
 from django.test.testcases import TestCase
-from 語料庫.management.commands.匯入1_0版語料 import Command
+from 語料庫.management.commands.匯入1版trs語料 import Command
 
 
 class 試驗(TestCase):
