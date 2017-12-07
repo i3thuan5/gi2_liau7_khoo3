@@ -1,5 +1,6 @@
-from os.path import join, basename
+from os.path import join, basename, isfile
 
+import Pyro4
 from django.core.files.base import File
 from django.db import transaction
 
@@ -27,12 +28,16 @@ class Command(trs指令):
         parser.add_argument(
             '聽拍檔名', type=str
         )
+        parser.add_argument(
+            'wav檔名', type=str
+        )
 
     @transaction.atomic()
     def handle(self, *args, **參數):
         textgird檔名 = join(參數['textgrid資料夾所在'], 參數['資料夾名'], 參數['聽拍檔名'])
-        wav檔名 = join(參數['wav資料夾所在'], 參數['資料夾名'],
-                     參數['聽拍檔名'].split('|')[0].replace('&amp;', '&'))
+        wav檔名 = join(參數['wav資料夾所在'], 參數['資料夾名'], 參數['wav檔名'])
+        if not isfile(wav檔名):
+            raise FileNotFoundError('無wav檔案：{}'.format(wav檔名))
         音檔資料 = 音檔表.objects.create(
             類別=self.語料類別[參數['資料夾名']],
             資料夾名=參數['資料夾名'],
@@ -44,13 +49,13 @@ class Command(trs指令):
         if 檢查.有錯誤無():
             print(檢查.錯誤資訊())
         else:
-            _工具 = 工具()
+            工具 = Pyro4.Proxy("PYRONAME:校對工具")
             語者資料 = 檢查.提出語者資料(textgird檔名)
             for 開始, 結束, 聽拍 in 檢查.提出聽拍資料(textgird檔名):
                 原始通用 = 提出通用音標.揣音標(聽拍)
                 口語調臺羅 = 原始通用工具.處理做口語調臺羅(原始通用).看型('-', ' ')
-                漢字, 本調 = _工具.口語標漢字本調(口語調臺羅)
-                print(原始通用,漢字, 本調 ,口語調臺羅)
+                漢字, 本調 = 工具.口語標漢字本調(口語調臺羅)
+                print(原始通用, 漢字, 本調, 口語調臺羅)
                 音檔資料.資料.create(
                     聲音結束時間=開始,
                     聲音開始時間=結束,
@@ -72,6 +77,6 @@ class Command(trs指令):
         raise NotImplementedError()
 
     def 揣語者(self, 語者資料, 聽拍開始):
-        for 開始, _結束, 語者 in 語者資料:
-            if 開始 >= 聽拍開始:
+        for _開始, 結束, 語者 in 語者資料:
+            if 結束 > 聽拍開始:
                 return 語者

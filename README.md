@@ -23,7 +23,7 @@ pip install django Taiwanese-Speech-And-Text-Corpus
 
 ## 匯入資料
 ```
-time python manage.py 匯入1版TextGird語料 ../Ko_corpus/Finished(Praat_Text) ../Finished/ MH MaternalHome-003\|25\|110308\|MaternalHome-003-101223.TextGird
+time python manage.py 匯入1版TextGird語料 ../Ko_corpus/Finished(Praat_Text) ../Finished/ MH MaternalHome-003\|25\|110308\|MaternalHome-003-101223.TextGird MaternalHome-003.wav
 ```
 
 ### 舊版trs
