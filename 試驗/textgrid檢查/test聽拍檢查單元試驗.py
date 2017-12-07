@@ -27,3 +27,7 @@ class textgrid試驗(TestCase):
     def test_袂使有silence(self):
         self.檢查.檢查聽拍([('0', '10', '[silence]')])
         self.assertEqual(len(self.檢查.錯誤), 1)
+
+    def test_有ATHL真實愛提出來討論(self):
+        self.檢查.檢查聽拍([('0', '10', 'ATHL')])
+        self.assertEqual(len(self.檢查.錯誤), 1)

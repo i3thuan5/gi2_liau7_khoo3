@@ -16,7 +16,7 @@ class praat檢查:
 
     def 檢查聽拍(self, 聽拍資料):
         for 開始, 結束, 聽拍 in 聽拍資料:
-            for 舊標仔 in ['[empty]', '[noise]', '[silence]', ]:
+            for 舊標仔 in ['[empty]', '[noise]', '[silence]', 'ATHL', ]:
                 if 舊標仔 in 聽拍:
                     self.發生錯誤('語句{}-{}，有{}'.format(開始, 結束, 舊標仔))
             趨線數量 = 0
