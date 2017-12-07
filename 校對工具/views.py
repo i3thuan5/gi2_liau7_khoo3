@@ -12,8 +12,10 @@ from 臺灣言語工具.解析整理.羅馬字仕上げ import 羅馬字仕上�
 from 本調辭典.models import 本調辭典表
 from 臺灣言語工具.解析整理.解析錯誤 import 解析錯誤
 from 校對工具.檢查 import 文本分析
+import Pyro4
 
 
+@Pyro4.expose
 class 工具(揣全漢全羅):
 
     def __init__(self):
