@@ -8,10 +8,18 @@ class 對齊狀態表(models.Model):
         語料表, default=None, related_name='對齊狀態', on_delete=models.CASCADE
     )
     狀態 = models.CharField(max_length=30)
+    本調空白 = models.CharField(max_length=30)
+    口語調空白 = models.CharField(max_length=30)
+    
     連字符邊仔空白 = re.compile('([\w]+ -+)|(-+ [\w]+)')
 
     def __str__(self):
         return self.狀態
+
+    def save(self, *args, **kwargs):
+        self.本調空白=self.檢查連字符邊仔有空白無(self.語料.本調臺羅)
+        self.口語調空白=self.檢查連字符邊仔有空白無(self.語料.口語調臺羅)
+        super().save(*args, **kwargs)
 
     @classmethod
     def 檢查連字符邊仔有空白無(cls, 羅馬字):
