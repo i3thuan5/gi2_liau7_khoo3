@@ -43,7 +43,7 @@ class 對齊狀態過濾器(admin.SimpleListFilter):
                 queryset.filter(校對者__isnull=False)
                 .filter(語料狀況__isnull=True)
                 .exclude(
-                    對齊狀態__狀態__exact='',
+                    對齊狀態__漢字本調對應__exact='',
                     對齊狀態__本調口語調對應__exact='',
                     對齊狀態__本調空白__exact='',
                     對齊狀態__口語調空白__exact='',
