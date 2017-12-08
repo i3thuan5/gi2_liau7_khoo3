@@ -1,6 +1,5 @@
 from django.test.testcases import TestCase
-from 檢查工具.檢查本調拼音 import 檢查本調拼音
-from 檢查工具.檢查本調拼音 import 判斷本調拼音
+from 檢查工具.models import 對齊狀態表
 
 
 class 檢查本調口語調對應單元試驗(TestCase):
@@ -20,7 +19,7 @@ class 檢查本調口語調對應單元試驗(TestCase):
         口語調臺羅 = 'sui2 e5'
         self.assertEqual(
             對齊狀態表.檢查本調口語調對應(本調臺羅, 口語調臺羅),
-            '詞組內底的型「sui2 e5,」比音「sui2 e5」濟'
+            '詞組內底的型「sui2 e5 , 」比音「sui2 e5」濟'
         )
 
     def test外來詞(self):
