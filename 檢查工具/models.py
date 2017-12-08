@@ -10,15 +10,17 @@ class 對齊狀態表(models.Model):
     狀態 = models.CharField(max_length=30)
     本調空白 = models.CharField(max_length=30)
     口語調空白 = models.CharField(max_length=30)
-    
+    口語調輕聲符 = models.CharField(max_length=30)
+
     連字符邊仔空白 = re.compile('([\w]+ -+)|(-+ [\w]+)')
 
     def __str__(self):
         return self.狀態
 
     def save(self, *args, **kwargs):
-        self.本調空白=self.檢查連字符邊仔有空白無(self.語料.本調臺羅)
-        self.口語調空白=self.檢查連字符邊仔有空白無(self.語料.口語調臺羅)
+        self.本調空白 = self.檢查連字符邊仔有空白無(self.語料.本調臺羅)
+        self.口語調空白 = self.檢查連字符邊仔有空白無(self.語料.口語調臺羅)
+        self.口語調輕聲符 = self.口語調無輕聲連字符(self.語料.口語調臺羅)
         super().save(*args, **kwargs)
 
     @classmethod
@@ -35,3 +37,9 @@ class 對齊狀態表(models.Model):
             else:
                 break
         return '、'.join(結果)
+
+    @classmethod
+    def 口語調無輕聲連字符(cls, 羅馬字):
+        if '--' in 羅馬字:
+            return '口語調袂使有輕聲符'
+        return ''
