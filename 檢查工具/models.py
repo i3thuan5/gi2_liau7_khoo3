@@ -20,7 +20,13 @@ class 對齊狀態表(models.Model):
     連字符邊仔空白 = re.compile('([\w]+ -+)|(-+ [\w]+)')
 
     def __str__(self):
-        return self.狀態
+        return '\n'.join([
+            self.本調空白,
+            self.口語調空白,
+            self.口語調輕聲符,
+            self.狀態,
+            self.本調口語調對應,
+            ]).strip()
 
     def save(self, *args, **kwargs):
         self.本調空白 = self.檢查連字符邊仔有空白無(self.語料.本調臺羅)
