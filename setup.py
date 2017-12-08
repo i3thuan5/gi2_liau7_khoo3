@@ -21,7 +21,9 @@ setup(
     install_requires=[
         'django',
         'Taiwanese-Speech-And-Text-Corpus',
-        'kau3-tian2_iong7-ji7',
+        'kau3-tian2_iong7-ji7>=0.1.2',
+        'praatIO',
+        'Pyro4',
         'whitenoise',
     ],
 )

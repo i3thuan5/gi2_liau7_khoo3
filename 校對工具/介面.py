@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from 校對工具.views import 工具
+import Pyro4
 from django.http.response import JsonResponse
 
+
 try:
-    _工具 = 工具()
+    _工具 = Pyro4.Proxy("PYRONAME:校對工具")
 except Exception as 錯誤:
     print(錯誤)
 

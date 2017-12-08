@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db import models
 from 臺灣言語工具.語音辨識.聲音檔 import 聲音檔
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 
 class 音檔表(models.Model):
@@ -49,9 +50,11 @@ class 語料表(models.Model):
     口語調臺羅 = models.TextField(blank=True)
     華語 = models.TextField(blank=True)
     語料狀況 = models.ManyToManyField('語料狀況表', blank=True)
-    校對者 = models.ForeignKey(User, null=True, related_name='+')
+    校對者 = models.ForeignKey(
+        User, null=True, related_name='+',  on_delete=models.CASCADE)
     校對時間 = models.DateTimeField(null=True)
-    檢查者 = models.ForeignKey(User, null=True, related_name='+')
+    檢查者 = models.ForeignKey(
+        User, null=True, related_name='+',  on_delete=models.CASCADE)
     檢查時間 = models.DateTimeField(null=True)
     備註 = models.TextField(blank=True)
 
@@ -63,6 +66,8 @@ class 語料表(models.Model):
     sing5hong5舊編號 = models.CharField(null=True, max_length=200)
     sing5hong5新編號 = models.CharField(null=True, max_length=200)
     sing5hong5有揀出來用無 = models.BooleanField(default=False)
+
+    愛先做無 = models.BooleanField()
 
     class Meta:
         verbose_name = "語料表"
@@ -82,9 +87,9 @@ class 語料表(models.Model):
             return self.備註[:10] + '……'
         return self.備註
 
-    def 對齊狀態(self):
-        '改去cache表'
-        return True
+    def save(self, *args, **kwargs):
+        super(語料表, self).save(*args, **kwargs)
+        post_save.send(sender=self.__class__, instance=self)
 
     def __str__(self):
         return '{} {}'.format(self.id, self.漢字)

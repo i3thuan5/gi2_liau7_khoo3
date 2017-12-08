@@ -9,7 +9,7 @@ class 檢查表(語料表):
 
     class Meta:
         proxy = True
-        verbose_name = "2.檢查表"
+        verbose_name = "檢查表"
         verbose_name_plural = verbose_name
 
     def save(self, *args, **kwargs):
@@ -24,9 +24,9 @@ class 檢查表管理(校對表管理, 目標音檔欄):
         '目標音檔', '狀況',
         '漢字', '本調臺羅', '口語調臺羅',
         '備註開頭',
-        '檢查時間',
+        '檢查者', '檢查時間',
     ]
-    ordering = ['檢查者', 'id']
+    ordering = ['檢查者', '-id']
     list_per_page = 10
     actions = [
         '設定無問題',
@@ -37,7 +37,7 @@ class 檢查表管理(校對表管理, 目標音檔欄):
         queryset.update(檢查者=request.user, 檢查時間=now())
 
     # change view
-    change_form_template = 'admin/gi2_liau7_khoo3/語料表/檢查_change_form.html'
+    change_form_template = 'admin/gi2_liau7_khoo3/檢查表/custom_change_form.html'
     readonly_fields = ('音檔', '漢字', '本調臺羅', '口語調臺羅', '語料狀況',)
     fieldsets = (
         ('音檔', {

@@ -16,6 +16,9 @@ td, th, input, textarea {
 .wide label {
 	width: 100px;
 }
+.module > h2 {
+	display: none;
+}
 /*
 * Overriding style of CheckboxSelectMultiple widget
 */
@@ -34,6 +37,9 @@ form .related-widget-wrapper ul {
 }
 .field-80w {
 	width: 80%;
+}
+.field-90w {
+	width: 90%;
 }
 .field-hint {
 	color: #666;

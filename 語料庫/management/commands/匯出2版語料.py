@@ -13,13 +13,26 @@ from 語料庫.models import 語料狀況表
 class Command(BaseCommand):
     無愛的狀況 = [
         '愛討論',
-        '講袂清楚',
-        '有人聲雜音',
-        '有非人聲雜音',
+        '品質：講袂清楚',
+        '品質：有人聲雜音(SPN)',
+        '品質：有非人聲雜音(NSN)',
+        '詞：有外語詞',
         '北部腔o',
         '切音問題',
         '猶袂處理好',
+        '大聲雜音(TS)',
+        '重複語料',
+        '講仝款話的濟人聲(TSLS)',
+        '講無仝話的重疊(TTH)',
+        '全雜音無對話',
     ]
+    會當的狀況 = {
+        '範例',
+        '詞：有合音',
+        '詞：講法佮辭典無仝',
+        '句：無合文法',
+        '落勾字詞',
+    }
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -34,6 +47,20 @@ class Command(BaseCommand):
             .filter(狀況__in=self.無愛的狀況)
             .values_list('id', flat=True)
         )
+        if 無愛狀況.count() != len(self.無愛的狀況):
+            拍毋著 = []
+            for 狀況 in self.無愛的狀況:
+                if not 語料狀況表.objects.filter(狀況=狀況).exists():
+                    拍毋著.append(狀況)
+            raise RuntimeError('狀況名有拍毋著！！\n{}'.format('\n'.join(拍毋著)))
+        assert len(self.會當的狀況 & set(self.無愛的狀況)) == 0, (
+            '有狀況佇「無愛的狀況」佮「會當的狀況」出現兩擺'
+        )
+        assert self.會當的狀況 == set(
+            語料狀況表.objects
+            .exclude(狀況__in=self.無愛的狀況)
+            .values_list('狀況', flat=True)
+        ), '有狀況漏勾矣，必須攏出現佇「無愛的狀況」佮「會當的狀況」'
         匯出資料 = []
         for 音檔資料 in 音檔表.objects.order_by('id'):
             語句 = []

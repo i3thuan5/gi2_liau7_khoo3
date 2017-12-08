@@ -32,6 +32,7 @@ SHARED_APPS = [
     '語言模型',
     '口語辭典',
     '本調辭典',
+    '檢查工具',
 ]
 
 # INSTALLED_APPS was moved to each setting
