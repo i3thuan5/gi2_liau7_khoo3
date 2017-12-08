@@ -2,16 +2,6 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-from 校對工具.檢查本調拼音 import 判斷本調拼音
-
-
-def 初始對齊狀態(apps, editor):
-    語料表 = apps.get_model('語料庫', '語料表')
-    對齊狀態表 = apps.get_model('語料庫', '對齊狀態表')
-    for 一語料 in 語料表.objects.all():
-        狀態字串 = 判斷本調拼音(一語料.漢字, 一語料.本調臺羅)
-        一狀態 = 對齊狀態表(狀態=狀態字串, 語料=一語料)
-        一狀態.save()
 
 
 class Migration(migrations.Migration):
@@ -32,6 +22,4 @@ class Migration(migrations.Migration):
                                             related_name='對齊狀態', to='語料庫.語料表')),
             ],
         ),
-
-        migrations.RunPython(初始對齊狀態, lambda *x:x)
     ]

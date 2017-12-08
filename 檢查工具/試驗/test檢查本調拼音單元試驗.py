@@ -1,6 +1,6 @@
 from django.test.testcases import TestCase
-from 校對工具.檢查本調拼音 import 檢查本調拼音
-from 校對工具.檢查本調拼音 import 判斷本調拼音
+from 檢查工具.檢查本調拼音 import 檢查本調拼音
+from 檢查工具.檢查本調拼音 import 判斷本調拼音
 
 
 class 檢查本調拼音試驗(TestCase):
