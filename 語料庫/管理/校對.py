@@ -79,7 +79,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     ordering = ['校對者', 'id', ]
     list_filter = ['語料狀況', '校對者', '音檔', 對齊狀態過濾器]
     search_fields = [
-        'id', '漢字', '本調臺羅', '口語調臺羅',
+        'id', '漢字', '本調臺羅', '口語調臺羅', '語者',
     ]
     list_per_page = 20
 
