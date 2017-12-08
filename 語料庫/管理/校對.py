@@ -42,14 +42,26 @@ class 對齊狀態過濾器(admin.SimpleListFilter):
             return (
                 queryset.filter(校對者__isnull=False)
                 .filter(語料狀況__isnull=True)
-                .exclude(對齊狀態__狀態__exact='')
+                .exclude(
+                    對齊狀態__漢字本調對應__exact='',
+                    對齊狀態__本調口語調對應__exact='',
+                    對齊狀態__本調空白__exact='',
+                    對齊狀態__口語調空白__exact='',
+                    對齊狀態__口語調輕聲符__exact='',
+                )
             )
 
 
 class 對齊狀態Inline(admin.StackedInline):
     model = 對齊狀態表
-    exclude = ('狀態', )
-    verbose_name = '對齊狀態'
+    readonly_fields = (
+        '漢字本調對應',
+        '本調口語調對應',
+        '本調空白',
+        '口語調空白',
+        '口語調輕聲符',
+    )
+    verbose_name = '自動檢查'
     verbose_name_plural = verbose_name
 
     def has_delete_permission(self, request, obj):
@@ -67,7 +79,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     ordering = ['校對者', 'id', ]
     list_filter = ['語料狀況', '校對者', '音檔', 對齊狀態過濾器]
     search_fields = [
-        'id', '漢字', '本調臺羅', '口語調臺羅',
+        'id', '漢字', '本調臺羅', '口語調臺羅', '語者',
     ]
     list_per_page = 20
 
