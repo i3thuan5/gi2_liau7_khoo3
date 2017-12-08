@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
-from 校對工具.檢查本調拼音 import 判斷本調拼音
 from 檢查工具.models import 對齊狀態表
+from 檢查工具.檢查本調拼音 import 判斷本調拼音
 
 
 @receiver(post_save, sender='語料庫.語料表')
