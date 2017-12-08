@@ -55,7 +55,7 @@ class 對齊狀態過濾器(admin.SimpleListFilter):
 class 對齊狀態Inline(admin.StackedInline):
     model = 對齊狀態表
     readonly_fields = (
-        '狀態',
+        '漢字本調對應',
         '本調口語調對應',
         '本調空白',
         '口語調空白',
