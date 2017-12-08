@@ -5,7 +5,7 @@ from django.forms.widgets import CheckboxSelectMultiple, Textarea
 from django.utils.timezone import now
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 from 語料庫.models import 語料表
-from 語料庫.models import 對齊狀態表
+from 檢查工具.models import 對齊狀態表
 
 
 class 校對表(語料表):
