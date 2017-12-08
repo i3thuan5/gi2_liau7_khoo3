@@ -76,5 +76,5 @@ class 檢查本調拼音試驗(TestCase):
 
     def test漢字有輕聲符(self):
         漢字 = '--mh4按怎'
-        本調臺羅 = '--mh4按怎'
+        本調臺羅 = '--mh4 an2-na2'
         self.assertEqual(判斷本調拼音(漢字, 本調臺羅), '')
