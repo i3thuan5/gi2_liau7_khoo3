@@ -3,7 +3,6 @@
 from 臺灣言語工具.音標系統.閩南語.臺灣閩南語羅馬字拼音 import 臺灣閩南語羅馬字拼音
 from 臺灣言語工具.解析整理.拆文分析器 import 拆文分析器
 from 臺灣言語工具.解析整理.文章粗胚 import 文章粗胚
-from 用字.models import 用字表
 from 用字規範.models import 語料庫用字
 
 
@@ -39,4 +38,4 @@ def 這个字袂使(字物件):
         return False
     if 語料庫用字.這字的漢字敢是合音(字物件):
         return False
-    return not 用字表.有這个字無(字物件)
+    return not 語料庫用字.有這个字無(字物件)

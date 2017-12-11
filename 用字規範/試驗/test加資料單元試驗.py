@@ -1,7 +1,10 @@
+from unittest.case import skip
+
 from django.test.testcases import TestCase
 from 用字規範.models import 語料庫用字
 
 
+@skip('無需要用程式加字')
 class 加資料試驗(TestCase):
     def test_加一个教典無的字(self):
         漢字 = '百'
