@@ -74,7 +74,6 @@ class Command(trs指令):
                 )
             with open(wav檔名, 'rb') as 檔案:
                 音檔資料.原始檔.save(音檔資料.資料夾名 + '/' + 音檔資料.聲音檔名, File(檔案))
-        raise NotImplementedError()
 
     def 揣語者(self, 語者資料, 聽拍開始):
         for _開始, 結束, 語者 in 語者資料:
