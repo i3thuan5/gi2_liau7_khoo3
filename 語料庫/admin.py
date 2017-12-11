@@ -14,7 +14,12 @@ from 語料庫.管理.Kaldi篩掉 import Kaldi篩掉表管理
 admin.site.disable_action('delete_selected')
 
 
-admin.site.register(語料狀況表)
+class 語料狀況表管理(admin.ModelAdmin):
+    list_display = ['id', '顯示名', '確定有校對', 'Kaldi輸出', ]
+    ordering = ['id']
+
+
+admin.site.register(語料狀況表, 語料狀況表管理)
 admin.site.register(校對表, 校對表管理)
 admin.site.register(檢查表, 檢查表管理)
 admin.site.register(Kaldi篩掉表, Kaldi篩掉表管理)
