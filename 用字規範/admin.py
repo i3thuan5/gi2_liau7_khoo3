@@ -8,7 +8,7 @@ class 語料庫用字管理(admin.ModelAdmin):
     list_display = ['id', '漢字', '羅馬字', '出處', '備註', ]
     exclude = ['分詞']
     ordering = ['-id']
-    search_fields = ['id', '漢字', '羅馬字', ]
+    search_fields = ['id', '漢字', '羅馬字', '分詞', ]
 
     actions = ['自動檢查重做_愛五分鐘', ]
 
