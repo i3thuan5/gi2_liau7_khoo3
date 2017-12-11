@@ -20,7 +20,8 @@ class 對齊狀態表(models.Model):
     口語調空白 = models.CharField(max_length=30)
     口語調輕聲符 = models.CharField(max_length=30)
 
-    連字符邊仔空白 = re.compile('([\w]+ -+)|(-+ [\w]+)')
+    連字符邊仔空白 = re.compile('([\w]+\s+-+)|(-+\s+[\w]+)')
+    頭前毋是音標的輕聲 = re.compile('([^a-z0-9]+\s+--)')
 
     def __str__(self):
         return '\n'.join([
@@ -46,7 +47,8 @@ class 對齊狀態表(models.Model):
         while True:
             揣 = cls.連字符邊仔空白.search(羅馬字, 所在)
             if 揣:
-                結果.append('「{}」'.format(揣.group(0)))
+                if not cls.頭前毋是音標的輕聲.search(揣.group(0)):
+                    結果.append('「{}」'.format(揣.group(0)))
                 所在 = 揣.end(0) - 1
                 while 所在 < len(羅馬字) - 1 and 羅馬字[所在] != ' ':
                     所在 -= 1
@@ -63,10 +65,14 @@ class 對齊狀態表(models.Model):
     @classmethod
     def 檢查本調口語調對應(cls, 本調臺羅, 口語調臺羅):
         try:
-            拆文分析器.對齊句物件(
+            句物件 = 拆文分析器.對齊句物件(
                 文章粗胚.建立物件語句前處理減號(臺灣閩南語羅馬字拼音, 本調臺羅),
                 文章粗胚.建立物件語句前處理減號(臺灣閩南語羅馬字拼音, 口語調臺羅)
             )
         except Exception as 錯誤:
             return str(錯誤).split('！')[0]
-        return ''
+        錯誤結果 = []
+        for 字物件 in 句物件.篩出字物件():
+            if not 字物件.音標敢著(臺灣閩南語羅馬字拼音) and 字物件.型 != 字物件.音:
+                錯誤結果.append('「{}」'.format(字物件.看音()))
+        return '、'.join(錯誤結果)
