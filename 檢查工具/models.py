@@ -20,7 +20,8 @@ class 對齊狀態表(models.Model):
     口語調空白 = models.CharField(max_length=30)
     口語調輕聲符 = models.CharField(max_length=30)
 
-    連字符邊仔空白 = re.compile('([\w]+ -+)|(-+ [\w]+)')
+    連字符邊仔空白 = re.compile('([\w]+\s+-+)|(-+\s+[\w]+)')
+    頭前毋是音標的輕聲 = re.compile('([^a-z0-9]+\s+--)')
 
     def __str__(self):
         return '\n'.join([
@@ -46,7 +47,8 @@ class 對齊狀態表(models.Model):
         while True:
             揣 = cls.連字符邊仔空白.search(羅馬字, 所在)
             if 揣:
-                結果.append('「{}」'.format(揣.group(0)))
+                if not cls.頭前毋是音標的輕聲.search(揣.group(0)):
+                    結果.append('「{}」'.format(揣.group(0)))
                 所在 = 揣.end(0) - 1
                 while 所在 < len(羅馬字) - 1 and 羅馬字[所在] != ' ':
                     所在 -= 1
