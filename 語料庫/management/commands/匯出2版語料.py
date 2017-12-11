@@ -7,7 +7,6 @@ from django.core.management.base import BaseCommand
 
 
 from 語料庫.models import 音檔表
-from 語料庫.models import 語料狀況表
 
 
 class Command(BaseCommand):
@@ -20,15 +19,14 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **參數):
-        語料狀況表.檢查狀況有著無()
-        無愛狀況 = 語料狀況表.無愛的狀況id()
         匯出資料 = []
         for 音檔資料 in 音檔表.objects.order_by('id'):
             語句 = []
             for 資料 in (
                 音檔資料.資料
                 .filter(校對者__isnull=False)
-                .exclude(語料狀況__in=無愛狀況)
+                .exclude(語料狀況__確定有校對=False)
+                .filter(語料狀況__Kaldi輸出=True)
             ):
                 語句.append({
                     "結束時間": 資料.聲音結束時間,
