@@ -41,7 +41,6 @@ class 對齊狀態過濾器(admin.SimpleListFilter):
         if self.value() == 'alignissue':
             return (
                 queryset.filter(校對者__isnull=False)
-                .filter(語料狀況__isnull=True)
                 .exclude(
                     對齊狀態__漢字本調對應__exact='',
                     對齊狀態__本調口語調對應__exact='',
