@@ -33,6 +33,10 @@ class Command(trs指令):
 
     @transaction.atomic()
     def handle(self, *args, **參數):
+        if basename(參數['textgrid資料夾所在'].rstrip('/')) != 'Praat當佇改佮改好的':
+            raise ValueError('textgrid資料夾所在應該是「Praat當佇改佮改好的」')
+        if basename(參數['wav資料夾所在'].rstrip('/')) != 'Finished':
+            raise ValueError('wav資料夾所在資料夾所在應該是「Finished」')
         textgird檔名 = join(參數['textgrid資料夾所在'], 參數['資料夾名'], 參數['聽拍檔名'])
         wav檔名 = join(參數['wav資料夾所在'], 參數['資料夾名'], 參數['wav檔名'])
         if not isfile(wav檔名):
