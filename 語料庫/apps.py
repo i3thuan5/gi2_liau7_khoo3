@@ -28,9 +28,3 @@ class 語料庫Config(AppConfig):
                 程式腳本._走指令(['sox', 檔名, '-t', 'wav', '/dev/null', 'remix', '1'],)
             except RuntimeError:
                 raise OSError('請裝sox!! `sudo apt-get install sox`')
-
-            from 語料庫.models import 語料狀況表
-            try:
-                語料狀況表.檢查狀況有著無()
-            except Exception as 錯誤:
-                print(錯誤)

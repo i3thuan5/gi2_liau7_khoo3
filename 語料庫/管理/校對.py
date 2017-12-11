@@ -6,7 +6,6 @@ from django.utils.timezone import now
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 from 語料庫.models import 語料表
 from 檢查工具.models import 對齊狀態表
-from 語料庫.models import 語料狀況表
 
 
 class 校對表(語料表):
@@ -73,7 +72,7 @@ class 確定有校對過濾器(admin.SimpleListFilter):
         if self.value() == 'khak4ting7':
             return (
                 queryset.filter(校對者__isnull=False)
-                .exclude(語料狀況__in=語料狀況表.無愛的狀況id())
+                .exclude(語料狀況__確定有校對=False)
             )
 
 

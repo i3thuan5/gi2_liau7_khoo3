@@ -97,6 +97,8 @@ class 語料表(models.Model):
 
 class 語料狀況表(models.Model):
     狀況 = models.CharField(unique=True, max_length=30)
+    確定有校對 = models.BooleanField(default=False)
+    Kaldi輸出 = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "狀況表"
@@ -104,51 +106,3 @@ class 語料狀況表(models.Model):
 
     def __str__(self):
         return '{} {}'.format(self.pk, self.狀況.split('：')[-1])
-
-    無愛的狀況 = [
-        '愛討論',
-        '品質：講袂清楚',
-        '品質：有人聲雜音(SPN)',
-        '品質：有非人聲雜音(NSN)',
-        '詞：有外語詞',
-        '北部腔o',
-        '切音問題',
-        '猶袂處理好',
-        '大聲雜音(TS)',
-        '重複語料',
-        '講仝款話的濟人聲(TSLS)',
-        '講無仝話的重疊(TTH)',
-        '全雜音無對話',
-    ]
-    會當的狀況 = {
-        '範例',
-        '詞：有合音',
-        '詞：講法佮辭典無仝',
-        '句：無合文法',
-        '落勾字詞',
-    }
-
-    @classmethod
-    def 無愛的狀況id(cls):
-        return (
-            語料狀況表.objects
-            .filter(狀況__in=cls.無愛的狀況)
-            .values_list('id', flat=True)
-        )
-
-    @classmethod
-    def 檢查狀況有著無(cls):
-        if cls.無愛的狀況id().count() != len(cls.無愛的狀況):
-            拍毋著 = []
-            for 狀況 in cls.無愛的狀況:
-                if not 語料狀況表.objects.filter(狀況=狀況).exists():
-                    拍毋著.append(狀況)
-            raise RuntimeError('狀況名有拍毋著！！\n{}'.format('\n'.join(拍毋著)))
-        assert len(cls.會當的狀況 & set(cls.無愛的狀況)) == 0, (
-            '有狀況佇「無愛的狀況」佮「會當的狀況」出現兩擺'
-        )
-        assert cls.會當的狀況 == set(
-            語料狀況表.objects
-            .exclude(狀況__in=cls.無愛的狀況)
-            .values_list('狀況', flat=True)
-        ), '有狀況漏勾矣，必須攏愛出現佇「無愛的狀況」抑是「會當的狀況」'
