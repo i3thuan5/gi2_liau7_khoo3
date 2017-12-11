@@ -6,9 +6,9 @@ from 口語辭典.models import 口語辭典表
 from 臺灣言語工具.基本物件.公用變數 import 標點符號
 from 語料庫.models import 語料表
 from 臺灣言語工具.解析整理.文章粗胚 import 文章粗胚
-from 用字.models import 用字表
 from 程式.全漢全羅.做辭典 import 漢字本調分開符號
 from 臺灣言語工具.解析整理.解析錯誤 import 解析錯誤
+from 用字規範.models import 語料庫用字
 
 
 def 語料庫校對語句匯口語辭典():
@@ -40,7 +40,7 @@ def _全部資料():
                 本.口音 = 口.音
             for 詞物件 in 本調.網出詞物件():
                 for 字物件 in 詞物件.篩出字物件():
-                    if not 用字表.有這个字無(字物件):
+                    if not 語料庫用字.有這个字無(字物件):
                         break
                 else:
                     for 字物件 in 詞物件.篩出字物件():

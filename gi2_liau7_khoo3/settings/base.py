@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     '口語辭典',
     '本調辭典',
     '檢查工具',
+    '用字規範',
 ]
 
 MIDDLEWARE = [
