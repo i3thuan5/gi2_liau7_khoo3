@@ -6,6 +6,7 @@ from django.utils.timezone import now
 from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 from 語料庫.models import 語料表
 from 檢查工具.models import 對齊狀態表
+from 語料庫.models import 語料狀況表
 
 
 class 校對表(語料表):
@@ -51,6 +52,31 @@ class 對齊狀態過濾器(admin.SimpleListFilter):
             )
 
 
+class 確定有校對過濾器(admin.SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = '確定有校對'
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'khak4ting7'
+
+    def lookups(self, request, model_admin):
+        """
+        (URL query, human-readable menu item)
+        """
+        return (
+            ('khak4ting7', '有校對'),
+        )
+
+    def queryset(self, request, queryset):
+        # decide how to filter the queryset.
+        if self.value() == 'khak4ting7':
+            return (
+                queryset.filter(校對者__isnull=False)
+                .exclude(語料狀況__in=語料狀況表.無愛的狀況id())
+            )
+
+
 class 對齊狀態Inline(admin.StackedInline):
     model = 對齊狀態表
     readonly_fields = (
@@ -76,7 +102,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         '校對者', '校對時間',
     ]
     ordering = ['校對者', 'id', ]
-    list_filter = ['語料狀況', '校對者', '音檔', 對齊狀態過濾器]
+    list_filter = ['語料狀況', '校對者', '音檔', 對齊狀態過濾器, 確定有校對過濾器, ]
     search_fields = [
         'id', '漢字', '本調臺羅', '口語調臺羅', '語者',
     ]
