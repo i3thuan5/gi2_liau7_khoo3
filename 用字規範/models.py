@@ -14,7 +14,11 @@ class 語料庫用字(models.Model):
     羅馬字 = models.CharField(max_length=20, db_index=True)
     分詞 = models.CharField(max_length=20, db_index=True)
     出處 = models.TextField()
-    備註 = models.TextField()
+    備註 = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = "語料庫補字"
+        verbose_name_plural = verbose_name
 
     def save(self, *args, **kwargs):
         self.分詞 = 拆文分析器.對齊字物件(
@@ -23,6 +27,8 @@ class 語料庫用字(models.Model):
         ).轉音(臺灣閩南語羅馬字拼音).看分詞()
         super().save(*args, **kwargs)
 
+    def __str__(self):
+        return self.分詞
     @classmethod
     def 有這个字無(cls, 字物件):
         if 用字表.有這个字無(字物件):
