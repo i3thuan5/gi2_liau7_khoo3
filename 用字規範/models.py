@@ -29,6 +29,7 @@ class 語料庫用字(models.Model):
 
     def __str__(self):
         return self.分詞
+
     @classmethod
     def 有這个字無(cls, 字物件):
         if 用字表.有這个字無(字物件):
