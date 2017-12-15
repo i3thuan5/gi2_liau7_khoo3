@@ -103,6 +103,7 @@ ENV/
 /.pydevproject
 /MANIFEST
 /.settings
+secret_key.txt
 
 # 資料
 /db.sqlite3*
