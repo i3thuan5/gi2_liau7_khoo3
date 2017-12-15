@@ -109,3 +109,4 @@ secret_key.txt
 /db.sqlite3*
 /音檔
 /*.json
+/staticAll
