@@ -18,17 +18,6 @@ BASE_DIR = os.path.dirname(
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-# SECRET_KEY 
-# WARNING: keep the secret key used in production secret!
-try:
-    with open(BASE_DIR + '/secret_key.txt') as f:
-        SECRET_KEY = f.read().strip()
-except OSError as err:
-    print("OS error: {0}".format(err))
-except:
-    print("Unexpected error for SECRET_KEY.")
-    raise
-
 ALLOWED_HOSTS = ['*']
 
 
