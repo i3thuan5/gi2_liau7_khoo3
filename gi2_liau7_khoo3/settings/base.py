@@ -25,7 +25,13 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-SHARED_APPS = [
+SHARED_INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
     '語料庫',
     '用字',
     '校對工具',
