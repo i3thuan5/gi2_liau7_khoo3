@@ -16,6 +16,6 @@ except:
 # Application definition
 INSTALLED_APPS = SHARED_INSTALLED_APPS
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticAll')
+STATIC_ROOT = os.path.join(BASE_DIR, 'whitenoise_static')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
