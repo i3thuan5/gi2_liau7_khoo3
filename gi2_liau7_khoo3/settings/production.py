@@ -1,11 +1,14 @@
+from os.path import join
+
 from .base import *
+
 
 DEBUG = False
 
 # Production SECRET_KEY 
 # WARNING: keep the secret key used in production secret!
 try:
-    with open(BASE_DIR + '/secret_key.txt') as f:
+    with open(join(BASE_DIR, 'secret_key.txt')) as f:
         SECRET_KEY = f.read().strip()
 except OSError as err:
     print("OS error: {0}".format(err))
