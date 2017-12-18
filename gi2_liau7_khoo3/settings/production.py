@@ -1,13 +1,24 @@
+from os.path import join
+
 from .base import *
-from django.core.exceptions import ImproperlyConfigured
 
 
-def get_env_variable(var_name):
-    try:
-        return os.environ[var_name]
-    except KeyError:
-        error_msg = "Set the %s environment variable" % var_name
-        raise ImproperlyConfigured(error_msg)
+DEBUG = False
 
+# Production SECRET_KEY 
+# WARNING: keep the secret key used in production secret!
+try:
+    with open(join(BASE_DIR, 'secret_key.txt')) as f:
+        SECRET_KEY = f.read().strip()
+except OSError as err:
+    print("OS error: {0}".format(err))
+except:
+    print("Unexpected error for SECRET_KEY.")
+    raise
 
-SECRET_KEY = get_env_variable('SECRET_KEY')
+# Application definition
+INSTALLED_APPS = SHARED_INSTALLED_APPS
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'whitenoise_static')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

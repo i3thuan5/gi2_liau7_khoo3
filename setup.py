@@ -24,5 +24,6 @@ setup(
         'kau3-tian2_iong7-ji7>=0.1.2',
         'praatIO',
         'Pyro4',
+        'whitenoise',
     ],
 )

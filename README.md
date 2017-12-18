@@ -4,9 +4,20 @@
 
 
 ## 執行
-```
+### Local
+``` 
 python manage.py runserver
+#### ,or
+python manage.py runserver --settings=gi2_liau7_khoo3.settings.local
 ```
+
+### Production
+```
+python manage.py collectstatic --settings=gi2_liau7_khoo3.settings.production
+python manage.py runserver --settings=gi2_liau7_khoo3.settings.production
+gunicorn gi2_liau7_khoo3.wsgi
+```
+
 
 ### 請確定有開這兩个指令，無會無法度用「標本調」佮「轉漢字本調」
 ```

@@ -30,13 +30,12 @@ class 檢查本調拼音試驗(TestCase):
         本調臺羅 = '--Honnh4, au7-pai2'
         self.assertEqual(檢查本調拼音(漢字, 本調臺羅), [])
 
-    def test句首輕聲詞正確2(self):
-        # TODO:
+    def test句首輕聲詞沒有輕聲符號(self):
         # 教典例句的書寫規則允許句首輕聲詞不用--，
-        # 但往後將此test判定為錯誤
+        # 但目前將此test判定為錯誤
         漢字 = '乎，後擺'
         本調臺羅 = 'Honnh4, au7-pai2'
-        self.assertEqual(檢查本調拼音(漢字, 本調臺羅), [])
+        self.assertEqual(檢查本調拼音(漢字, 本調臺羅), ['乎｜honnh4'])
 
     def test漢字少字(self):
         漢字 = '後擺'
