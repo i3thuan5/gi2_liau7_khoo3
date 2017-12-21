@@ -33,4 +33,3 @@ class 試驗(TestCase):
                 'LTS',
                 'LTS30-1.TextGrid', 'LTS30.wav'
             )
-        self.fail()
