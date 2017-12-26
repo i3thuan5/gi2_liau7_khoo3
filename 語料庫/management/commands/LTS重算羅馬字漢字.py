@@ -17,7 +17,7 @@ class Command(textgrid指令):
         工具 = Pyro4.Proxy("PYRONAME:校對工具")
         for 語料 in (
             語料表.objects
-            .filter(校對者__isnull=False)
+            .filter(校對者__isnull=True)
             .filter(音檔__聲音檔名='LTS30.wav')
         ):
             原始口語調臺羅 = (
