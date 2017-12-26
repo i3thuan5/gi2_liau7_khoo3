@@ -61,6 +61,7 @@ class 語料表(models.Model):
     # Original data backup
     頭一版資料 = models.TextField(blank=True)
     頭一版通用 = models.TextField(blank=True)
+    頭一版轉出來的口語調臺羅 = models.TextField(blank=True)
 
     # Tags for Kaldi
     sing5hong5舊編號 = models.CharField(null=True, max_length=200)

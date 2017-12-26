@@ -7,6 +7,7 @@ env:
 - TOX_ENV=flake8
 - TOX_ENV=單元
 - TOX_ENV=整合
+- TOX_ENV=匯入
 - TOX_ENV=check_migration
 addons:
   apt:
