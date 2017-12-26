@@ -1,13 +1,16 @@
 import Pyro4
-from django.core.management.base import BaseCommand
 from django.db import transaction
 
 
+from 語料庫.management.commands.匯入1版TextGrid語料 import Command as textgrid指令
 from 程式.全漢全羅.原始通用處理 import 原始通用工具
 from 語料庫.models import 語料表
 
 
-class Command(BaseCommand):
+class Command(textgrid指令):
+
+    def add_arguments(self, parser):
+        pass
 
     @transaction.atomic()
     def handle(self, *args, **參數):
