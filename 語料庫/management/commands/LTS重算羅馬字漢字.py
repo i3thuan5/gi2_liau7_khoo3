@@ -29,7 +29,11 @@ class Command(trs指令):
     @transaction.atomic()
     def handle(self, *args, **參數):
         工具 = Pyro4.Proxy("PYRONAME:校對工具")
-        for 語料 in 語料表.objects.filter(音檔__聲音檔名='LTS30.wav'):
+        for 語料 in (
+            語料表.objects
+            .filter(校對者__isnull=False)
+            .filter(音檔__聲音檔名='LTS30.wav')
+        ):
             原始口語調臺羅 = (
                 原始通用工具.處理做口語調臺羅(語料.頭一版通用).看型('-', ' ')
                 .replace(' - ', '-')
