@@ -5,7 +5,7 @@ from 語料庫.models import 語料表
 
 
 class 語料庫用字管理(admin.ModelAdmin):
-    list_display = ['id', '漢字', '羅馬字', '出處', '備註', ]
+    list_display = ['id', '漢字', '羅馬字', '出處', '備註', '修改時間']
     exclude = ['分詞']
     ordering = ['-id']
     search_fields = ['id', '漢字', '羅馬字', '分詞', ]

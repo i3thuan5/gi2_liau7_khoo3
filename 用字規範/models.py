@@ -15,6 +15,7 @@ class 語料庫用字(models.Model):
     分詞 = models.CharField(max_length=20, db_index=True)
     出處 = models.TextField()
     備註 = models.TextField(blank=True)
+    修改時間 = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "語料庫補字"
