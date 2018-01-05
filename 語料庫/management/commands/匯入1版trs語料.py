@@ -88,4 +88,6 @@ class Command(BaseCommand):
     def 判斷先愛先做無(cls, 語句):
         if cls.先莫閬過比較.search(語句):
             return False
+        if 語句 == '':
+            return False
         return True
