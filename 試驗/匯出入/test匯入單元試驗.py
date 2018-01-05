@@ -18,3 +18,8 @@ class 試驗(TestCase):
         self.assertFalse(
             Command.判斷先愛先做無('四十外年的老店矣 SPN')
         )
+
+    def test空的就莫矣(self):
+        self.assertFalse(
+            Command.判斷先愛先做無('')
+        )
