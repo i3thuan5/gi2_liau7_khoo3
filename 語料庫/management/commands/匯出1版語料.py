@@ -3,6 +3,7 @@ from 語料庫.management.commands.匯出2版語料 import Command as 匯出2版
 
 
 class Command(匯出2版語料Command):
+    預設檔名 = 'twisas1.json'
 
     def 轉做json(self, 資料):
         return {

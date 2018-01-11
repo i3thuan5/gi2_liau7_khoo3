@@ -10,12 +10,13 @@ from 語料庫.models import 音檔表
 
 
 class Command(BaseCommand):
+    預設檔名 = 'twisas2.json'
 
     def add_arguments(self, parser):
         parser.add_argument(
             '--輸出檔名',
             type=str,
-            default='twisas2.json',
+            default=self.預設檔名,
         )
 
     def handle(self, *args, **參數):
