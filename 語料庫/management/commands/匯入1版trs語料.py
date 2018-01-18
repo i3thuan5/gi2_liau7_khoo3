@@ -19,6 +19,18 @@ class Command(BaseCommand):
         'DaAi_urs': '戲劇',
         'DaAi_vvrs': '戲劇',
         'LTS': '戲劇',
+        'ALen&Tea': '廣播',
+        'Dream_State': '廣播',
+        'Neighbor': '廣播',
+        'FTVN-1': '新聞',
+        'FTVN-2': '新聞',
+        'FTVN-3': '新聞',
+        'FTVN-4': '新聞',
+        'PTSN-1': '新聞',
+        'PTSN-2': '新聞',
+        'PTSN-3': '新聞',
+        'EDU': '朗讀',
+        'TW03': '朗讀',
     }
     先莫閬過符號 = [
         'SIL', 'SPN', 'NSN',
