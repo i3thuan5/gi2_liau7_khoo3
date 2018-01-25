@@ -111,14 +111,14 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
     # venv/lib/python3.5/site-packages/django/contrib/admin/templates/admin/
     change_list_template = 'admin/gi2_liau7_khoo3/語料表/custom_change_list.html'
     change_form_template = 'admin/gi2_liau7_khoo3/語料表/custom_change_form.html'
-    readonly_fields = ('音檔', )
+    readonly_fields = ('音檔', '頭一版資料',)
     fieldsets = (
         ('語料狀況', {
             'fields': ('語料狀況', '語者'),
             'classes': ['wide']
         }),
         ('漢字', {
-            'fields': ('漢字', '本調臺羅', '口語調臺羅', '備註', ),
+            'fields': ('漢字', '本調臺羅', '口語調臺羅', '頭一版資料', '備註', ),
             'classes': ['wide']
         }),
     )
