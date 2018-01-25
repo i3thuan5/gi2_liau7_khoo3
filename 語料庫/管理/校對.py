@@ -101,7 +101,7 @@ class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
         '校對者', '校對時間',
     ]
     ordering = ['校對者', 'id', ]
-    list_filter = ['語料狀況', '校對者', '音檔', 對齊狀態過濾器, 確定有校對過濾器, ]
+    list_filter = ['語料狀況', '校對者',  對齊狀態過濾器, 確定有校對過濾器, '音檔', ]
     search_fields = [
         'id', '漢字', '本調臺羅', '口語調臺羅', '語者', '備註',
     ]
