@@ -33,9 +33,12 @@ class 匯出試驗(TestCase):
             聲音結束時間='0',
             聲音開始時間='1',
             漢字="阮小弟的個性乎，較直啦，較衝碰",
-            本調臺羅="gun2 sio2-ti7 e5 ko3-sing3--honnh4, khah4 tit8--lah4, khah4 tshong2-pong7",
-            口語調臺羅="gun1 sio1-ti7 e7 ko2-sing3 honn3, khah8 tit8 la3, khah8 tshong1-pong7",
-            頭一版轉出來的口語調臺羅="gun1 sio1-ti7 e7 ko2-sing3 honn3, khah8 tit8 la3, khah8 tshong1-pong7",
+            本調臺羅="gun2 sio2-ti7 e5 ko3-sing3--honnh4, "
+            "khah4 tit8--lah4, khah4 tshong2-pong7",
+            口語調臺羅="gun1 sio1-ti7 e7 ko2-sing3 honn3, "
+            "khah8 tit8 la3, khah8 tshong1-pong7",
+            頭一版轉出來的口語調臺羅="gun1 sio1-ti7 e7 ko2-sing3 honn3, "
+            "khah8 tit8 la3, khah8 tshong1-pong7",
             sing5hong5舊編號='333',
             sing5hong5新編號='333',
             sing5hong5有揀出來用無=True,
@@ -56,7 +59,8 @@ class 匯出試驗(TestCase):
                 資料 = json.load(檔案)
         self.assertEqual(
             資料[0]["聽拍資料"][0]['內容'],
-            "gun1 sio1-ti7 e7 ko2-sing3 honn3 , khah8 tit8 la3 , khah8 tshong1-pong7"
+            "gun1 sio1-ti7 e7 ko2-sing3 honn3 , "
+            "khah8 tit8 la3 , khah8 tshong1-pong7"
         )
 
     def test1版愛分詞(self):
@@ -69,5 +73,6 @@ class 匯出試驗(TestCase):
                 資料 = json.load(檔案)
         self.assertEqual(
             資料[0]["聽拍資料"][0]['內容'],
-            "gun1 sio1-ti7 e7 ko2-sing3 honn3 , khah8 tit8 la3 , khah8 tshong1-pong7"
+            "gun1 sio1-ti7 e7 ko2-sing3 honn3 , "
+            "khah8 tit8 la3 , khah8 tshong1-pong7"
         )
