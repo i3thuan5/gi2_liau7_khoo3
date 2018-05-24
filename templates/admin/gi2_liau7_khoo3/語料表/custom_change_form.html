@@ -58,7 +58,7 @@ django.jQuery(document).ready(function($){
 		var a='/口語標漢字本調/'+django.jQuery("#id_口語調臺羅").val();
 		var jqxhr = django.jQuery.ajax( a )
 		  .done(function(data) {
-			django.jQuery("#id_漢字").val(data.漢字);
+			django.jQuery("#id_漢字").val(data.漢字.replace(/ /g,''));
 			django.jQuery("#id_本調臺羅").val(data.本調);
 		  })
 		  .fail(function() {
