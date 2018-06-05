@@ -33,9 +33,12 @@ class Command(BaseCommand):
                 .exclude(語料狀況__確定有校對=False)
                 .exclude(語料狀況__Kaldi輸出=False)
             ):
-                語句.append(self.轉做json(資料))
-                語句數量 += 1
-                語句秒數 += 資料.聲音結束時間 - 資料.聲音開始時間
+                try:
+                    語句.append(self.轉做json(資料))
+                    語句數量 += 1
+                    語句秒數 += 資料.聲音結束時間 - 資料.聲音開始時間
+                except Exception as 錯誤:
+                    print(錯誤)
             if len(語句) > 0:
                 匯出資料.append({
                     '影音所在': join(abspath(settings.MEDIA_ROOT), 音檔資料.原始檔.name),
