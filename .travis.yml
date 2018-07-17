@@ -12,21 +12,21 @@ env:
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - linux-libc-dev
-      - gcc-multilib
-      - automake
-      - libtool
-      - zlib1g-dev
-      - libbz2-dev
-      - liblzma-dev
-      - libboost-all-dev
-      - libgoogle-perftools-dev
-      - cmake
-      - csh
-      - normalize-audio
-      - sox
+    - linux-libc-dev
+    - gcc-multilib
+    - automake
+    - libtool
+    - zlib1g-dev
+    - libbz2-dev
+    - liblzma-dev
+    - libboost-all-dev
+    - libgoogle-perftools-dev
+    - cmake
+    - csh
+    - normalize-audio
+    - sox
 install:
 - pip install tox python-coveralls
 - pip install https://github.com/a8568730/django/archive/url_prefix_unicode.zip
@@ -38,4 +38,12 @@ script:
 after_success:
 - coverage report
 - coveralls
-
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token:
+    secure: F4CjI5CjyYA37Lx1/qoLwfuQ+1JHyEdgchYbgi4WfFLJbNcTjoppmHLwLvWC+wn08DGmlWmTIN5JISjFqCbjCZKbQGjgJe2W1ze/BcacPg1wPlJX+3WMb5RjvJc0GV7mEMeAjwqKP4gwuo3iA3rxeVCK4AVLRiZGBc4W+iGeJomhhy2fdOxvmHrHMdXQUhWeT65Y1G7D7QIUOZFsRm2M0m8vSlLEMVtAwV4+tsZMliP5qubD7CmOXWJKauyGZ3XE8+h328vUUyZVLVtM5+Q5R4VK6KY82JCJ1IR7z8EkTDYtSqbWXe5FYBELVCytp515GRgWbmsjzWc1TqeKG3SHQtbUYYSDAf/VBM9FSUxQBqIW2ewOArOFUSybEEMzirPaZYFu4qVzh/75q+kwTdm24u+mA6YH8gUQuvs+pqXDLH1GROAFGgt9JllQuMLfP/i3FjdEJFQJOx5DfuAuu1DbkmBkeORWYuYPxdlZjeu7eacCYvzuw2IjpWTA5+nFptf4ccjKGVy4h9SAzj85ARiYRR3IhNUdPHRtKofWlgvage7JdFdA+nQ43ZmzhBJuJtix3KER9U4C1rlJupLMMjU1ELUs2sRG+hzsML1gQurGGfppfNkLwFovehDfQ5DuILZCsX9jxzg9bpATiVBajmdZV95nmWsIaWkyBgPzz7JNiQA=
+  local_dir: gh-pages/
+  on:
+    branch: master
+    condition: "$CI_ENV = flake8"
