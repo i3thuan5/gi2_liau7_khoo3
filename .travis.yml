@@ -46,4 +46,4 @@ deploy:
   local_dir: gh-pages/
   on:
     branch: master
-    condition: "$CI_ENV = flake8"
+    condition: $CI_ENV = flake8
