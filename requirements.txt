@@ -1,4 +1,4 @@
-https://github.com/a8568730/django/archive/url_prefix_unicode.zip
+django==2.1
 gunicorn==19.7.1
 htsengine==0.2.4
 kau3-tian2-iong7-ji7==0.1.3

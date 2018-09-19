@@ -3,7 +3,6 @@ from django.db import models
 from django.db.models.query_utils import Q
 from django.forms.widgets import CheckboxSelectMultiple, Textarea
 from django.utils.timezone import now
-from 語料庫.widgets.ReadOnlyAdminFields import ReadOnlyAdminFields
 from 語料庫.models import 語料表
 from 檢查工具.models import 對齊狀態表
 
@@ -92,7 +91,7 @@ class 對齊狀態Inline(admin.StackedInline):
         return False
 
 
-class 校對表管理(ReadOnlyAdminFields, admin.ModelAdmin):
+class 校對表管理(admin.ModelAdmin):
     # change list
     list_display = [
         'id', '語者', '狀況',
