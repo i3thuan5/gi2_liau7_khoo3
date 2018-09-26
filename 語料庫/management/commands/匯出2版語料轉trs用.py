@@ -55,4 +55,6 @@ class Command(BaseCommand):
             '備註': 資料.備註,
             '校對者': str(資料.校對者),
             '語料狀況': sorted(資料.語料狀況.all().values_list('pk', flat=1)),
+            '原本trs資料': 資料.頭一版資料,
+            '原本trs通用': 資料.頭一版通用,
         }
